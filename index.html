@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cashio - Pengelola Keuangan Mahasiswa</title>
+    
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Lora -->
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <!-- Manifest untuk PWA -->
+    
+    <!-- Google Fonts - Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Metadata -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#90AB8B">
+    <meta name="theme-color" content="#EBF4DD">
+    
     <style>
         :root {
-            --primary-light: #EBF4DD;
-            --primary-dark: #90AB8B;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
+            --color-primary: #EBF4DD;
+            --color-secondary: #90AB8B;
+            --color-warning: #ffc107;
+            --color-danger: #dc3545;
+            --color-success: #198754;
         }
         
         * {
@@ -26,110 +31,177 @@
         }
         
         body {
-            background-color: var(--primary-light);
+            background-color: var(--color-primary);
             color: #333;
-            min-height: 100vh;
+            padding-bottom: 80px;
         }
         
-        .navbar, .footer {
-            background-color: var(--primary-dark) !important;
-            color: white;
+        .navbar {
+            background-color: var(--color-secondary) !important;
         }
         
         .card {
             border: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
         }
         
         .card-header {
-            background-color: var(--primary-dark);
+            background-color: var(--color-secondary);
             color: white;
-            border-radius: 12px 12px 0 0 !important;
+            border-radius: 15px 15px 0 0 !important;
             font-weight: 600;
         }
         
         .btn-primary {
-            background-color: var(--primary-dark);
-            border-color: var(--primary-dark);
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
         }
         
         .btn-primary:hover {
-            background-color: #7a9576;
-            border-color: #7a9576;
+            background-color: #7a9475;
+            border-color: #7a9475;
         }
         
         .btn-warning {
-            background-color: var(--warning-color);
-            border-color: var(--warning-color);
+            background-color: var(--color-warning);
+            border-color: var(--color-warning);
         }
         
         .btn-danger {
-            background-color: var(--danger-color);
-            border-color: var(--danger-color);
+            background-color: var(--color-danger);
+            border-color: var(--color-danger);
         }
         
-        .budget-display {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-dark);
-        }
-        
-        .expense-item {
-            border-left: 4px solid var(--primary-dark);
-            padding-left: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .warning-alert {
-            border-left: 4px solid var(--warning-color);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-        
-        .progress {
-            height: 25px;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-        }
-        
-        .progress-bar {
-            background-color: var(--primary-dark);
+        .budget-summary {
+            background: linear-gradient(135deg, var(--color-secondary), #7a9475);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
         .icon-large {
             font-size: 2rem;
-            color: var(--primary-dark);
+            margin-bottom: 10px;
         }
         
-        .history-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+        .expense-item {
+            border-left: 4px solid var(--color-secondary);
+            padding-left: 15px;
+            margin-bottom: 15px;
+            background-color: rgba(144, 171, 139, 0.1);
+            padding: 10px 15px;
+            border-radius: 0 8px 8px 0;
         }
         
-        .history-item:last-child {
-            border-bottom: none;
+        .expense-item.high-expense {
+            border-left-color: var(--color-danger);
+            background-color: rgba(220, 53, 69, 0.1);
         }
         
-        /* PWA install button */
-        #installButton {
-            display: none;
+        .alert-warning-custom {
+            background-color: rgba(255, 193, 7, 0.2);
+            border-left: 4px solid var(--color-warning);
+            border-radius: 0 8px 8px 0;
         }
         
-        /* Responsive adjustments */
+        .day-chart {
+            height: 40px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .day-bar {
+            height: 100%;
+            background-color: var(--color-secondary);
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+        
+        .day-high {
+            background-color: var(--color-danger);
+        }
+        
+        .install-btn {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--color-secondary);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+        
+        .reset-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--color-danger);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+        }
+        
+        .install-btn:hover, .reset-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        .status-safe {
+            background-color: var(--color-success);
+        }
+        
+        .status-warning {
+            background-color: var(--color-warning);
+        }
+        
+        .status-danger {
+            background-color: var(--color-danger);
+        }
+        
+        .day-of-week {
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
         @media (max-width: 768px) {
-            .budget-display {
-                font-size: 2rem;
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
             }
             
-            .card {
-                margin-bottom: 1rem;
+            .budget-summary h2 {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -139,72 +211,260 @@
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <i class="bi bi-cash-coin me-2 icon-large"></i>
-                <span class="fs-4 fw-bold">Cashio</span>
+                <span style="font-size: 1.8rem; margin-right: 10px;">💰</span>
+                <h1 class="h4 mb-0">Cashio</h1>
             </a>
-            <div class="d-flex align-items-center">
-                <button id="installButton" class="btn btn-outline-light btn-sm me-2">
-                    <i class="bi bi-download"></i> Install
-                </button>
-                <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#aboutModal">
-                    <i class="bi bi-info-circle"></i>
-                </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="navHome">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navHistory">Riwayat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navTips">Tips Hemat</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Main Container -->
-    <div class="container py-4">
-        <!-- Budget Overview Card -->
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="bi bi-wallet2 me-2"></i>Ringkasan Keuangan Bulanan</span>
-                <button id="resetButton" class="btn btn-danger btn-sm">
-                    <i class="bi bi-arrow-clockwise me-1"></i>Reset Bulan Ini
-                </button>
+    <div class="container mt-4">
+        <!-- Budget Summary Card -->
+        <div class="budget-summary">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2>Pengelolaan Keuangan Bulanan</h2>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="status-indicator" id="statusIndicator"></span>
+                        <span id="budgetStatus">Status anggaran</span>
+                    </div>
+                    <p class="mb-0">Kelola pengeluaranmu dengan bijak untuk menghindari kehabisan uang sebelum akhir bulan</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="icon-large">💡</div>
+                    <p class="mb-0">Tips: Catat semua pengeluaran, sekecil apapun!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Budget Input Section -->
+        <div class="card" id="budgetSection">
+            <div class="card-header">
+                <h5 class="mb-0">Anggaran Bulanan</h5>
             </div>
             <div class="card-body">
-                <div class="row align-items-center">
-                    <div class="col-md-4 text-center mb-3 mb-md-0">
-                        <i class="bi bi-cash-stack icon-large"></i>
-                        <h5 class="mt-2">Anggaran Bulanan</h5>
-                        <div class="budget-display" id="monthlyBudgetDisplay">Rp 0</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="monthlyBudget" class="form-label">Masukkan Anggaran Bulanan (Rp)</label>
+                            <input type="number" class="form-control" id="monthlyBudget" placeholder="Contoh: 1500000">
+                            <div class="form-text">Total uang yang kamu miliki untuk satu bulan</div>
+                        </div>
+                        <button class="btn btn-primary" id="setBudget">Atur Anggaran</button>
                     </div>
-                    <div class="col-md-4 text-center mb-3 mb-md-0">
-                        <i class="bi bi-cart-check icon-large"></i>
-                        <h5 class="mt-2">Total Pengeluaran</h5>
-                        <div class="budget-display text-danger" id="totalExpensesDisplay">Rp 0</div>
-                    </div>
-                    <div class="col-md-4 text-center">
-                        <i class="bi bi-piggy-bank icon-large"></i>
-                        <h5 class="mt-2">Sisa Uang</h5>
-                        <div class="budget-display text-success" id="remainingBudgetDisplay">Rp 0</div>
+                    <div class="col-md-6">
+                        <div class="mt-3 mt-md-0">
+                            <h6>Anggaran Saat Ini:</h6>
+                            <div class="d-flex justify-content-between">
+                                <span>Total Anggaran:</span>
+                                <span id="currentBudget">Rp 0</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Total Pengeluaran:</span>
+                                <span id="totalExpense">Rp 0</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between fw-bold">
+                                <span>Sisa Uang:</span>
+                                <span id="remainingBudget">Rp 0</span>
+                            </div>
+                            <div class="progress mt-3" style="height: 20px;">
+                                <div class="progress-bar" id="budgetProgress" role="progressbar" style="width: 0%;"></div>
+                            </div>
+                            <div class="text-center mt-1">
+                                <small id="budgetPercentage">0% digunakan</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="mt-4">
-                    <div class="d-flex justify-content-between mb-1">
-                        <small>Penggunaan Anggaran</small>
-                        <small id="budgetPercentage">0%</small>
+            </div>
+        </div>
+        
+        <!-- Expense Input Section -->
+        <div class="card" id="expenseSection">
+            <div class="card-header">
+                <h5 class="mb-0">Pencatatan Pengeluaran</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="expenseName" class="form-label">Nama Pengeluaran</label>
+                            <input type="text" class="form-control" id="expenseName" placeholder="Contoh: Makan siang, Transportasi">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expenseAmount" class="form-label">Jumlah (Rp)</label>
+                            <input type="number" class="form-control" id="expenseAmount" placeholder="Contoh: 25000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expenseDate" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="expenseDate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expenseCategory" class="form-label">Kategori</label>
+                            <select class="form-select" id="expenseCategory">
+                                <option value="makanan">Makanan & Minuman</option>
+                                <option value="transportasi">Transportasi</option>
+                                <option value="hiburan">Hiburan</option>
+                                <option value="belanja">Belanja</option>
+                                <option value="pendidikan">Pendidikan</option>
+                                <option value="lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="addExpense">Tambah Pengeluaran</button>
                     </div>
-                    <div class="progress">
-                        <div id="budgetProgressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    <div class="col-md-6">
+                        <h6>Pengeluaran Terakhir:</h6>
+                        <div id="recentExpenses">
+                            <p class="text-muted">Belum ada pengeluaran tercatat</p>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Warning Alert -->
-                <div id="warningAlert" class="alert alert-warning warning-alert mt-3 d-none">
-                    <div class="d-flex">
-                        <i class="bi bi-lightbulb me-3 fs-4"></i>
-                        <div>
-                            <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-1"></i>Peringatan Pengeluaran!</h5>
-                            <p id="warningMessage">Pengeluaran Anda telah mencapai 50% dari anggaran bulanan.</p>
-                            <div id="savingTips" class="mt-2">
-                                <strong>Saran Penghematan:</strong>
-                                <ul class="mb-0 mt-1">
-                                    <li>Batasi makan di luar, masak sendiri lebih hemat</li>
-                                    <li>Manfaatkan promo dan diskon untuk kebutuhan mahasiswa</li>
-                                    <li>Prioritaskan kebutuhan wajib di atas keinginan</li>
+            </div>
+        </div>
+        
+        <!-- Expense by Day Chart -->
+        <div class="card" id="dayChartSection">
+            <div class="card-header">
+                <h5 class="mb-0">Pengeluaran per Hari dalam Seminggu</h5>
+            </div>
+            <div class="card-body">
+                <p>Lihat hari dengan pengeluaran terbanyak untuk mengidentifikasi pola pengeluaran Anda.</p>
+                <div id="dayChart"></div>
+                <div class="row mt-3" id="dayLabels"></div>
+            </div>
+        </div>
+        
+        <!-- Warning Alert -->
+        <div class="alert alert-warning-custom alert-dismissible fade show hidden" id="warningAlert">
+            <div class="d-flex">
+                <div class="me-3" style="font-size: 1.5rem;">⚠️</div>
+                <div>
+                    <h5>Peringatan Pengeluaran!</h5>
+                    <p id="warningMessage">Pengeluaran Anda telah mencapai 50% dari anggaran bulanan. Pertimbangkan untuk mengurangi pengeluaran yang tidak perlu.</p>
+                    <div id="savingTips">
+                        <h6>Saran Penghematan:</h6>
+                        <ul class="mb-0">
+                            <li>Batasi makan di luar, masak sendiri lebih hemat</li>
+                            <li>Manfaatkan diskon dan promo untuk kebutuhan mahasiswa</li>
+                            <li>Gunakan transportasi umum atau berjalan kaki untuk jarak dekat</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        
+        <!-- Income History Section (Hidden by default) -->
+        <div class="card hidden" id="incomeHistorySection">
+            <div class="card-header">
+                <h5 class="mb-0">Riwayat Pemasukan</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="incomeSource" class="form-label">Sumber Pemasukan</label>
+                            <input type="text" class="form-control" id="incomeSource" placeholder="Contoh: Orang tua, Beasiswa, Part-time">
+                        </div>
+                        <div class="mb-3">
+                            <label for="incomeAmount" class="form-label">Jumlah (Rp)</label>
+                            <input type="number" class="form-control" id="incomeAmount" placeholder="Contoh: 1000000">
+                        </div>
+                        <div class="mb-3">
+                            <label for="incomeDate" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="incomeDate">
+                        </div>
+                        <button class="btn btn-primary" id="addIncome">Tambah Pemasukan</button>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Riwayat Pemasukan:</h6>
+                        <div id="incomeHistoryList">
+                            <p class="text-muted">Belum ada pemasukan tercatat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Expense History Section (Hidden by default) -->
+        <div class="card hidden" id="expenseHistorySection">
+            <div class="card-header">
+                <h5 class="mb-0">Riwayat Pengeluaran</h5>
+            </div>
+            <div class="card-body">
+                <div id="allExpensesList">
+                    <p class="text-muted">Belum ada pengeluaran tercatat</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tips Section (Hidden by default) -->
+        <div class="card hidden" id="tipsSection">
+            <div class="card-header">
+                <h5 class="mb-0">Tips Hemat untuk Mahasiswa</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">📚 Pendidikan</h5>
+                                <ul>
+                                    <li>Manfaatkan perpustakaan kampus untuk pinjam buku</li>
+                                    <li>Bergabung dengan grup diskusi untuk berbagi sumber belajar</li>
+                                    <li>Cari e-book gratis atau versi online sebelum membeli buku fisik</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">🍔 Makanan</h5>
+                                <ul>
+                                    <li>Masak makanan sendiri lebih hemat daripada makan di luar</li>
+                                    <li>Beli bahan makanan di pasar tradisional yang lebih murah</li>
+                                    <li>Manfaatkan promo makanan mahasiswa di kafetaria kampus</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">🚌 Transportasi</h5>
+                                <ul>
+                                    <li>Gunakan transportasi umum atau kendaraan kampus</li>
+                                    <li>Berjalan kaki atau bersepeda untuk jarak dekat</li>
+                                    <li>Cari tiket promo untuk perjalanan jauh</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">💡 Lainnya</h5>
+                                <ul>
+                                    <li>Manfaatkan diskon mahasiswa di berbagai merchant</li>
+                                    <li>Beli barang bekas berkualitas untuk kebutuhan sekunder</li>
+                                    <li>Ikuti kegiatan kampus gratis untuk hiburan</li>
                                 </ul>
                             </div>
                         </div>
@@ -212,755 +472,588 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <!-- Left Column: Input Budget & Expenses -->
-            <div class="col-lg-8">
-                <!-- Input Budget Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="bi bi-wallet2 me-2"></i>Input Anggaran dan Pemasukan
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="monthlyBudget" class="form-label">Anggaran Bulanan (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="monthlyBudget" placeholder="Masukkan anggaran bulanan" min="0">
-                                    <button class="btn btn-primary" type="button" id="setBudgetButton">
-                                        <i class="bi bi-check-circle me-1"></i>Setel
-                                    </button>
-                                </div>
-                                <div class="form-text">Masukkan total uang yang tersedia untuk satu bulan</div>
-                            </div>
-                            
-                            <div class="col-md-6 mb-3">
-                                <label for="incomeAmount" class="form-label">Tambahkan Pemasukan (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="incomeAmount" placeholder="Jumlah pemasukan" min="0">
-                                    <button class="btn btn-success" type="button" id="addIncomeButton">
-                                        <i class="bi bi-plus-circle me-1"></i>Tambah
-                                    </button>
-                                </div>
-                                <div class="form-text">Tambahkan pemasukan tambahan ke anggaran bulanan</div>
-                            </div>
-                        </div>
-                        
-                        <div class="alert alert-info mt-3">
-                            <i class="bi bi-info-circle me-2"></i>
-                            Setelah mengatur anggaran bulanan, Anda dapat mencatat pengeluaran di bawah ini.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Input Expense Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="bi bi-cart-plus me-2"></i>Catat Pengeluaran Baru
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-5 mb-3">
-                                <label for="expenseName" class="form-label">Nama Pengeluaran</label>
-                                <input type="text" class="form-control" id="expenseName" placeholder="Contoh: Makan siang, Transportasi">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="expenseAmount" class="form-label">Jumlah (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="expenseAmount" placeholder="0" min="0">
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="expenseCategory" class="form-label">Kategori</label>
-                                <select class="form-select" id="expenseCategory">
-                                    <option value="Makanan">Makanan</option>
-                                    <option value="Transportasi">Transportasi</option>
-                                    <option value="Belanja">Belanja</option>
-                                    <option value="Hiburan">Hiburan</option>
-                                    <option value="Pendidikan">Pendidikan</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="d-grid">
-                            <button class="btn btn-primary" id="addExpenseButton">
-                                <i class="bi bi-plus-circle me-1"></i>Tambah Pengeluaran
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column: Expense History -->
-            <div class="col-lg-4">
-                <!-- Expense History Card -->
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-clock-history me-2"></i>Riwayat Pengeluaran</span>
-                        <span class="badge bg-primary" id="expenseCount">0</span>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush" id="expenseHistory">
-                            <div class="text-center py-5 text-muted" id="emptyHistoryMessage">
-                                <i class="bi bi-receipt fs-1"></i>
-                                <p class="mt-2">Belum ada pengeluaran</p>
-                                <small>Catat pengeluaran pertama Anda</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Income History Card -->
-                <div class="card mt-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span><i class="bi bi-cash-coin me-2"></i>Riwayat Pemasukan</span>
-                        <span class="badge bg-success" id="incomeCount">0</span>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="list-group list-group-flush" id="incomeHistory">
-                            <div class="text-center py-5 text-muted" id="emptyIncomeMessage">
-                                <i class="bi bi-wallet fs-1"></i>
-                                <p class="mt-2">Belum ada pemasukan</p>
-                                <small>Tambahkan pemasukan pertama Anda</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
+    
+    <!-- Install Button -->
+    <div class="install-btn hidden" id="installButton" title="Install Aplikasi">
+        <span style="font-size: 1.5rem;">📲</span>
+    </div>
+    
+    <!-- Reset Button -->
+    <div class="reset-btn" id="resetButton" title="Reset Data">
+        <span style="font-size: 1.5rem;">🔄</span>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="container text-center">
-            <span>Cashio &copy; 2023 - Aplikasi Pengelola Keuangan Mahasiswa</span>
-            <div class="mt-2">
-                <small>Status: <span id="appStatus">Aplikasi siap digunakan</span></small>
-                <span class="mx-2">•</span>
-                <small>Data tersimpan di perangkat Anda</small>
-            </div>
-        </div>
-    </footer>
-
-    <!-- About Modal -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="aboutModalLabel">
-                        <i class="bi bi-info-circle me-2"></i>Tentang Cashio
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <i class="bi bi-cash-coin fs-1 text-primary"></i>
-                        <h4 class="mt-2">Cashio</h4>
-                        <p class="text-muted">Pengelola Keuangan Mahasiswa</p>
-                    </div>
-                    <p>Cashio adalah aplikasi Progressive Web App (PWA) yang dirancang khusus untuk membantu mahasiswa mengelola keuangan bulanan agar pengeluaran lebih terkontrol dan tidak melebihi anggaran.</p>
-                    <h6>Fitur Utama:</h6>
-                    <ul>
-                        <li>Input anggaran bulanan</li>
-                        <li>Pencatatan pengeluaran dengan kategori</li>
-                        <li>Riwayat pemasukan tambahan</li>
-                        <li>Perhitungan sisa uang otomatis</li>
-                        <li>Peringatan saat pengeluaran mencapai 50% anggaran</li>
-                        <li>Saran penghematan keuangan</li>
-                        <li>Bekerja offline (PWA)</li>
-                    </ul>
-                    <div class="alert alert-info">
-                        <i class="bi bi-lightbulb me-2"></i>
-                        <strong>Tips:</strong> Anda dapat menginstal aplikasi ini di perangkat Anda untuk akses lebih cepat!
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS Bundle with Popper -->
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Main Application JavaScript -->
     <script>
-        // Inisialisasi variabel aplikasi
+        // PWA Installation
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installButton').classList.remove('hidden');
+        });
+        
+        document.getElementById('installButton').addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    document.getElementById('installButton').classList.add('hidden');
+                }
+                deferredPrompt = null;
+            }
+        });
+        
+        // Data Management
         let monthlyBudget = 0;
-        let totalExpenses = 0;
         let expenses = [];
         let incomes = [];
         
         // DOM Elements
-        const monthlyBudgetInput = document.getElementById('monthlyBudget');
-        const setBudgetButton = document.getElementById('setBudgetButton');
-        const monthlyBudgetDisplay = document.getElementById('monthlyBudgetDisplay');
-        const totalExpensesDisplay = document.getElementById('totalExpensesDisplay');
-        const remainingBudgetDisplay = document.getElementById('remainingBudgetDisplay');
-        const budgetPercentage = document.getElementById('budgetPercentage');
-        const budgetProgressBar = document.getElementById('budgetProgressBar');
-        const warningAlert = document.getElementById('warningAlert');
-        const warningMessage = document.getElementById('warningMessage');
+        const budgetInput = document.getElementById('monthlyBudget');
+        const setBudgetBtn = document.getElementById('setBudget');
+        const currentBudgetEl = document.getElementById('currentBudget');
+        const totalExpenseEl = document.getElementById('totalExpense');
+        const remainingBudgetEl = document.getElementById('remainingBudget');
+        const budgetProgressEl = document.getElementById('budgetProgress');
+        const budgetPercentageEl = document.getElementById('budgetPercentage');
+        const statusIndicatorEl = document.getElementById('statusIndicator');
+        const budgetStatusEl = document.getElementById('budgetStatus');
         
         const expenseNameInput = document.getElementById('expenseName');
         const expenseAmountInput = document.getElementById('expenseAmount');
+        const expenseDateInput = document.getElementById('expenseDate');
         const expenseCategoryInput = document.getElementById('expenseCategory');
-        const addExpenseButton = document.getElementById('addExpenseButton');
-        const expenseHistory = document.getElementById('expenseHistory');
-        const emptyHistoryMessage = document.getElementById('emptyHistoryMessage');
-        const expenseCount = document.getElementById('expenseCount');
+        const addExpenseBtn = document.getElementById('addExpense');
+        const recentExpensesEl = document.getElementById('recentExpenses');
         
+        const incomeSourceInput = document.getElementById('incomeSource');
         const incomeAmountInput = document.getElementById('incomeAmount');
-        const addIncomeButton = document.getElementById('addIncomeButton');
-        const incomeHistory = document.getElementById('incomeHistory');
-        const emptyIncomeMessage = document.getElementById('emptyIncomeMessage');
-        const incomeCount = document.getElementById('incomeCount');
+        const incomeDateInput = document.getElementById('incomeDate');
+        const addIncomeBtn = document.getElementById('addIncome');
+        const incomeHistoryListEl = document.getElementById('incomeHistoryList');
         
+        const warningAlertEl = document.getElementById('warningAlert');
+        const warningMessageEl = document.getElementById('warningMessage');
+        
+        const dayChartEl = document.getElementById('dayChart');
+        const dayLabelsEl = document.getElementById('dayLabels');
+        
+        const allExpensesListEl = document.getElementById('allExpensesList');
+        
+        // Navigation Elements
+        const navHome = document.getElementById('navHome');
+        const navHistory = document.getElementById('navHistory');
+        const navTips = document.getElementById('navTips');
+        
+        // Sections
+        const budgetSection = document.getElementById('budgetSection');
+        const expenseSection = document.getElementById('expenseSection');
+        const dayChartSection = document.getElementById('dayChartSection');
+        const incomeHistorySection = document.getElementById('incomeHistorySection');
+        const expenseHistorySection = document.getElementById('expenseHistorySection');
+        const tipsSection = document.getElementById('tipsSection');
+        
+        // Reset Button
         const resetButton = document.getElementById('resetButton');
-        const installButton = document.getElementById('installButton');
-        const appStatus = document.getElementById('appStatus');
         
-        // Format currency untuk Rupiah
-        const formatCurrency = (amount) => {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                minimumFractionDigits: 0
-            }).format(amount);
-        };
+        // Set today's date as default for expense and income inputs
+        expenseDateInput.valueAsDate = new Date();
+        incomeDateInput.valueAsDate = new Date();
         
-        // Load data dari localStorage
-        const loadData = () => {
+        // Initialize app
+        function initApp() {
+            loadData();
+            updateBudgetDisplay();
+            updateRecentExpenses();
+            updateIncomeHistory();
+            updateExpenseHistory();
+            updateDayChart();
+            checkBudgetWarning();
+            
+            // Set event listeners
+            setBudgetBtn.addEventListener('click', setMonthlyBudget);
+            addExpenseBtn.addEventListener('click', addExpense);
+            addIncomeBtn.addEventListener('click', addIncome);
+            resetButton.addEventListener('click', resetData);
+            
+            // Navigation event listeners
+            navHome.addEventListener('click', () => showSection('home'));
+            navHistory.addEventListener('click', () => showSection('history'));
+            navTips.addEventListener('click', () => showSection('tips'));
+        }
+        
+        // Load data from localStorage
+        function loadData() {
             const savedBudget = localStorage.getItem('cashio_monthlyBudget');
             const savedExpenses = localStorage.getItem('cashio_expenses');
             const savedIncomes = localStorage.getItem('cashio_incomes');
             
             if (savedBudget) {
                 monthlyBudget = parseFloat(savedBudget);
-                monthlyBudgetInput.value = monthlyBudget;
-                monthlyBudgetDisplay.textContent = formatCurrency(monthlyBudget);
             }
             
             if (savedExpenses) {
                 expenses = JSON.parse(savedExpenses);
-                totalExpenses = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-                updateExpenseDisplay();
-                renderExpenseHistory();
             }
             
             if (savedIncomes) {
                 incomes = JSON.parse(savedIncomes);
-                renderIncomeHistory();
             }
-            
-            updateBudgetDisplay();
-        };
+        }
         
-        // Simpan data ke localStorage
-        const saveData = () => {
+        // Save data to localStorage
+        function saveData() {
             localStorage.setItem('cashio_monthlyBudget', monthlyBudget);
             localStorage.setItem('cashio_expenses', JSON.stringify(expenses));
             localStorage.setItem('cashio_incomes', JSON.stringify(incomes));
-        };
+        }
         
-        // Update tampilan anggaran
-        const updateBudgetDisplay = () => {
-            monthlyBudgetDisplay.textContent = formatCurrency(monthlyBudget);
-            totalExpensesDisplay.textContent = formatCurrency(totalExpenses);
+        // Set monthly budget
+        function setMonthlyBudget() {
+            const budgetValue = parseFloat(budgetInput.value);
             
-            const remaining = monthlyBudget - totalExpenses;
-            remainingBudgetDisplay.textContent = formatCurrency(remaining);
-            
-            // Update progress bar
-            let percentage = 0;
-            if (monthlyBudget > 0) {
-                percentage = Math.min(100, (totalExpenses / monthlyBudget) * 100);
-            }
-            
-            budgetProgressBar.style.width = `${percentage}%`;
-            budgetPercentage.textContent = `${percentage.toFixed(1)}%`;
-            
-            // Update warna progress bar berdasarkan persentase
-            if (percentage >= 80) {
-                budgetProgressBar.classList.remove('bg-warning');
-                budgetProgressBar.classList.add('bg-danger');
-            } else if (percentage >= 50) {
-                budgetProgressBar.classList.remove('bg-primary', 'bg-danger');
-                budgetProgressBar.classList.add('bg-warning');
-            } else {
-                budgetProgressBar.classList.remove('bg-warning', 'bg-danger');
-                budgetProgressBar.classList.add('bg-primary');
-            }
-            
-            // Tampilkan peringatan jika pengeluaran >= 50% anggaran
-            if (percentage >= 50 && monthlyBudget > 0) {
-                warningAlert.classList.remove('d-none');
-                
-                if (percentage >= 80) {
-                    warningMessage.textContent = "Pengeluaran Anda telah mencapai 80% dari anggaran bulanan! Harap berhati-hati dalam mengeluarkan uang.";
-                } else if (percentage >= 50) {
-                    warningMessage.textContent = "Pengeluaran Anda telah mencapai 50% dari anggaran bulanan. Pertimbangkan untuk mengurangi pengeluaran tidak perlu.";
-                }
-            } else {
-                warningAlert.classList.add('d-none');
-            }
-            
-            // Update status aplikasi
-            if (navigator.onLine) {
-                appStatus.textContent = "Aplikasi siap digunakan (Online)";
-                appStatus.className = "text-success";
-            } else {
-                appStatus.textContent = "Aplikasi siap digunakan (Offline)";
-                appStatus.className = "text-warning";
-            }
-        };
-        
-        // Update tampilan pengeluaran
-        const updateExpenseDisplay = () => {
-            expenseCount.textContent = expenses.length;
-            
-            if (expenses.length > 0) {
-                emptyHistoryMessage.style.display = 'none';
-            } else {
-                emptyHistoryMessage.style.display = 'block';
-            }
-        };
-        
-        // Render riwayat pengeluaran
-        const renderExpenseHistory = () => {
-            expenseHistory.innerHTML = '';
-            
-            if (expenses.length === 0) {
-                expenseHistory.appendChild(emptyHistoryMessage);
-                emptyHistoryMessage.style.display = 'block';
-                return;
-            }
-            
-            // Tampilkan maksimal 10 pengeluaran terbaru
-            const recentExpenses = [...expenses].reverse().slice(0, 10);
-            
-            recentExpenses.forEach(expense => {
-                const expenseElement = document.createElement('div');
-                expenseElement.className = 'history-item';
-                expenseElement.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <strong>${expense.name}</strong>
-                            <div class="text-muted small">${expense.category} • ${expense.date}</div>
-                        </div>
-                        <div class="text-danger fw-bold">${formatCurrency(expense.amount)}</div>
-                    </div>
-                `;
-                expenseHistory.appendChild(expenseElement);
-            });
-        };
-        
-        // Render riwayat pemasukan
-        const renderIncomeHistory = () => {
-            incomeHistory.innerHTML = '';
-            
-            if (incomes.length === 0) {
-                incomeHistory.appendChild(emptyIncomeMessage);
-                emptyIncomeMessage.style.display = 'block';
-                return;
-            }
-            
-            incomeCount.textContent = incomes.length;
-            
-            // Tampilkan maksimal 10 pemasukan terbaru
-            const recentIncomes = [...incomes].reverse().slice(0, 10);
-            
-            recentIncomes.forEach(income => {
-                const incomeElement = document.createElement('div');
-                incomeElement.className = 'history-item';
-                incomeElement.innerHTML = `
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <strong>${income.description}</strong>
-                            <div class="text-muted small">${income.date}</div>
-                        </div>
-                        <div class="text-success fw-bold">+${formatCurrency(income.amount)}</div>
-                    </div>
-                `;
-                incomeHistory.appendChild(incomeElement);
-            });
-        };
-        
-        // Tambah anggaran bulanan
-        setBudgetButton.addEventListener('click', () => {
-            const budgetValue = parseFloat(monthlyBudgetInput.value);
-            
-            if (isNaN(budgetValue) || budgetValue <= 0) {
-                alert('Masukkan jumlah anggaran yang valid (lebih dari 0)');
+            if (!budgetValue || budgetValue <= 0) {
+                alert('Masukkan jumlah anggaran yang valid!');
                 return;
             }
             
             monthlyBudget = budgetValue;
-            monthlyBudgetDisplay.textContent = formatCurrency(monthlyBudget);
-            
             saveData();
             updateBudgetDisplay();
+            checkBudgetWarning();
+            budgetInput.value = '';
             
-            // Tampilkan notifikasi
-            showNotification('Anggaran bulanan berhasil diatur!', 'success');
-        });
+            // Show confirmation
+            alert(`Anggaran bulanan berhasil diatur menjadi Rp ${formatCurrency(monthlyBudget)}`);
+        }
         
-        // Tambah pengeluaran
-        addExpenseButton.addEventListener('click', () => {
+        // Add expense
+        function addExpense() {
             const name = expenseNameInput.value.trim();
             const amount = parseFloat(expenseAmountInput.value);
+            const date = expenseDateInput.value;
             const category = expenseCategoryInput.value;
             
-            if (!name) {
-                alert('Masukkan nama pengeluaran');
-                expenseNameInput.focus();
+            if (!name || !amount || amount <= 0 || !date) {
+                alert('Harap isi semua field dengan benar!');
                 return;
             }
             
-            if (isNaN(amount) || amount <= 0) {
-                alert('Masukkan jumlah pengeluaran yang valid (lebih dari 0)');
-                expenseAmountInput.focus();
-                return;
-            }
-            
-            if (monthlyBudget <= 0) {
-                alert('Harap atur anggaran bulanan terlebih dahulu');
-                monthlyBudgetInput.focus();
-                return;
-            }
-            
-            // Cek apakah pengeluaran melebihi sisa anggaran
-            const remaining = monthlyBudget - totalExpenses;
-            if (amount > remaining) {
-                const confirmExpense = confirm(`Pengeluaran ini (${formatCurrency(amount)}) melebihi sisa anggaran Anda (${formatCurrency(remaining)}). Apakah Anda yakin ingin melanjutkan?`);
-                if (!confirmExpense) return;
-            }
-            
-            // Buat objek pengeluaran
-            const now = new Date();
             const expense = {
                 id: Date.now(),
                 name,
                 amount,
-                category,
-                date: now.toLocaleDateString('id-ID', { 
-                    day: '2-digit', 
-                    month: 'short', 
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                })
+                date,
+                category
             };
             
-            // Tambahkan ke array pengeluaran
             expenses.push(expense);
-            totalExpenses += amount;
-            
-            // Reset form input
-            expenseNameInput.value = '';
-            expenseAmountInput.value = '';
-            
-            // Update tampilan dan simpan data
-            updateExpenseDisplay();
-            renderExpenseHistory();
             saveData();
             updateBudgetDisplay();
+            updateRecentExpenses();
+            updateExpenseHistory();
+            updateDayChart();
+            checkBudgetWarning();
             
-            // Tampilkan notifikasi
-            showNotification('Pengeluaran berhasil dicatat!', 'success');
-        });
+            // Clear form
+            expenseNameInput.value = '';
+            expenseAmountInput.value = '';
+            expenseDateInput.valueAsDate = new Date();
+            
+            // Show confirmation
+            alert(`Pengeluaran "${name}" sebesar Rp ${formatCurrency(amount)} berhasil ditambahkan.`);
+        }
         
-        // Tambah pemasukan
-        addIncomeButton.addEventListener('click', () => {
+        // Add income
+        function addIncome() {
+            const source = incomeSourceInput.value.trim();
             const amount = parseFloat(incomeAmountInput.value);
+            const date = incomeDateInput.value;
             
-            if (isNaN(amount) || amount <= 0) {
-                alert('Masukkan jumlah pemasukan yang valid (lebih dari 0)');
-                incomeAmountInput.focus();
+            if (!source || !amount || amount <= 0 || !date) {
+                alert('Harap isi semua field dengan benar!');
                 return;
             }
             
-            // Buat objek pemasukan
-            const now = new Date();
             const income = {
                 id: Date.now(),
-                description: `Pemasukan tambahan`,
+                source,
                 amount,
-                date: now.toLocaleDateString('id-ID', { 
-                    day: '2-digit', 
-                    month: 'short', 
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                })
+                date
             };
             
-            // Tambahkan ke array pemasukan
             incomes.push(income);
-            
-            // Tambahkan ke anggaran bulanan
-            monthlyBudget += amount;
-            monthlyBudgetInput.value = monthlyBudget;
-            
-            // Reset form input
-            incomeAmountInput.value = '';
-            
-            // Update tampilan dan simpan data
-            renderIncomeHistory();
             saveData();
-            updateBudgetDisplay();
+            updateIncomeHistory();
             
-            // Tampilkan notifikasi
-            showNotification('Pemasukan berhasil ditambahkan!', 'success');
-        });
-        
-        // Reset data bulanan
-        resetButton.addEventListener('click', () => {
-            const confirmReset = confirm('Apakah Anda yakin ingin mereset data bulan ini? Data pengeluaran dan pemasukan akan dihapus, tetapi anggaran tetap tersimpan.');
+            // Clear form
+            incomeSourceInput.value = '';
+            incomeAmountInput.value = '';
+            incomeDateInput.valueAsDate = new Date();
             
-            if (confirmReset) {
-                // Reset pengeluaran dan pemasukan, tapi biarkan anggaran tetap
-                expenses = [];
-                incomes = [];
-                totalExpenses = 0;
-                
-                // Update tampilan dan simpan data
-                updateExpenseDisplay();
-                renderExpenseHistory();
-                renderIncomeHistory();
-                saveData();
-                updateBudgetDisplay();
-                
-                // Tampilkan notifikasi
-                showNotification('Data bulanan berhasil direset!', 'info');
-            }
-        });
-        
-        // Tampilkan notifikasi
-        const showNotification = (message, type) => {
-            // Buat elemen notifikasi
-            const notification = document.createElement('div');
-            notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
-            notification.style.cssText = `
-                top: 20px;
-                right: 20px;
-                z-index: 1050;
-                min-width: 300px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            `;
-            notification.innerHTML = `
-                ${message}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            `;
-            
-            // Tambahkan ke body
-            document.body.appendChild(notification);
-            
-            // Hapus notifikasi setelah 3 detik
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.classList.remove('show');
-                    setTimeout(() => {
-                        if (notification.parentNode) {
-                            notification.parentNode.removeChild(notification);
-                        }
-                    }, 300);
-                }
-            }, 3000);
-        };
-        
-        // PWA Installation
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Mencegah tampilan prompt instalasi otomatis
-            e.preventDefault();
-            // Simpan event untuk digunakan nanti
-            deferredPrompt = e;
-            // Tampilkan tombol install
-            installButton.style.display = 'block';
-        });
-        
-        installButton.addEventListener('click', async () => {
-            if (!deferredPrompt) return;
-            
-            // Tampilkan prompt instalasi
-            deferredPrompt.prompt();
-            
-            // Tunggu user merespon prompt
-            const { outcome } = await deferredPrompt.userChoice;
-            
-            if (outcome === 'accepted') {
-                console.log('User menerima instalasi PWA');
-                installButton.style.display = 'none';
-            }
-            
-            // Reset deferredPrompt
-            deferredPrompt = null;
-        });
-        
-        // Deteksi perubahan koneksi
-        window.addEventListener('online', () => {
-            appStatus.textContent = "Aplikasi siap digunakan (Online)";
-            appStatus.className = "text-success";
-        });
-        
-        window.addEventListener('offline', () => {
-            appStatus.textContent = "Aplikasi siap digunakan (Offline)";
-            appStatus.className = "text-warning";
-        });
-        
-        // Inisialisasi aplikasi saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', () => {
-            loadData();
-            updateBudgetDisplay();
-            
-            // Coba daftarkan service worker untuk PWA
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('ServiceWorker berhasil didaftarkan: ', registration);
-                    })
-                    .catch(error => {
-                        console.log('ServiceWorker pendaftaran gagal: ', error);
-                    });
-            }
-        });
-    </script>
-    
-    <!-- Service Worker dan Manifest untuk PWA -->
-    <script>
-        // Buat service worker inline
-        if ('serviceWorker' in navigator) {
-            // Buat service worker script secara dinamis
-            const swScript = `
-                // Nama cache untuk aplikasi
-                const CACHE_NAME = 'cashio-v1.0';
-                
-                // Aset yang akan di-cache saat install
-                const urlsToCache = [
-                    '/',
-                    './index.html',
-                    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css',
-                    'https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap',
-                    'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css',
-                    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js'
-                ];
-                
-                // Event install - cache aset statis
-                self.addEventListener('install', event => {
-                    event.waitUntil(
-                        caches.open(CACHE_NAME)
-                            .then(cache => {
-                                console.log('Cache opened');
-                                return cache.addAll(urlsToCache);
-                            })
-                            .then(() => self.skipWaiting())
-                    );
-                });
-                
-                // Event activate - hapus cache lama
-                self.addEventListener('activate', event => {
-                    event.waitUntil(
-                        caches.keys().then(cacheNames => {
-                            return Promise.all(
-                                cacheNames.map(cacheName => {
-                                    if (cacheName !== CACHE_NAME) {
-                                        console.log('Deleting old cache:', cacheName);
-                                        return caches.delete(cacheName);
-                                    }
-                                })
-                            );
-                        }).then(() => self.clients.claim())
-                    );
-                });
-                
-                // Event fetch - serve dari cache jika offline
-                self.addEventListener('fetch', event => {
-                    event.respondWith(
-                        caches.match(event.request)
-                            .then(response => {
-                                // Cache hit - return response
-                                if (response) {
-                                    return response;
-                                }
-                                
-                                // Clone request
-                                const fetchRequest = event.request.clone();
-                                
-                                return fetch(fetchRequest).then(
-                                    response => {
-                                        // Cek jika response valid
-                                        if(!response || response.status !== 200 || response.type !== 'basic') {
-                                            return response;
-                                        }
-                                        
-                                        // Clone response
-                                        const responseToCache = response.clone();
-                                        
-                                        // Tambahkan ke cache
-                                        caches.open(CACHE_NAME)
-                                            .then(cache => {
-                                                cache.put(event.request, responseToCache);
-                                            });
-                                        
-                                        return response;
-                                    }
-                                ).catch(() => {
-                                    // Jika fetch gagal (offline), coba return halaman fallback
-                                    if (event.request.mode === 'navigate') {
-                                        return caches.match('/');
-                                    }
-                                });
-                            })
-                    );
-                });
-            `;
-            
-            // Buat blob dari service worker script
-            const swBlob = new Blob([swScript], { type: 'application/javascript' });
-            const swURL = URL.createObjectURL(swBlob);
-            
-            // Daftarkan service worker
-            navigator.serviceWorker.register(swURL)
-                .then(registration => {
-                    console.log('Service Worker registered with scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.log('Service Worker registration failed:', error);
-                });
+            // Show confirmation
+            alert(`Pemasukan dari "${source}" sebesar Rp ${formatCurrency(amount)} berhasil ditambahkan.`);
         }
         
-        // Buat manifest.json secara dinamis
+        // Update budget display
+        function updateBudgetDisplay() {
+            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const remainingBudget = monthlyBudget - totalExpense;
+            const percentageUsed = monthlyBudget > 0 ? (totalExpense / monthlyBudget) * 100 : 0;
+            
+            currentBudgetEl.textContent = `Rp ${formatCurrency(monthlyBudget)}`;
+            totalExpenseEl.textContent = `Rp ${formatCurrency(totalExpense)}`;
+            remainingBudgetEl.textContent = `Rp ${formatCurrency(remainingBudget)}`;
+            
+            budgetProgressEl.style.width = `${Math.min(percentageUsed, 100)}%`;
+            budgetPercentageEl.textContent = `${percentageUsed.toFixed(1)}% digunakan`;
+            
+            // Update progress bar color based on percentage
+            if (percentageUsed >= 75) {
+                budgetProgressEl.className = 'progress-bar bg-danger';
+            } else if (percentageUsed >= 50) {
+                budgetProgressEl.className = 'progress-bar bg-warning';
+            } else {
+                budgetProgressEl.className = 'progress-bar bg-success';
+            }
+            
+            // Update status indicator
+            updateBudgetStatus(percentageUsed);
+        }
+        
+        // Update budget status
+        function updateBudgetStatus(percentageUsed) {
+            if (monthlyBudget === 0) {
+                statusIndicatorEl.className = 'status-indicator';
+                budgetStatusEl.textContent = 'Belum ada anggaran ditetapkan';
+                return;
+            }
+            
+            if (percentageUsed >= 75) {
+                statusIndicatorEl.className = 'status-indicator status-danger';
+                budgetStatusEl.textContent = 'Bahaya - Pengeluaran hampir habis';
+            } else if (percentageUsed >= 50) {
+                statusIndicatorEl.className = 'status-indicator status-warning';
+                budgetStatusEl.textContent = 'Peringatan - Pengeluaran sudah 50%';
+            } else {
+                statusIndicatorEl.className = 'status-indicator status-safe';
+                budgetStatusEl.textContent = 'Aman - Pengeluaran terkendali';
+            }
+        }
+        
+        // Update recent expenses
+        function updateRecentExpenses() {
+            if (expenses.length === 0) {
+                recentExpensesEl.innerHTML = '<p class="text-muted">Belum ada pengeluaran tercatat</p>';
+                return;
+            }
+            
+            // Get last 5 expenses
+            const recentExpenses = expenses.slice(-5).reverse();
+            let html = '';
+            
+            recentExpenses.forEach(expense => {
+                const date = new Date(expense.date).toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'short'
+                });
+                
+                const isHighExpense = expense.amount > (monthlyBudget * 0.1); // Highlight if > 10% of budget
+                
+                html += `
+                    <div class="expense-item ${isHighExpense ? 'high-expense' : ''}">
+                        <div class="d-flex justify-content-between">
+                            <strong>${expense.name}</strong>
+                            <span>Rp ${formatCurrency(expense.amount)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted">
+                            <small>${getCategoryName(expense.category)} • ${date}</small>
+                            <small>#${expense.id.toString().slice(-4)}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            recentExpensesEl.innerHTML = html;
+        }
+        
+        // Update income history
+        function updateIncomeHistory() {
+            if (incomes.length === 0) {
+                incomeHistoryListEl.innerHTML = '<p class="text-muted">Belum ada pemasukan tercatat</p>';
+                return;
+            }
+            
+            // Get all incomes
+            const sortedIncomes = [...incomes].sort((a, b) => new Date(b.date) - new Date(a.date));
+            let html = '';
+            
+            sortedIncomes.forEach(income => {
+                const date = new Date(income.date).toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                
+                html += `
+                    <div class="expense-item">
+                        <div class="d-flex justify-content-between">
+                            <strong>${income.source}</strong>
+                            <span class="text-success">+ Rp ${formatCurrency(income.amount)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted">
+                            <small>${date}</small>
+                            <small>#${income.id.toString().slice(-4)}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            incomeHistoryListEl.innerHTML = html;
+        }
+        
+        // Update expense history
+        function updateExpenseHistory() {
+            if (expenses.length === 0) {
+                allExpensesListEl.innerHTML = '<p class="text-muted">Belum ada pengeluaran tercatat</p>';
+                return;
+            }
+            
+            // Get all expenses sorted by date (newest first)
+            const sortedExpenses = [...expenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+            let html = '';
+            
+            sortedExpenses.forEach(expense => {
+                const date = new Date(expense.date).toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+                
+                html += `
+                    <div class="expense-item">
+                        <div class="d-flex justify-content-between">
+                            <strong>${expense.name}</strong>
+                            <span>Rp ${formatCurrency(expense.amount)}</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-muted">
+                            <small>${getCategoryName(expense.category)} • ${date}</small>
+                            <small>#${expense.id.toString().slice(-4)}</small>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            allExpensesListEl.innerHTML = html;
+        }
+        
+        // Update day chart
+        function updateDayChart() {
+            // Initialize day data
+            const daysOfWeek = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const dayTotals = Array(7).fill(0);
+            
+            // Calculate expenses per day of week
+            expenses.forEach(expense => {
+                const date = new Date(expense.date);
+                const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
+                dayTotals[dayOfWeek] += expense.amount;
+            });
+            
+            // Find max value for scaling
+            const maxExpense = Math.max(...dayTotals);
+            
+            // Generate chart HTML
+            let chartHTML = '';
+            let labelsHTML = '';
+            
+            daysOfWeek.forEach((day, index) => {
+                const percentage = maxExpense > 0 ? (dayTotals[index] / maxExpense) * 100 : 0;
+                const isHighDay = dayTotals[index] === maxExpense && maxExpense > 0;
+                
+                chartHTML += `
+                    <div class="day-chart">
+                        <div class="day-bar ${isHighDay ? 'day-high' : ''}" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+                
+                labelsHTML += `
+                    <div class="col day-of-week">
+                        <div>${day.charAt(0)}</div>
+                        <small>Rp ${formatCurrency(dayTotals[index])}</small>
+                    </div>
+                `;
+            });
+            
+            dayChartEl.innerHTML = chartHTML;
+            dayLabelsEl.innerHTML = labelsHTML;
+        }
+        
+        // Check budget warning
+        function checkBudgetWarning() {
+            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+            const percentageUsed = monthlyBudget > 0 ? (totalExpense / monthlyBudget) * 100 : 0;
+            
+            if (monthlyBudget > 0 && percentageUsed >= 50) {
+                warningAlertEl.classList.remove('hidden');
+                
+                if (percentageUsed >= 75) {
+                    warningMessageEl.textContent = 'Peringatan! Pengeluaran Anda telah mencapai atau melebihi 75% dari anggaran bulanan. Segera evaluasi pengeluaran Anda!';
+                } else {
+                    warningMessageEl.textContent = 'Peringatan! Pengeluaran Anda telah mencapai atau melebihi 50% dari anggaran bulanan. Pertimbangkan untuk mengurangi pengeluaran yang tidak perlu.';
+                }
+            } else {
+                warningAlertEl.classList.add('hidden');
+            }
+        }
+        
+        // Reset all data
+        function resetData() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua data? Tindakan ini tidak dapat dibatalkan.')) {
+                monthlyBudget = 0;
+                expenses = [];
+                incomes = [];
+                
+                saveData();
+                updateBudgetDisplay();
+                updateRecentExpenses();
+                updateIncomeHistory();
+                updateExpenseHistory();
+                updateDayChart();
+                checkBudgetWarning();
+                
+                alert('Semua data telah direset.');
+            }
+        }
+        
+        // Show specific section
+        function showSection(section) {
+            // Hide all sections first
+            budgetSection.classList.add('hidden');
+            expenseSection.classList.add('hidden');
+            dayChartSection.classList.add('hidden');
+            incomeHistorySection.classList.add('hidden');
+            expenseHistorySection.classList.add('hidden');
+            tipsSection.classList.add('hidden');
+            warningAlertEl.classList.add('hidden');
+            
+            // Remove active class from all nav items
+            navHome.classList.remove('active');
+            navHistory.classList.remove('active');
+            navTips.classList.remove('active');
+            
+            // Show selected section
+            if (section === 'home') {
+                budgetSection.classList.remove('hidden');
+                expenseSection.classList.remove('hidden');
+                dayChartSection.classList.remove('hidden');
+                checkBudgetWarning();
+                navHome.classList.add('active');
+            } else if (section === 'history') {
+                incomeHistorySection.classList.remove('hidden');
+                expenseHistorySection.classList.remove('hidden');
+                navHistory.classList.add('active');
+            } else if (section === 'tips') {
+                tipsSection.classList.remove('hidden');
+                navTips.classList.add('active');
+            }
+        }
+        
+        // Helper functions
+        function formatCurrency(amount) {
+            return amount.toLocaleString('id-ID');
+        }
+        
+        function getCategoryName(category) {
+            const categories = {
+                'makanan': 'Makanan & Minuman',
+                'transportasi': 'Transportasi',
+                'hiburan': 'Hiburan',
+                'belanja': 'Belanja',
+                'pendidikan': 'Pendidikan',
+                'lainnya': 'Lainnya'
+            };
+            
+            return categories[category] || 'Lainnya';
+        }
+        
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }).catch(err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+        
+        // Generate manifest content
         const manifest = {
             "name": "Cashio - Pengelola Keuangan Mahasiswa",
             "short_name": "Cashio",
-            "description": "Aplikasi pengelola keuangan bulanan untuk mahasiswa",
+            "description": "Aplikasi untuk membantu mahasiswa mengelola keuangan bulanan",
             "start_url": ".",
             "display": "standalone",
             "background_color": "#EBF4DD",
             "theme_color": "#90AB8B",
             "icons": [
                 {
-                    "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjggMTI4Ij48cmVjdCB3aWR0aD0iMTI4IiBoZWlnaHQ9IjEyOCIgZmlsbD0iIzkwQUI4QiIgcng9IjEwIj48L3JlY3Q+PHBhdGggZD0iTTY0IDI0QzQxLjkyIDI0IDI0IDQxLjkyIDI0IDY0czE3LjkyIDQwIDQwIDQwIDQwLTE3LjkyIDQwLTQwUzg2LjA4IDI0IDY0IDI0em0xNiA1NmgtOHYtMTZoOHYxNnptMC0yNHYtOGgtOHY4aDh6IiBmaWxsPSIjRUIGNDREIj48L3BhdGg+PHBhdGggZD0iTTcyIDY0SDQ4bC02IDE2aDQwbC02LTE2em0tNi0xNmgtNHYtOGg0djh6IiBmaWxsPSIjRUIGNDREIj48L3BhdGg+PC9zdmc+",
-                    "type": "image/svg+xml",
-                    "sizes": "128x128"
+                    "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml"
                 }
             ]
         };
         
-        // Buat dan tambahkan tag manifest
-        const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-        const manifestURL = URL.createObjectURL(manifestBlob);
+        // Create manifest link
+        const manifestLink = document.createElement('link');
+        manifestLink.rel = 'manifest';
+        manifestLink.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(manifest));
+        document.head.appendChild(manifestLink);
         
-        const manifestElement = document.querySelector('link[rel="manifest"]');
-        if (manifestElement) {
-            manifestElement.href = manifestURL;
-        }
+        // Create service worker content
+        const swContent = `
+            self.addEventListener('install', event => {
+                event.waitUntil(
+                    caches.open('cashio-v1').then(cache => {
+                        return cache.addAll([
+                            '.',
+                            './index.html'
+                        ]);
+                    })
+                );
+            });
+            
+            self.addEventListener('fetch', event => {
+                event.respondWith(
+                    caches.match(event.request).then(response => {
+                        return response || fetch(event.request);
+                    })
+                );
+            });
+        `;
+        
+        // Create service worker blob
+        const swBlob = new Blob([swContent], { type: 'application/javascript' });
+        const swURL = URL.createObjectURL(swBlob);
+        
+        // Override service worker registration to use the blob URL
+        const originalRegister = navigator.serviceWorker.register;
+        navigator.serviceWorker.register = function() {
+            arguments[0] = swURL;
+            return originalRegister.apply(this, arguments);
+        };
     </script>
 </body>
 </html>
