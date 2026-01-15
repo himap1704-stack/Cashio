@@ -4,3 +4,6 @@ Membantu mahasiswa mengelola keuangan bulanan agar pengeluaran lebih terkontrol 
 
 # Ketua 
 Dirgahayu Rohima Putri
+
+# Team
+Margaretha Gracia Tiara Putri
