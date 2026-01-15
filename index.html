@@ -3,27 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashio - Pengelola Keuangan Mahasiswa</title>
-    
+    <title>Cashio - Manajemen Keuangan Mahasiswa</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts - Lora -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    
-    <!-- PWA Metadata -->
+    <!-- Google Font Lora -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Manifest untuk PWA -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#EBF4DD">
-    
     <style>
         :root {
             --color-primary: #EBF4DD;
             --color-secondary: #90AB8B;
-            --color-warning: #ffc107;
-            --color-danger: #dc3545;
-            --color-success: #198754;
+            --color-dark: #2C3E50;
+            --color-warning: #E74C3C;
+            --color-success: #27AE60;
         }
         
         * {
@@ -32,18 +25,18 @@
         
         body {
             background-color: var(--color-primary);
-            color: #333;
+            color: var(--color-dark);
             padding-bottom: 80px;
         }
         
-        .navbar {
-            background-color: var(--color-secondary) !important;
+        .navbar, .footer {
+            background-color: var(--color-secondary);
         }
         
         .card {
             border: none;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
         
@@ -60,70 +53,93 @@
         }
         
         .btn-primary:hover {
-            background-color: #7a9475;
-            border-color: #7a9475;
+            background-color: #7A9775;
+            border-color: #7A9775;
         }
         
         .btn-warning {
+            background-color: #F39C12;
+            border-color: #F39C12;
+        }
+        
+        .btn-danger {
             background-color: var(--color-warning);
             border-color: var(--color-warning);
         }
         
-        .btn-danger {
-            background-color: var(--color-danger);
-            border-color: var(--color-danger);
+        .budget-display {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-dark);
         }
         
-        .budget-summary {
-            background: linear-gradient(135deg, var(--color-secondary), #7a9475);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .icon-large {
+        .remaining-budget {
             font-size: 2rem;
-            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .alert-warning {
+            background-color: rgba(243, 156, 18, 0.2);
+            border-color: #F39C12;
+            color: #7E5109;
         }
         
         .expense-item {
-            border-left: 4px solid var(--color-secondary);
+            border-left: 5px solid var(--color-secondary);
             padding-left: 15px;
-            margin-bottom: 15px;
-            background-color: rgba(144, 171, 139, 0.1);
-            padding: 10px 15px;
-            border-radius: 0 8px 8px 0;
+            margin-bottom: 10px;
         }
         
-        .expense-item.high-expense {
-            border-left-color: var(--color-danger);
-            background-color: rgba(220, 53, 69, 0.1);
+        .income-item {
+            border-left: 5px solid var(--color-success);
+            padding-left: 15px;
+            margin-bottom: 10px;
         }
         
-        .alert-warning-custom {
-            background-color: rgba(255, 193, 7, 0.2);
-            border-left: 4px solid var(--color-warning);
-            border-radius: 0 8px 8px 0;
+        .icon-lg {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+        
+        .progress {
+            height: 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--color-secondary);
         }
         
         .day-chart {
-            height: 40px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            overflow: hidden;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-top: 20px;
         }
         
         .day-bar {
-            height: 100%;
+            width: 12%;
             background-color: var(--color-secondary);
-            border-radius: 5px;
-            transition: width 0.5s ease;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            text-align: center;
+            color: white;
+            font-weight: bold;
         }
         
-        .day-high {
-            background-color: var(--color-danger);
+        .day-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--color-dark);
+        }
+        
+        .highest-day {
+            background-color: #E74C3C;
         }
         
         .install-btn {
@@ -139,80 +155,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: none;
         }
         
-        .reset-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background-color: var(--color-danger);
-            color: white;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
+        .section-title {
+            border-bottom: 2px solid var(--color-secondary);
+            padding-bottom: 5px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            cursor: pointer;
         }
         
-        .install-btn:hover, .reset-btn:hover {
-            transform: scale(1.05);
+        .section-title i {
+            margin-right: 10px;
         }
         
-        .hidden {
-            display: none !important;
-        }
-        
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 5px;
-        }
-        
-        .status-safe {
-            background-color: var(--color-success);
-        }
-        
-        .status-warning {
-            background-color: var(--color-warning);
-        }
-        
-        .status-danger {
-            background-color: var(--color-danger);
-        }
-        
-        .day-of-week {
-            font-size: 0.85rem;
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0;
             text-align: center;
-            margin-bottom: 5px;
+            color: white;
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding-left: 15px;
-                padding-right: 15px;
+            .budget-display {
+                font-size: 1.5rem;
             }
             
-            .budget-summary h2 {
-                font-size: 1.5rem;
+            .remaining-budget {
+                font-size: 1.8rem;
             }
         }
     </style>
+    <!-- Ikon Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <span style="font-size: 1.8rem; margin-right: 10px;">💰</span>
-                <h1 class="h4 mb-0">Cashio</h1>
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-money-bill-wave icon-lg"></i>
+                <span class="fw-bold">Cashio</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -220,13 +207,15 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" id="navHome">Beranda</a>
+                        <a class="nav-link active" href="#home"><i class="fas fa-home"></i> Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="navHistory">Riwayat</a>
+                        <a class="nav-link" href="#history"><i class="fas fa-history"></i> Riwayat</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="navTips">Tips Hemat</a>
+                        <button class="btn btn-sm btn-outline-light mt-1" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset Data
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -234,826 +223,839 @@
     </nav>
 
     <div class="container mt-4">
-        <!-- Budget Summary Card -->
-        <div class="budget-summary">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h2>Pengelolaan Keuangan Bulanan</h2>
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="status-indicator" id="statusIndicator"></span>
-                        <span id="budgetStatus">Status anggaran</span>
-                    </div>
-                    <p class="mb-0">Kelola pengeluaranmu dengan bijak untuk menghindari kehabisan uang sebelum akhir bulan</p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <div class="icon-large">💡</div>
-                    <p class="mb-0">Tips: Catat semua pengeluaran, sekecil apapun!</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Budget Input Section -->
-        <div class="card" id="budgetSection">
-            <div class="card-header">
-                <h5 class="mb-0">Anggaran Bulanan</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="monthlyBudget" class="form-label">Masukkan Anggaran Bulanan (Rp)</label>
-                            <input type="number" class="form-control" id="monthlyBudget" placeholder="Contoh: 1500000">
-                            <div class="form-text">Total uang yang kamu miliki untuk satu bulan</div>
+        <!-- Bagian Input Anggaran dan Pemasukan -->
+        <div id="home">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-wallet"></i> Anggaran Bulanan
                         </div>
-                        <button class="btn btn-primary" id="setBudget">Atur Anggaran</button>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="mt-3 mt-md-0">
-                            <h6>Anggaran Saat Ini:</h6>
-                            <div class="d-flex justify-content-between">
-                                <span>Total Anggaran:</span>
-                                <span id="currentBudget">Rp 0</span>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="monthlyBudget" class="form-label">Masukkan Anggaran Bulanan (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="monthlyBudget" placeholder="Contoh: 2000000" min="0">
+                                    <button class="btn btn-primary" id="setBudgetBtn">Set Anggaran</button>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Total Pengeluaran:</span>
-                                <span id="totalExpense">Rp 0</span>
+                            <div class="mb-3">
+                                <label for="incomeAmount" class="form-label">Tambah Pemasukan (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="incomeAmount" placeholder="Contoh: 500000" min="0">
+                                    <button class="btn btn-success" id="addIncomeBtn">Tambah Pemasukan</button>
+                                </div>
+                                <small class="text-muted">Pemasukan akan ditambahkan ke sisa anggaran.</small>
                             </div>
-                            <hr>
-                            <div class="d-flex justify-content-between fw-bold">
-                                <span>Sisa Uang:</span>
-                                <span id="remainingBudget">Rp 0</span>
-                            </div>
-                            <div class="progress mt-3" style="height: 20px;">
-                                <div class="progress-bar" id="budgetProgress" role="progressbar" style="width: 0%;"></div>
-                            </div>
-                            <div class="text-center mt-1">
-                                <small id="budgetPercentage">0% digunakan</small>
+                            
+                            <div class="alert alert-info">
+                                <i class="fas fa-lightbulb"></i> <strong>Tip:</strong> Catat semua pemasukan tambahan seperti uang saku ekstra, hasil freelance, atau hadiah.
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Expense Input Section -->
-        <div class="card" id="expenseSection">
-            <div class="card-header">
-                <h5 class="mb-0">Pencatatan Pengeluaran</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="expenseName" class="form-label">Nama Pengeluaran</label>
-                            <input type="text" class="form-control" id="expenseName" placeholder="Contoh: Makan siang, Transportasi">
+                
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-chart-line"></i> Ringkasan Keuangan
                         </div>
-                        <div class="mb-3">
-                            <label for="expenseAmount" class="form-label">Jumlah (Rp)</label>
-                            <input type="number" class="form-control" id="expenseAmount" placeholder="Contoh: 25000">
-                        </div>
-                        <div class="mb-3">
-                            <label for="expenseDate" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="expenseDate">
-                        </div>
-                        <div class="mb-3">
-                            <label for="expenseCategory" class="form-label">Kategori</label>
-                            <select class="form-select" id="expenseCategory">
-                                <option value="makanan">Makanan & Minuman</option>
-                                <option value="transportasi">Transportasi</option>
-                                <option value="hiburan">Hiburan</option>
-                                <option value="belanja">Belanja</option>
-                                <option value="pendidikan">Pendidikan</option>
-                                <option value="lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        <button class="btn btn-primary" id="addExpense">Tambah Pengeluaran</button>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>Pengeluaran Terakhir:</h6>
-                        <div id="recentExpenses">
-                            <p class="text-muted">Belum ada pengeluaran tercatat</p>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <p class="text-muted mb-1">Total Anggaran</p>
+                                <h2 class="budget-display" id="totalBudgetDisplay">Rp 0</h2>
+                                
+                                <p class="text-muted mb-1 mt-3">Total Pengeluaran</p>
+                                <h3 class="text-danger" id="totalExpenseDisplay">Rp 0</h3>
+                                
+                                <p class="text-muted mb-1 mt-3">Sisa Uang Tersedia</p>
+                                <h2 class="remaining-budget text-success" id="remainingBudgetDisplay">Rp 0</h2>
+                                
+                                <div class="mt-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Penggunaan Anggaran</span>
+                                        <span id="budgetPercentage">0%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" id="budgetProgressBar" role="progressbar" style="width: 0%;"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Expense by Day Chart -->
-        <div class="card" id="dayChartSection">
-            <div class="card-header">
-                <h5 class="mb-0">Pengeluaran per Hari dalam Seminggu</h5>
+            
+            <!-- Peringatan jika pengeluaran > 50% -->
+            <div class="alert alert-warning alert-dismissible fade" id="budgetWarning" role="alert">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Peringatan!</strong> Pengeluaran Anda telah mencapai <span id="warningPercentage">0%</span> dari anggaran bulanan.
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <div class="mt-2" id="savingTips"></div>
             </div>
-            <div class="card-body">
-                <p>Lihat hari dengan pengeluaran terbanyak untuk mengidentifikasi pola pengeluaran Anda.</p>
-                <div id="dayChart"></div>
-                <div class="row mt-3" id="dayLabels"></div>
-            </div>
-        </div>
-        
-        <!-- Warning Alert -->
-        <div class="alert alert-warning-custom alert-dismissible fade show hidden" id="warningAlert">
-            <div class="d-flex">
-                <div class="me-3" style="font-size: 1.5rem;">⚠️</div>
-                <div>
-                    <h5>Peringatan Pengeluaran!</h5>
-                    <p id="warningMessage">Pengeluaran Anda telah mencapai 50% dari anggaran bulanan. Pertimbangkan untuk mengurangi pengeluaran yang tidak perlu.</p>
-                    <div id="savingTips">
-                        <h6>Saran Penghematan:</h6>
-                        <ul class="mb-0">
-                            <li>Batasi makan di luar, masak sendiri lebih hemat</li>
-                            <li>Manfaatkan diskon dan promo untuk kebutuhan mahasiswa</li>
-                            <li>Gunakan transportasi umum atau berjalan kaki untuk jarak dekat</li>
-                        </ul>
+            
+            <!-- Bagian Input Pengeluaran -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <i class="fas fa-shopping-cart"></i> Catat Pengeluaran Baru
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="expenseName" class="form-label">Nama Pengeluaran</label>
+                                <input type="text" class="form-control" id="expenseName" placeholder="Contoh: Makan Siang">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="expenseAmount" class="form-label">Jumlah (Rp)</label>
+                                <input type="number" class="form-control" id="expenseAmount" placeholder="Contoh: 25000" min="0">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="expenseCategory" class="form-label">Kategori</label>
+                                <select class="form-select" id="expenseCategory">
+                                    <option value="Makanan">Makanan</option>
+                                    <option value="Transportasi">Transportasi</option>
+                                    <option value="Hiburan">Hiburan</option>
+                                    <option value="Belanja">Belanja</option>
+                                    <option value="Pendidikan">Pendidikan</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label for="expenseDate" class="form-label">Tanggal</label>
+                                <input type="date" class="form-control" id="expenseDate">
+                            </div>
+                        </div>
                     </div>
+                    <button class="btn btn-primary" id="addExpenseBtn">
+                        <i class="fas fa-plus"></i> Tambah Pengeluaran
+                    </button>
                 </div>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-        
-        <!-- Income History Section (Hidden by default) -->
-        <div class="card hidden" id="incomeHistorySection">
-            <div class="card-header">
-                <h5 class="mb-0">Riwayat Pemasukan</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="incomeSource" class="form-label">Sumber Pemasukan</label>
-                            <input type="text" class="form-control" id="incomeSource" placeholder="Contoh: Orang tua, Beasiswa, Part-time">
-                        </div>
-                        <div class="mb-3">
-                            <label for="incomeAmount" class="form-label">Jumlah (Rp)</label>
-                            <input type="number" class="form-control" id="incomeAmount" placeholder="Contoh: 1000000">
-                        </div>
-                        <div class="mb-3">
-                            <label for="incomeDate" class="form-label">Tanggal</label>
-                            <input type="date" class="form-control" id="incomeDate">
-                        </div>
-                        <button class="btn btn-primary" id="addIncome">Tambah Pemasukan</button>
+            
+            <!-- Grafik Pengeluaran per Hari -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <i class="fas fa-chart-bar"></i> Pengeluaran per Hari dalam Minggu Ini
+                </div>
+                <div class="card-body">
+                    <div class="day-chart" id="dayChart">
+                        <!-- Grafik akan di-generate oleh JavaScript -->
                     </div>
-                    <div class="col-md-6">
-                        <h6>Riwayat Pemasukan:</h6>
-                        <div id="incomeHistoryList">
-                            <p class="text-muted">Belum ada pemasukan tercatat</p>
-                        </div>
-                    </div>
+                    <p class="text-muted text-center mt-4">
+                        <i class="fas fa-info-circle"></i> Grafik menunjukkan total pengeluaran Anda per hari dalam 7 hari terakhir.
+                        Hari dengan pengeluaran tertinggi ditandai dengan warna merah.
+                    </p>
                 </div>
             </div>
         </div>
         
-        <!-- Expense History Section (Hidden by default) -->
-        <div class="card hidden" id="expenseHistorySection">
-            <div class="card-header">
-                <h5 class="mb-0">Riwayat Pengeluaran</h5>
+        <!-- Bagian Riwayat -->
+        <div id="history" class="mt-5" style="display: none;">
+            <div class="section-title">
+                <i class="fas fa-history"></i>
+                <h3 class="mb-0">Riwayat Pemasukan dan Pengeluaran</h3>
             </div>
-            <div class="card-body">
-                <div id="allExpensesList">
-                    <p class="text-muted">Belum ada pengeluaran tercatat</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Tips Section (Hidden by default) -->
-        <div class="card hidden" id="tipsSection">
-            <div class="card-header">
-                <h5 class="mb-0">Tips Hemat untuk Mahasiswa</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">📚 Pendidikan</h5>
-                                <ul>
-                                    <li>Manfaatkan perpustakaan kampus untuk pinjam buku</li>
-                                    <li>Bergabung dengan grup diskusi untuk berbagi sumber belajar</li>
-                                    <li>Cari e-book gratis atau versi online sebelum membeli buku fisik</li>
-                                </ul>
+            
+            <ul class="nav nav-tabs" id="historyTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="expense-tab" data-bs-toggle="tab" data-bs-target="#expense-history">Pengeluaran</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="income-tab" data-bs-toggle="tab" data-bs-target="#income-history">Pemasukan</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content mt-3">
+                <!-- Tab Riwayat Pengeluaran -->
+                <div class="tab-pane fade show active" id="expense-history" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Nama</th>
+                                            <th>Kategori</th>
+                                            <th>Jumlah</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="expenseHistoryTable">
+                                        <!-- Riwayat pengeluaran akan diisi oleh JavaScript -->
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">🍔 Makanan</h5>
-                                <ul>
-                                    <li>Masak makanan sendiri lebih hemat daripada makan di luar</li>
-                                    <li>Beli bahan makanan di pasar tradisional yang lebih murah</li>
-                                    <li>Manfaatkan promo makanan mahasiswa di kafetaria kampus</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">🚌 Transportasi</h5>
-                                <ul>
-                                    <li>Gunakan transportasi umum atau kendaraan kampus</li>
-                                    <li>Berjalan kaki atau bersepeda untuk jarak dekat</li>
-                                    <li>Cari tiket promo untuk perjalanan jauh</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h5 class="card-title">💡 Lainnya</h5>
-                                <ul>
-                                    <li>Manfaatkan diskon mahasiswa di berbagai merchant</li>
-                                    <li>Beli barang bekas berkualitas untuk kebutuhan sekunder</li>
-                                    <li>Ikuti kegiatan kampus gratis untuk hiburan</li>
-                                </ul>
-                            </div>
+                            <p class="text-center text-muted" id="noExpenseHistory">Belum ada catatan pengeluaran.</p>
                         </div>
                     </div>
                 </div>
+                
+                <!-- Tab Riwayat Pemasukan -->
+                <div class="tab-pane fade" id="income-history" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Deskripsi</th>
+                                            <th>Jumlah</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="incomeHistoryTable">
+                                        <!-- Riwayat pemasukan akan diisi oleh JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="text-center text-muted" id="noIncomeHistory">Belum ada catatan pemasukan.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Install Button -->
-    <div class="install-btn hidden" id="installButton" title="Install Aplikasi">
-        <span style="font-size: 1.5rem;">📲</span>
-    </div>
-    
-    <!-- Reset Button -->
-    <div class="reset-btn" id="resetButton" title="Reset Data">
-        <span style="font-size: 1.5rem;">🔄</span>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Tombol Install PWA -->
+    <div class="install-btn" id="installButton">
+        <i class="fas fa-download"></i>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <span>Cashio &copy; 2023 - Aplikasi Manajemen Keuangan Mahasiswa</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // PWA Installation
-        let deferredPrompt;
-        
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            document.getElementById('installButton').classList.remove('hidden');
-        });
-        
-        document.getElementById('installButton').addEventListener('click', async () => {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                if (outcome === 'accepted') {
-                    document.getElementById('installButton').classList.add('hidden');
-                }
-                deferredPrompt = null;
-            }
-        });
-        
-        // Data Management
+        // Data aplikasi
         let monthlyBudget = 0;
         let expenses = [];
         let incomes = [];
+        let totalExpenses = 0;
+        let totalIncomes = 0;
         
         // DOM Elements
-        const budgetInput = document.getElementById('monthlyBudget');
-        const setBudgetBtn = document.getElementById('setBudget');
-        const currentBudgetEl = document.getElementById('currentBudget');
-        const totalExpenseEl = document.getElementById('totalExpense');
-        const remainingBudgetEl = document.getElementById('remainingBudget');
-        const budgetProgressEl = document.getElementById('budgetProgress');
-        const budgetPercentageEl = document.getElementById('budgetPercentage');
-        const statusIndicatorEl = document.getElementById('statusIndicator');
-        const budgetStatusEl = document.getElementById('budgetStatus');
+        const monthlyBudgetInput = document.getElementById('monthlyBudget');
+        const setBudgetBtn = document.getElementById('setBudgetBtn');
+        const incomeAmountInput = document.getElementById('incomeAmount');
+        const addIncomeBtn = document.getElementById('addIncomeBtn');
+        const totalBudgetDisplay = document.getElementById('totalBudgetDisplay');
+        const totalExpenseDisplay = document.getElementById('totalExpenseDisplay');
+        const remainingBudgetDisplay = document.getElementById('remainingBudgetDisplay');
+        const budgetPercentage = document.getElementById('budgetPercentage');
+        const budgetProgressBar = document.getElementById('budgetProgressBar');
+        const budgetWarning = document.getElementById('budgetWarning');
+        const warningPercentage = document.getElementById('warningPercentage');
+        const savingTips = document.getElementById('savingTips');
         
         const expenseNameInput = document.getElementById('expenseName');
         const expenseAmountInput = document.getElementById('expenseAmount');
-        const expenseDateInput = document.getElementById('expenseDate');
         const expenseCategoryInput = document.getElementById('expenseCategory');
-        const addExpenseBtn = document.getElementById('addExpense');
-        const recentExpensesEl = document.getElementById('recentExpenses');
+        const expenseDateInput = document.getElementById('expenseDate');
+        const addExpenseBtn = document.getElementById('addExpenseBtn');
         
-        const incomeSourceInput = document.getElementById('incomeSource');
-        const incomeAmountInput = document.getElementById('incomeAmount');
-        const incomeDateInput = document.getElementById('incomeDate');
-        const addIncomeBtn = document.getElementById('addIncome');
-        const incomeHistoryListEl = document.getElementById('incomeHistoryList');
+        const expenseHistoryTable = document.getElementById('expenseHistoryTable');
+        const noExpenseHistory = document.getElementById('noExpenseHistory');
+        const incomeHistoryTable = document.getElementById('incomeHistoryTable');
+        const noIncomeHistory = document.getElementById('noIncomeHistory');
         
-        const warningAlertEl = document.getElementById('warningAlert');
-        const warningMessageEl = document.getElementById('warningMessage');
+        const dayChart = document.getElementById('dayChart');
         
-        const dayChartEl = document.getElementById('dayChart');
-        const dayLabelsEl = document.getElementById('dayLabels');
+        const resetBtn = document.getElementById('resetBtn');
+        const installButton = document.getElementById('installButton');
         
-        const allExpensesListEl = document.getElementById('allExpensesList');
+        // Tab navigation
+        const homeSection = document.getElementById('home');
+        const historySection = document.getElementById('history');
+        const navbarLinks = document.querySelectorAll('.nav-link');
         
-        // Navigation Elements
-        const navHome = document.getElementById('navHome');
-        const navHistory = document.getElementById('navHistory');
-        const navTips = document.getElementById('navTips');
-        
-        // Sections
-        const budgetSection = document.getElementById('budgetSection');
-        const expenseSection = document.getElementById('expenseSection');
-        const dayChartSection = document.getElementById('dayChartSection');
-        const incomeHistorySection = document.getElementById('incomeHistorySection');
-        const expenseHistorySection = document.getElementById('expenseHistorySection');
-        const tipsSection = document.getElementById('tipsSection');
-        
-        // Reset Button
-        const resetButton = document.getElementById('resetButton');
-        
-        // Set today's date as default for expense and income inputs
+        // Inisialisasi tanggal default untuk input
         expenseDateInput.valueAsDate = new Date();
-        incomeDateInput.valueAsDate = new Date();
         
-        // Initialize app
-        function initApp() {
-            loadData();
-            updateBudgetDisplay();
-            updateRecentExpenses();
-            updateIncomeHistory();
-            updateExpenseHistory();
-            updateDayChart();
-            checkBudgetWarning();
-            
-            // Set event listeners
-            setBudgetBtn.addEventListener('click', setMonthlyBudget);
-            addExpenseBtn.addEventListener('click', addExpense);
-            addIncomeBtn.addEventListener('click', addIncome);
-            resetButton.addEventListener('click', resetData);
-            
-            // Navigation event listeners
-            navHome.addEventListener('click', () => showSection('home'));
-            navHistory.addEventListener('click', () => showSection('history'));
-            navTips.addEventListener('click', () => showSection('tips'));
-        }
+        // Event Listeners
+        setBudgetBtn.addEventListener('click', setMonthlyBudget);
+        addIncomeBtn.addEventListener('click', addIncome);
+        addExpenseBtn.addEventListener('click', addExpense);
+        resetBtn.addEventListener('click', resetData);
+        installButton.addEventListener('click', installPWA);
         
-        // Load data from localStorage
-        function loadData() {
-            const savedBudget = localStorage.getItem('cashio_monthlyBudget');
-            const savedExpenses = localStorage.getItem('cashio_expenses');
-            const savedIncomes = localStorage.getItem('cashio_incomes');
-            
-            if (savedBudget) {
-                monthlyBudget = parseFloat(savedBudget);
-            }
-            
-            if (savedExpenses) {
-                expenses = JSON.parse(savedExpenses);
-            }
-            
-            if (savedIncomes) {
-                incomes = JSON.parse(savedIncomes);
-            }
-        }
+        // Navigasi navbar
+        navbarLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href');
+                
+                if (target === '#home') {
+                    homeSection.style.display = 'block';
+                    historySection.style.display = 'none';
+                } else if (target === '#history') {
+                    homeSection.style.display = 'none';
+                    historySection.style.display = 'block';
+                    updateHistoryTables();
+                }
+                
+                // Update active state
+                navbarLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
         
-        // Save data to localStorage
-        function saveData() {
-            localStorage.setItem('cashio_monthlyBudget', monthlyBudget);
-            localStorage.setItem('cashio_expenses', JSON.stringify(expenses));
-            localStorage.setItem('cashio_incomes', JSON.stringify(incomes));
-        }
-        
-        // Set monthly budget
+        // Fungsi untuk mengatur anggaran bulanan
         function setMonthlyBudget() {
-            const budgetValue = parseFloat(budgetInput.value);
+            const budgetValue = parseInt(monthlyBudgetInput.value);
             
-            if (!budgetValue || budgetValue <= 0) {
+            if (isNaN(budgetValue) || budgetValue <= 0) {
                 alert('Masukkan jumlah anggaran yang valid!');
                 return;
             }
             
             monthlyBudget = budgetValue;
-            saveData();
-            updateBudgetDisplay();
-            checkBudgetWarning();
-            budgetInput.value = '';
+            monthlyBudgetInput.value = '';
             
-            // Show confirmation
-            alert(`Anggaran bulanan berhasil diatur menjadi Rp ${formatCurrency(monthlyBudget)}`);
+            // Simpan ke localStorage
+            saveData();
+            
+            // Update tampilan
+            updateBudgetDisplay();
+            showNotification('Anggaran bulanan berhasil disimpan!', 'success');
         }
         
-        // Add expense
-        function addExpense() {
-            const name = expenseNameInput.value.trim();
-            const amount = parseFloat(expenseAmountInput.value);
-            const date = expenseDateInput.value;
-            const category = expenseCategoryInput.value;
-            
-            if (!name || !amount || amount <= 0 || !date) {
-                alert('Harap isi semua field dengan benar!');
-                return;
-            }
-            
-            const expense = {
-                id: Date.now(),
-                name,
-                amount,
-                date,
-                category
-            };
-            
-            expenses.push(expense);
-            saveData();
-            updateBudgetDisplay();
-            updateRecentExpenses();
-            updateExpenseHistory();
-            updateDayChart();
-            checkBudgetWarning();
-            
-            // Clear form
-            expenseNameInput.value = '';
-            expenseAmountInput.value = '';
-            expenseDateInput.valueAsDate = new Date();
-            
-            // Show confirmation
-            alert(`Pengeluaran "${name}" sebesar Rp ${formatCurrency(amount)} berhasil ditambahkan.`);
-        }
-        
-        // Add income
+        // Fungsi untuk menambah pemasukan
         function addIncome() {
-            const source = incomeSourceInput.value.trim();
-            const amount = parseFloat(incomeAmountInput.value);
-            const date = incomeDateInput.value;
+            const incomeAmount = parseInt(incomeAmountInput.value);
             
-            if (!source || !amount || amount <= 0 || !date) {
-                alert('Harap isi semua field dengan benar!');
+            if (isNaN(incomeAmount) || incomeAmount <= 0) {
+                alert('Masukkan jumlah pemasukan yang valid!');
                 return;
             }
             
             const income = {
                 id: Date.now(),
-                source,
-                amount,
-                date
+                amount: incomeAmount,
+                date: new Date().toISOString().split('T')[0],
+                description: 'Pemasukan Tambahan'
             };
             
             incomes.push(income);
-            saveData();
-            updateIncomeHistory();
-            
-            // Clear form
-            incomeSourceInput.value = '';
             incomeAmountInput.value = '';
-            incomeDateInput.valueAsDate = new Date();
             
-            // Show confirmation
-            alert(`Pemasukan dari "${source}" sebesar Rp ${formatCurrency(amount)} berhasil ditambahkan.`);
+            // Simpan ke localStorage
+            saveData();
+            
+            // Update tampilan
+            updateBudgetDisplay();
+            showNotification('Pemasukan berhasil ditambahkan!', 'success');
         }
         
-        // Update budget display
-        function updateBudgetDisplay() {
-            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-            const remainingBudget = monthlyBudget - totalExpense;
-            const percentageUsed = monthlyBudget > 0 ? (totalExpense / monthlyBudget) * 100 : 0;
+        // Fungsi untuk menambah pengeluaran
+        function addExpense() {
+            const expenseName = expenseNameInput.value.trim();
+            const expenseAmount = parseInt(expenseAmountInput.value);
+            const expenseCategory = expenseCategoryInput.value;
+            const expenseDate = expenseDateInput.value;
             
-            currentBudgetEl.textContent = `Rp ${formatCurrency(monthlyBudget)}`;
-            totalExpenseEl.textContent = `Rp ${formatCurrency(totalExpense)}`;
-            remainingBudgetEl.textContent = `Rp ${formatCurrency(remainingBudget)}`;
-            
-            budgetProgressEl.style.width = `${Math.min(percentageUsed, 100)}%`;
-            budgetPercentageEl.textContent = `${percentageUsed.toFixed(1)}% digunakan`;
-            
-            // Update progress bar color based on percentage
-            if (percentageUsed >= 75) {
-                budgetProgressEl.className = 'progress-bar bg-danger';
-            } else if (percentageUsed >= 50) {
-                budgetProgressEl.className = 'progress-bar bg-warning';
-            } else {
-                budgetProgressEl.className = 'progress-bar bg-success';
+            if (expenseName === '') {
+                alert('Masukkan nama pengeluaran!');
+                return;
             }
             
-            // Update status indicator
-            updateBudgetStatus(percentageUsed);
-        }
-        
-        // Update budget status
-        function updateBudgetStatus(percentageUsed) {
+            if (isNaN(expenseAmount) || expenseAmount <= 0) {
+                alert('Masukkan jumlah pengeluaran yang valid!');
+                return;
+            }
+            
+            // Cek apakah anggaran sudah ditetapkan
             if (monthlyBudget === 0) {
-                statusIndicatorEl.className = 'status-indicator';
-                budgetStatusEl.textContent = 'Belum ada anggaran ditetapkan';
-                return;
-            }
-            
-            if (percentageUsed >= 75) {
-                statusIndicatorEl.className = 'status-indicator status-danger';
-                budgetStatusEl.textContent = 'Bahaya - Pengeluaran hampir habis';
-            } else if (percentageUsed >= 50) {
-                statusIndicatorEl.className = 'status-indicator status-warning';
-                budgetStatusEl.textContent = 'Peringatan - Pengeluaran sudah 50%';
-            } else {
-                statusIndicatorEl.className = 'status-indicator status-safe';
-                budgetStatusEl.textContent = 'Aman - Pengeluaran terkendali';
-            }
-        }
-        
-        // Update recent expenses
-        function updateRecentExpenses() {
-            if (expenses.length === 0) {
-                recentExpensesEl.innerHTML = '<p class="text-muted">Belum ada pengeluaran tercatat</p>';
-                return;
-            }
-            
-            // Get last 5 expenses
-            const recentExpenses = expenses.slice(-5).reverse();
-            let html = '';
-            
-            recentExpenses.forEach(expense => {
-                const date = new Date(expense.date).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'short'
-                });
-                
-                const isHighExpense = expense.amount > (monthlyBudget * 0.1); // Highlight if > 10% of budget
-                
-                html += `
-                    <div class="expense-item ${isHighExpense ? 'high-expense' : ''}">
-                        <div class="d-flex justify-content-between">
-                            <strong>${expense.name}</strong>
-                            <span>Rp ${formatCurrency(expense.amount)}</span>
-                        </div>
-                        <div class="d-flex justify-content-between text-muted">
-                            <small>${getCategoryName(expense.category)} • ${date}</small>
-                            <small>#${expense.id.toString().slice(-4)}</small>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            recentExpensesEl.innerHTML = html;
-        }
-        
-        // Update income history
-        function updateIncomeHistory() {
-            if (incomes.length === 0) {
-                incomeHistoryListEl.innerHTML = '<p class="text-muted">Belum ada pemasukan tercatat</p>';
-                return;
-            }
-            
-            // Get all incomes
-            const sortedIncomes = [...incomes].sort((a, b) => new Date(b.date) - new Date(a.date));
-            let html = '';
-            
-            sortedIncomes.forEach(income => {
-                const date = new Date(income.date).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric'
-                });
-                
-                html += `
-                    <div class="expense-item">
-                        <div class="d-flex justify-content-between">
-                            <strong>${income.source}</strong>
-                            <span class="text-success">+ Rp ${formatCurrency(income.amount)}</span>
-                        </div>
-                        <div class="d-flex justify-content-between text-muted">
-                            <small>${date}</small>
-                            <small>#${income.id.toString().slice(-4)}</small>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            incomeHistoryListEl.innerHTML = html;
-        }
-        
-        // Update expense history
-        function updateExpenseHistory() {
-            if (expenses.length === 0) {
-                allExpensesListEl.innerHTML = '<p class="text-muted">Belum ada pengeluaran tercatat</p>';
-                return;
-            }
-            
-            // Get all expenses sorted by date (newest first)
-            const sortedExpenses = [...expenses].sort((a, b) => new Date(b.date) - new Date(a.date));
-            let html = '';
-            
-            sortedExpenses.forEach(expense => {
-                const date = new Date(expense.date).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric'
-                });
-                
-                html += `
-                    <div class="expense-item">
-                        <div class="d-flex justify-content-between">
-                            <strong>${expense.name}</strong>
-                            <span>Rp ${formatCurrency(expense.amount)}</span>
-                        </div>
-                        <div class="d-flex justify-content-between text-muted">
-                            <small>${getCategoryName(expense.category)} • ${date}</small>
-                            <small>#${expense.id.toString().slice(-4)}</small>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            allExpensesListEl.innerHTML = html;
-        }
-        
-        // Update day chart
-        function updateDayChart() {
-            // Initialize day data
-            const daysOfWeek = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            const dayTotals = Array(7).fill(0);
-            
-            // Calculate expenses per day of week
-            expenses.forEach(expense => {
-                const date = new Date(expense.date);
-                const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
-                dayTotals[dayOfWeek] += expense.amount;
-            });
-            
-            // Find max value for scaling
-            const maxExpense = Math.max(...dayTotals);
-            
-            // Generate chart HTML
-            let chartHTML = '';
-            let labelsHTML = '';
-            
-            daysOfWeek.forEach((day, index) => {
-                const percentage = maxExpense > 0 ? (dayTotals[index] / maxExpense) * 100 : 0;
-                const isHighDay = dayTotals[index] === maxExpense && maxExpense > 0;
-                
-                chartHTML += `
-                    <div class="day-chart">
-                        <div class="day-bar ${isHighDay ? 'day-high' : ''}" style="width: ${percentage}%"></div>
-                    </div>
-                `;
-                
-                labelsHTML += `
-                    <div class="col day-of-week">
-                        <div>${day.charAt(0)}</div>
-                        <small>Rp ${formatCurrency(dayTotals[index])}</small>
-                    </div>
-                `;
-            });
-            
-            dayChartEl.innerHTML = chartHTML;
-            dayLabelsEl.innerHTML = labelsHTML;
-        }
-        
-        // Check budget warning
-        function checkBudgetWarning() {
-            const totalExpense = expenses.reduce((sum, expense) => sum + expense.amount, 0);
-            const percentageUsed = monthlyBudget > 0 ? (totalExpense / monthlyBudget) * 100 : 0;
-            
-            if (monthlyBudget > 0 && percentageUsed >= 50) {
-                warningAlertEl.classList.remove('hidden');
-                
-                if (percentageUsed >= 75) {
-                    warningMessageEl.textContent = 'Peringatan! Pengeluaran Anda telah mencapai atau melebihi 75% dari anggaran bulanan. Segera evaluasi pengeluaran Anda!';
-                } else {
-                    warningMessageEl.textContent = 'Peringatan! Pengeluaran Anda telah mencapai atau melebihi 50% dari anggaran bulanan. Pertimbangkan untuk mengurangi pengeluaran yang tidak perlu.';
+                const setBudgetFirst = confirm('Anda belum menetapkan anggaran bulanan. Tetapkan anggaran terlebih dahulu atau lanjutkan tanpa anggaran?');
+                if (setBudgetFirst) {
+                    monthlyBudgetInput.focus();
+                    return;
                 }
-            } else {
-                warningAlertEl.classList.add('hidden');
+            }
+            
+            const expense = {
+                id: Date.now(),
+                name: expenseName,
+                amount: expenseAmount,
+                category: expenseCategory,
+                date: expenseDate
+            };
+            
+            expenses.push(expense);
+            
+            // Reset form
+            expenseNameInput.value = '';
+            expenseAmountInput.value = '';
+            expenseCategoryInput.value = 'Makanan';
+            expenseDateInput.valueAsDate = new Date();
+            
+            // Simpan ke localStorage
+            saveData();
+            
+            // Update tampilan
+            updateBudgetDisplay();
+            updateDayChart();
+            showNotification('Pengeluaran berhasil dicatat!', 'success');
+        }
+        
+        // Fungsi untuk menghapus pengeluaran
+        function deleteExpense(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus pengeluaran ini?')) {
+                expenses = expenses.filter(expense => expense.id !== id);
+                saveData();
+                updateBudgetDisplay();
+                updateHistoryTables();
+                updateDayChart();
+                showNotification('Pengeluaran berhasil dihapus!', 'info');
             }
         }
         
-        // Reset all data
+        // Fungsi untuk menghapus pemasukan
+        function deleteIncome(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus pemasukan ini?')) {
+                incomes = incomes.filter(income => income.id !== id);
+                saveData();
+                updateBudgetDisplay();
+                updateHistoryTables();
+                showNotification('Pemasukan berhasil dihapus!', 'info');
+            }
+        }
+        
+        // Fungsi untuk memperbarui tampilan anggaran
+        function updateBudgetDisplay() {
+            // Hitung total pengeluaran
+            totalExpenses = expenses.reduce((total, expense) => total + expense.amount, 0);
+            
+            // Hitung total pemasukan
+            totalIncomes = incomes.reduce((total, income) => total + income.amount, 0);
+            
+            // Hitung sisa anggaran
+            const remainingBudget = monthlyBudget + totalIncomes - totalExpenses;
+            
+            // Update tampilan
+            totalBudgetDisplay.textContent = formatCurrency(monthlyBudget + totalIncomes);
+            totalExpenseDisplay.textContent = formatCurrency(totalExpenses);
+            remainingBudgetDisplay.textContent = formatCurrency(remainingBudget);
+            
+            // Hitung persentase penggunaan anggaran
+            const totalAvailable = monthlyBudget + totalIncomes;
+            let percentage = 0;
+            
+            if (totalAvailable > 0) {
+                percentage = Math.min(100, Math.round((totalExpenses / totalAvailable) * 100));
+            }
+            
+            budgetPercentage.textContent = `${percentage}%`;
+            budgetProgressBar.style.width = `${percentage}%`;
+            
+            // Update warna sisa anggaran
+            if (remainingBudget <= 0) {
+                remainingBudgetDisplay.classList.remove('text-success');
+                remainingBudgetDisplay.classList.add('text-danger');
+            } else if (remainingBudget < monthlyBudget * 0.3) {
+                remainingBudgetDisplay.classList.remove('text-success');
+                remainingBudgetDisplay.classList.add('text-warning');
+            } else {
+                remainingBudgetDisplay.classList.remove('text-danger', 'text-warning');
+                remainingBudgetDisplay.classList.add('text-success');
+            }
+            
+            // Tampilkan peringatan jika pengeluaran mencapai atau melebihi 50%
+            if (percentage >= 50 && totalAvailable > 0) {
+                warningPercentage.textContent = `${percentage}%`;
+                
+                // Tambahkan tips penghematan
+                let tips = '<strong>Tips Penghematan:</strong><ul class="mb-0 mt-1">';
+                tips += '<li>Kurangi makan di luar, masak sendiri lebih hemat</li>';
+                tips += '<li>Gunakan transportasi umum daripada taksi/ojol</li>';
+                tips += '<li>Beli barang kebutuhan saat diskon atau promo</li>';
+                tips += '<li>Batasi pengeluaran hiburan di akhir pekan</li>';
+                tips += '</ul>';
+                savingTips.innerHTML = tips;
+                
+                budgetWarning.classList.add('show');
+            } else {
+                budgetWarning.classList.remove('show');
+            }
+        }
+        
+        // Fungsi untuk memperbarui tabel riwayat
+        function updateHistoryTables() {
+            // Update tabel pengeluaran
+            if (expenses.length === 0) {
+                expenseHistoryTable.innerHTML = '';
+                noExpenseHistory.style.display = 'block';
+            } else {
+                noExpenseHistory.style.display = 'none';
+                let expenseRows = '';
+                
+                // Urutkan berdasarkan tanggal terbaru
+                const sortedExpenses = [...expenses].sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                sortedExpenses.forEach(expense => {
+                    expenseRows += `
+                        <tr>
+                            <td>${formatDate(expense.date)}</td>
+                            <td>${expense.name}</td>
+                            <td><span class="badge bg-secondary">${expense.category}</span></td>
+                            <td class="text-danger">${formatCurrency(expense.amount)}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" onclick="deleteExpense(${expense.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                expenseHistoryTable.innerHTML = expenseRows;
+            }
+            
+            // Update tabel pemasukan
+            if (incomes.length === 0) {
+                incomeHistoryTable.innerHTML = '';
+                noIncomeHistory.style.display = 'block';
+            } else {
+                noIncomeHistory.style.display = 'none';
+                let incomeRows = '';
+                
+                // Urutkan berdasarkan tanggal terbaru
+                const sortedIncomes = [...incomes].sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                sortedIncomes.forEach(income => {
+                    incomeRows += `
+                        <tr>
+                            <td>${formatDate(income.date)}</td>
+                            <td>${income.description}</td>
+                            <td class="text-success">${formatCurrency(income.amount)}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" onclick="deleteIncome(${income.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                incomeHistoryTable.innerHTML = incomeRows;
+            }
+        }
+        
+        // Fungsi untuk membuat grafik pengeluaran per hari
+        function updateDayChart() {
+            // Inisialisasi data untuk 7 hari terakhir
+            const daysOfWeek = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+            const dayData = {};
+            
+            // Inisialisasi dengan 0 untuk setiap hari
+            daysOfWeek.forEach(day => {
+                dayData[day] = 0;
+            });
+            
+            // Hitung pengeluaran per hari dalam 7 hari terakhir
+            const today = new Date();
+            const sevenDaysAgo = new Date(today);
+            sevenDaysAgo.setDate(today.getDate() - 6);
+            
+            expenses.forEach(expense => {
+                const expenseDate = new Date(expense.date);
+                
+                // Hanya hitung pengeluaran dalam 7 hari terakhir
+                if (expenseDate >= sevenDaysAgo && expenseDate <= today) {
+                    const dayName = daysOfWeek[expenseDate.getDay()];
+                    dayData[dayName] += expense.amount;
+                }
+            });
+            
+            // Cari nilai maksimum untuk penskalaan grafik
+            const maxExpense = Math.max(...Object.values(dayData));
+            
+            // Bersihkan grafik sebelumnya
+            dayChart.innerHTML = '';
+            
+            // Buat grafik batang untuk setiap hari
+            daysOfWeek.forEach(day => {
+                const amount = dayData[day];
+                let heightPercentage = 0;
+                
+                if (maxExpense > 0) {
+                    heightPercentage = (amount / maxExpense) * 100;
+                }
+                
+                const bar = document.createElement('div');
+                bar.className = 'day-bar';
+                bar.style.height = `${Math.max(10, heightPercentage)}%`;
+                
+                // Tandai hari dengan pengeluaran tertinggi
+                if (amount > 0 && amount === maxExpense) {
+                    bar.classList.add('highest-day');
+                }
+                
+                // Tambahkan label nilai
+                const valueLabel = document.createElement('div');
+                valueLabel.className = 'value-label';
+                valueLabel.textContent = amount > 0 ? formatCurrencyShort(amount) : '';
+                valueLabel.style.position = 'absolute';
+                valueLabel.style.top = '-25px';
+                valueLabel.style.width = '100%';
+                valueLabel.style.textAlign = 'center';
+                valueLabel.style.fontSize = '0.8rem';
+                valueLabel.style.color = 'var(--color-dark)';
+                
+                // Tambahkan label hari
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'day-label';
+                dayLabel.textContent = day;
+                
+                bar.appendChild(valueLabel);
+                bar.appendChild(dayLabel);
+                dayChart.appendChild(bar);
+            });
+        }
+        
+        // Fungsi untuk mereset semua data
         function resetData() {
             if (confirm('Apakah Anda yakin ingin menghapus semua data? Tindakan ini tidak dapat dibatalkan.')) {
                 monthlyBudget = 0;
                 expenses = [];
                 incomes = [];
                 
-                saveData();
-                updateBudgetDisplay();
-                updateRecentExpenses();
-                updateIncomeHistory();
-                updateExpenseHistory();
-                updateDayChart();
-                checkBudgetWarning();
+                // Hapus dari localStorage
+                localStorage.removeItem('cashioData');
                 
-                alert('Semua data telah direset.');
+                // Reset tampilan
+                monthlyBudgetInput.value = '';
+                incomeAmountInput.value = '';
+                expenseNameInput.value = '';
+                expenseAmountInput.value = '';
+                expenseCategoryInput.value = 'Makanan';
+                expenseDateInput.valueAsDate = new Date();
+                
+                updateBudgetDisplay();
+                updateHistoryTables();
+                updateDayChart();
+                
+                budgetWarning.classList.remove('show');
+                
+                showNotification('Semua data telah direset!', 'info');
             }
         }
         
-        // Show specific section
-        function showSection(section) {
-            // Hide all sections first
-            budgetSection.classList.add('hidden');
-            expenseSection.classList.add('hidden');
-            dayChartSection.classList.add('hidden');
-            incomeHistorySection.classList.add('hidden');
-            expenseHistorySection.classList.add('hidden');
-            tipsSection.classList.add('hidden');
-            warningAlertEl.classList.add('hidden');
-            
-            // Remove active class from all nav items
-            navHome.classList.remove('active');
-            navHistory.classList.remove('active');
-            navTips.classList.remove('active');
-            
-            // Show selected section
-            if (section === 'home') {
-                budgetSection.classList.remove('hidden');
-                expenseSection.classList.remove('hidden');
-                dayChartSection.classList.remove('hidden');
-                checkBudgetWarning();
-                navHome.classList.add('active');
-            } else if (section === 'history') {
-                incomeHistorySection.classList.remove('hidden');
-                expenseHistorySection.classList.remove('hidden');
-                navHistory.classList.add('active');
-            } else if (section === 'tips') {
-                tipsSection.classList.remove('hidden');
-                navTips.classList.add('active');
-            }
-        }
-        
-        // Helper functions
-        function formatCurrency(amount) {
-            return amount.toLocaleString('id-ID');
-        }
-        
-        function getCategoryName(category) {
-            const categories = {
-                'makanan': 'Makanan & Minuman',
-                'transportasi': 'Transportasi',
-                'hiburan': 'Hiburan',
-                'belanja': 'Belanja',
-                'pendidikan': 'Pendidikan',
-                'lainnya': 'Lainnya'
+        // Fungsi untuk menyimpan data ke localStorage
+        function saveData() {
+            const data = {
+                monthlyBudget,
+                expenses,
+                incomes,
+                lastUpdated: new Date().toISOString()
             };
             
-            return categories[category] || 'Lainnya';
+            localStorage.setItem('cashioData', JSON.stringify(data));
         }
         
-        // Initialize app when DOM is loaded
-        document.addEventListener('DOMContentLoaded', initApp);
-    </script>
-    
-    <!-- Service Worker Registration -->
-    <script>
+        // Fungsi untuk memuat data dari localStorage
+        function loadData() {
+            const savedData = localStorage.getItem('cashioData');
+            
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    monthlyBudget = data.monthlyBudget || 0;
+                    expenses = data.expenses || [];
+                    incomes = data.incomes || [];
+                    
+                    // Update tampilan dengan data yang dimuat
+                    updateBudgetDisplay();
+                    updateHistoryTables();
+                    updateDayChart();
+                    
+                    showNotification('Data berhasil dimuat!', 'success');
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                }
+            }
+        }
+        
+        // Fungsi untuk memformat mata uang
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        // Fungsi untuk memformat mata uang singkat
+        function formatCurrencyShort(amount) {
+            if (amount >= 1000000) {
+                return `Rp${(amount / 1000000).toFixed(1)}jt`;
+            } else if (amount >= 1000) {
+                return `Rp${(amount / 1000).toFixed(0)}rb`;
+            } else {
+                return `Rp${amount}`;
+            }
+        }
+        
+        // Fungsi untuk memformat tanggal
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+        
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message, type = 'info') {
+            // Buat elemen notifikasi
+            const notification = document.createElement('div');
+            notification.className = `alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} alert-dismissible fade show position-fixed`;
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.zIndex = '1050';
+            notification.style.minWidth = '300px';
+            notification.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            // Tambahkan ke body
+            document.body.appendChild(notification);
+            
+            // Hapus notifikasi setelah 3 detik
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+        
+        // PWA Installation
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Mencegah tampilan prompt otomatis
+            e.preventDefault();
+            // Simpan event untuk digunakan nanti
+            deferredPrompt = e;
+            // Tampilkan tombol install
+            installButton.style.display = 'flex';
+        });
+        
+        function installPWA() {
+            if (deferredPrompt) {
+                // Tampilkan prompt instalasi
+                deferredPrompt.prompt();
+                
+                // Lihat hasil instalasi
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                        installButton.style.display = 'none';
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+        }
+        
+        // Service Worker Registration
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                }).catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
+                navigator.serviceWorker.register('/sw.js').then((registration) => {
+                    console.log('ServiceWorker registered dengan scope: ', registration.scope);
+                }).catch((error) => {
+                    console.log('ServiceWorker registration gagal: ', error);
                 });
             });
         }
         
-        // Generate manifest content
-        const manifest = {
-            "name": "Cashio - Pengelola Keuangan Mahasiswa",
-            "short_name": "Cashio",
-            "description": "Aplikasi untuk membantu mahasiswa mengelola keuangan bulanan",
-            "start_url": ".",
-            "display": "standalone",
-            "background_color": "#EBF4DD",
-            "theme_color": "#90AB8B",
-            "icons": [
-                {
-                    "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💰</text></svg>",
-                    "sizes": "192x192",
-                    "type": "image/svg+xml"
-                }
-            ]
-        };
+        // Inisialisasi aplikasi saat dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            
+            // Set tanggal default untuk input tanggal
+            expenseDateInput.valueAsDate = new Date();
+            
+            // Update grafik hari
+            updateDayChart();
+        });
         
-        // Create manifest link
-        const manifestLink = document.createElement('link');
-        manifestLink.rel = 'manifest';
-        manifestLink.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(manifest));
-        document.head.appendChild(manifestLink);
-        
-        // Create service worker content
-        const swContent = `
-            self.addEventListener('install', event => {
+        // Simulasi service worker untuk PWA (dalam satu file HTML)
+        const serviceWorkerCode = `
+            self.addEventListener('install', (event) => {
                 event.waitUntil(
-                    caches.open('cashio-v1').then(cache => {
+                    caches.open('cashio-v1').then((cache) => {
                         return cache.addAll([
-                            '.',
-                            './index.html'
+                            '/',
+                            '/index.html',
+                            '/manifest.json'
                         ]);
                     })
                 );
             });
             
-            self.addEventListener('fetch', event => {
+            self.addEventListener('fetch', (event) => {
                 event.respondWith(
-                    caches.match(event.request).then(response => {
+                    caches.match(event.request).then((response) => {
                         return response || fetch(event.request);
                     })
                 );
             });
         `;
         
-        // Create service worker blob
-        const swBlob = new Blob([swContent], { type: 'application/javascript' });
-        const swURL = URL.createObjectURL(swBlob);
-        
-        // Override service worker registration to use the blob URL
-        const originalRegister = navigator.serviceWorker.register;
-        navigator.serviceWorker.register = function() {
-            arguments[0] = swURL;
-            return originalRegister.apply(this, arguments);
-        };
+        // Buat service worker secara dinamis jika diperlukan
+        if ('serviceWorker' in navigator) {
+            const blob = new Blob([serviceWorkerCode], { type: 'application/javascript' });
+            const swURL = URL.createObjectURL(blob);
+            navigator.serviceWorker.register(swURL);
+        }
+    </script>
+    
+    <!-- Manifest untuk PWA -->
+    <script type="application/json" id="manifest-data">
+        {
+            "name": "Cashio",
+            "short_name": "Cashio",
+            "description": "Aplikasi Manajemen Keuangan untuk Mahasiswa",
+            "start_url": "/",
+            "display": "standalone",
+            "background_color": "#EBF4DD",
+            "theme_color": "#90AB8B",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iOTYiIGN5PSI5NiIgcj0iODgiIGZpbGw9IiM5MEFCOEIiLz48cGF0aCBkPSJNMTIwIDEwNEg3MkM2NS4zNzMgMTA0IDYwIDEwOS4zNzMgNjAgMTE2VjE0NEM2MCAxNTAuNjI3IDY1LjM3MyAxNTYgNzIgMTU2SDEyMEMxMjYuNjI3IDE1NiAxMzIgMTUwLjYyNyAxMzIgMTQ0VjExNkMxMzIgMTA5LjM3MyAxMjYuNjI3IDEwNCAxMjAgMTA0Wk04NCAxMjRWODEuMkM4NCA3NC41NzMgODkuMzcyIDY4IDk2IDY4UzEwOCA3NC41NzMgMTA4IDgxLjJWMTA0SDg0Wk04NCAxMzZIMTA4VjE0NEg4NFYxMzZaIiBmaWxsPSIjRkJGQkZCIi8+PC9zdmc+",
+                    "sizes": "192x192",
+                    "type": "image/svg+xml"
+                }
+            ]
+        }
+    </script>
+    
+    <script>
+        // Buat manifest.json secara dinamis
+        const manifestData = JSON.parse(document.getElementById('manifest-data').textContent);
+        const manifestBlob = new Blob([JSON.stringify(manifestData)], { type: 'application/json' });
+        const manifestURL = URL.createObjectURL(manifestBlob);
+        document.querySelector('link[rel="manifest"]').href = manifestURL;
     </script>
 </body>
 </html>
