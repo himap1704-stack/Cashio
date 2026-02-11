@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashio - Aplikasi Manajemen Keuangan</title>
+    <title>Cashio - Aplikasi Manajemen Keuangan Pribadi</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Font Lora -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Manifest untuk PWA -->
     <link rel="manifest" href="manifest.json">
     <style>
         :root {
             --color-primary: #EBF4DD;
-            --color-secondary: #9CCFFF; /* DIUBAH dari #90AB8B ke #9CCFFF */
+            --color-secondary: #9CCFFF;
             --color-dark: #2C3E50;
             --color-warning: #E74C3C;
-            --color-success: #9CCFFF; /* DIUBAH dari #4988C4 ke #9CCFFF */
-            --color-info: #9CCFFF; /* DIUBAH dari #3498DB ke #9CCFFF */
+            --color-success: #9CCFFF;
+            --color-info: #9CCFFF;
             --color-purple: #9B59B6;
             --color-gold: #FFD700;
             --color-money-green: #2ECC71;
@@ -55,7 +57,7 @@
         }
         
         .navbar {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             padding: 1rem 0;
             position: relative;
@@ -74,7 +76,7 @@
             border: none;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-bottom: 15px; /* Diperkecil */
+            margin-bottom: 15px;
             background: white;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -105,11 +107,11 @@
         }
         
         .card-header {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             color: white;
             border-radius: 20px 20px 0 0 !important;
             font-weight: 600;
-            padding: 1rem 1.2rem; /* Diperkecil */
+            padding: 1rem 1.2rem;
             border: none;
             position: relative;
             overflow: hidden;
@@ -134,7 +136,7 @@
         .btn {
             border-radius: 12px;
             font-weight: 600;
-            padding: 0.6rem 1.2rem; /* Diperkecil */
+            padding: 0.6rem 1.2rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -157,27 +159,27 @@
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             color: white;
             border-color: var(--color-secondary);
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%); /* Diupdate */
+            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3); /* Diupdate */
+            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
         }
         
         .btn-success {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%);
             color: white;
             border-color: var(--color-success);
         }
         
         .btn-success:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%); /* Diupdate */
+            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3); /* Diupdate */
+            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
         }
         
         .btn-danger {
@@ -199,15 +201,15 @@
         }
         
         .btn-info {
-            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%);
             color: white;
             border-color: var(--color-info);
         }
         
         .btn-info:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%); /* Diupdate */
+            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3); /* Diupdate */
+            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
         }
         
         .btn-purple {
@@ -228,65 +230,64 @@
             transform: translateY(-3px);
         }
         
-        /* Currency Display Styles */
         .budget-display {
-            font-size: 2.2rem; /* Diperkecil */
+            font-size: 2.2rem;
             font-weight: 800;
             color: var(--color-dark);
             position: relative;
             display: inline-block;
-            padding: 8px 15px; /* Diperkecil */
+            padding: 8px 15px;
             background: white;
-            border-radius: 12px; /* Diperkecil */
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Diperkecil */
-            margin: 8px 0; /* Diperkecil */
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
         }
         
         .remaining-budget {
-            font-size: 2.8rem; /* Diperkecil */
+            font-size: 2.8rem;
             font-weight: 900;
             color: var(--color-success);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Diperkecil */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
             position: relative;
             display: inline-block;
-            padding: 12px 25px; /* Diperkecil */
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%); /* Diupdate */
-            border-radius: 15px; /* Diperkecil */
-            border: 2px solid var(--color-success); /* Diperkecil */
+            padding: 12px 25px;
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            border-radius: 15px;
+            border: 2px solid var(--color-success);
         }
         
         .expense-item {
-            border-left: 4px solid var(--color-secondary); /* Diperkecil */
-            padding: 15px; /* Diperkecil */
-            margin-bottom: 10px; /* Diperkecil */
+            border-left: 4px solid var(--color-secondary);
+            padding: 15px;
+            margin-bottom: 10px;
             background: white;
-            border-radius: 10px; /* Diperkecil */
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05); /* Diperkecil */
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
         .expense-item:hover {
-            transform: translateX(8px); /* Diperkecil */
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Diperkecil */
+            transform: translateX(8px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
         
         .income-item {
-            border-left: 4px solid var(--color-success); /* Diperkecil */
-            padding: 15px; /* Diperkecil */
-            margin-bottom: 10px; /* Diperkecil */
+            border-left: 4px solid var(--color-success);
+            padding: 15px;
+            margin-bottom: 10px;
             background: white;
-            border-radius: 10px; /* Diperkecil */
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05); /* Diperkecil */
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         
         .icon-lg {
-            font-size: 1.8rem; /* Diperkecil */
-            margin-right: 12px; /* Diperkecil */
+            font-size: 1.8rem;
+            margin-right: 12px;
             background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
             -webkit-background-clip: text;
             background-clip: text;
@@ -295,9 +296,9 @@
         }
         
         .progress {
-            height: 12px; /* Diperkecil */
-            border-radius: 8px; /* Diperkecil */
-            margin-bottom: 12px; /* Diperkecil */
+            height: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
             background: #f0f0f0;
             overflow: hidden;
             border: 1px solid #e0e0e0;
@@ -325,7 +326,7 @@
         
         .progress-bar {
             background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
-            border-radius: 8px; /* Diperkecil */
+            border-radius: 8px;
             transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
@@ -351,13 +352,13 @@
         }
         
         .section-title {
-            border-bottom: 2px solid var(--color-secondary); /* Diperkecil */
-            padding-bottom: 12px; /* Diperkecil */
-            margin-bottom: 20px; /* Diperkecil */
+            border-bottom: 2px solid var(--color-secondary);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             position: relative;
-            padding-left: 50px; /* Diperkecil */
+            padding-left: 50px;
         }
         
         .section-title::before {
@@ -366,7 +367,7 @@
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2rem; /* Diperkecil */
+            font-size: 2rem;
             background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
             -webkit-background-clip: text;
             background-clip: text;
@@ -374,29 +375,29 @@
         }
         
         .section-title i {
-            margin-right: 12px; /* Diperkecil */
-            font-size: 1.5rem; /* Diperkecil */
+            margin-right: 12px;
+            font-size: 1.5rem;
         }
         
         .footer {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             position: fixed;
             bottom: 0;
             width: 100%;
-            padding: 12px 0; /* Diperkecil */
+            padding: 12px 0;
             text-align: center;
             color: white;
-            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1); /* Diperkecil */
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
             z-index: 100;
         }
         
         .login-container {
             max-width: 450px;
-            margin: 80px auto; /* Diperkecil */
-            padding: 30px; /* Diperkecil */
-            border-radius: 20px; /* Diperkecil */
+            margin: 80px auto;
+            padding: 30px;
+            border-radius: 20px;
             background: white;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Diperkecil */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
             position: relative;
             overflow: hidden;
             border: 2px solid var(--color-secondary);
@@ -408,15 +409,15 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 6px; /* Diperkecil */
+            height: 6px;
             background: linear-gradient(90deg, var(--color-secondary), var(--color-success), var(--color-info));
         }
         
         .wishlist-item {
             border: 2px solid var(--color-purple);
-            border-radius: 12px; /* Diperkecil */
-            padding: 15px; /* Diperkecil */
-            margin-bottom: 12px; /* Diperkecil */
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
             background: white;
             transition: all 0.3s ease;
             position: relative;
@@ -424,18 +425,18 @@
         }
         
         .wishlist-item:hover {
-            transform: translateY(-4px); /* Diperkecil */
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2); /* Diperkecil */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
             border-color: var(--color-purple);
         }
         
         .savings-card {
-            border: 2px solid var(--color-success); /* Diperkecil */
+            border: 2px solid var(--color-success);
             position: relative;
         }
         
         .wishlist-card {
-            border: 2px solid var(--color-purple); /* Diperkecil */
+            border: 2px solid var(--color-purple);
             position: relative;
         }
         
@@ -443,17 +444,17 @@
             border: none;
             color: var(--color-dark);
             font-weight: 500;
-            padding: 8px 16px; /* Diperkecil */
-            border-radius: 8px 8px 0 0; /* Diperkecil */
+            padding: 8px 16px;
+            border-radius: 8px 8px 0 0;
             transition: all 0.3s ease;
         }
         
         .nav-tabs .nav-link.active {
             background-color: white;
-            border-bottom: 3px solid var(--color-secondary); /* Diperkecil */
+            border-bottom: 3px solid var(--color-secondary);
             color: var(--color-secondary);
             font-weight: 600;
-            transform: translateY(-1px); /* Diperkecil */
+            transform: translateY(-1px);
         }
         
         .badge-priority-high {
@@ -462,34 +463,34 @@
         }
         
         .badge-priority-medium {
-            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%);
             color: white;
         }
         
         .badge-priority-low {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%);
             color: white;
         }
         
         .reset-info {
-            font-size: 0.8rem; /* Diperkecil */
+            font-size: 0.8rem;
             color: #666;
         }
         
         .wishlist-progress {
-            height: 10px; /* Diperkecil */
-            margin-top: 8px; /* Diperkecil */
-            border-radius: 5px; /* Diperkecil */
+            height: 10px;
+            margin-top: 8px;
+            border-radius: 5px;
         }
         
         .google-login-btn {
             background: white;
             border: 2px solid #ddd;
             color: #444;
-            padding: 10px; /* Diperkecil */
-            border-radius: 8px; /* Diperkecil */
+            padding: 10px;
+            border-radius: 8px;
             width: 100%;
-            margin-bottom: 12px; /* Diperkecil */
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -501,16 +502,16 @@
             background: #f5f5f5;
             border-color: var(--color-secondary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Diperkecil */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .google-login-btn img {
-            width: 18px; /* Diperkecil */
-            margin-right: 8px; /* Diperkecil */
+            width: 18px;
+            margin-right: 8px;
         }
         
         .simulation-card {
-            border: 2px solid var(--color-info); /* Diperkecil */
+            border: 2px solid var(--color-info);
             position: relative;
         }
         
@@ -518,61 +519,61 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 2px solid #e0e0e0;
-            border-radius: 12px; /* Diperkecil */
-            padding: 15px; /* Diperkecil */
+            border-radius: 12px;
+            padding: 15px;
             height: 100%;
         }
         
         .purchase-option:hover {
-            transform: translateY(-8px) scale(1.03); /* Diperkecil */
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Diperkecil */
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
             border-color: var(--color-info);
         }
         
         .purchase-option.active {
-            border: 2px solid var(--color-success) !important; /* Diperkecil */
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%); /* Diupdate */
+            border: 2px solid var(--color-success) !important;
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
             animation: pulse 2s infinite;
         }
         
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0.4); } /* Diupdate */
-            70% { box-shadow: 0 0 0 12px rgba(156, 207, 255, 0); } /* Diupdate */
-            100% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0); } /* Diupdate */
+            0% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0.4); }
+            70% { box-shadow: 0 0 0 12px rgba(156, 207, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0); }
         }
         
         .recommendation-card {
-            border-left: 5px solid var(--color-success); /* Diperkecil */
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%); /* Diupdate */
-            padding: 15px; /* Diperkecil */
-            border-radius: 8px; /* Diperkecil */
-            margin: 12px 0; /* Diperkecil */
+            border-left: 5px solid var(--color-success);
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 12px 0;
         }
         
         .warning-recommendation {
-            border-left: 5px solid var(--color-warning); /* Diperkecil */
+            border-left: 5px solid var(--color-warning);
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, transparent 100%);
         }
         
         .danger-recommendation {
-            border-left: 5px solid #C0392B; /* Diperkecil */
+            border-left: 5px solid #C0392B;
             background: linear-gradient(135deg, rgba(192, 57, 43, 0.05) 0%, transparent 100%);
         }
         
         .chart-container {
             position: relative;
-            height: 280px; /* Diperkecil */
-            margin-bottom: 20px; /* Diperkecil */
+            height: 280px;
+            margin-bottom: 20px;
             background: white;
-            padding: 15px; /* Diperkecil */
-            border-radius: 12px; /* Diperkecil */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Diperkecil */
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
         
         .timeline-item {
-            border-left: 3px solid var(--color-secondary); /* Diperkecil */
-            padding-left: 20px; /* Diperkecil */
-            margin-bottom: 15px; /* Diperkecil */
+            border-left: 3px solid var(--color-secondary);
+            padding-left: 20px;
+            margin-bottom: 15px;
             position: relative;
             padding-top: 5px;
         }
@@ -580,101 +581,101 @@
         .timeline-item:before {
             content: '';
             position: absolute;
-            left: -8px; /* Diperkecil */
+            left: -8px;
             top: 0;
-            width: 16px; /* Diperkecil */
-            height: 16px; /* Diperkecil */
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
             background: var(--color-secondary);
-            border: 3px solid white; /* Diperkecil */
-            box-shadow: 0 0 0 2px var(--color-secondary); /* Diperkecil */
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--color-secondary);
         }
         
         .timeline-item.completed:before {
             background: var(--color-success);
-            box-shadow: 0 0 0 2px var(--color-success); /* Diperkecil */
+            box-shadow: 0 0 0 2px var(--color-success);
         }
         
         .timeline-item.current:before {
             background: var(--color-info);
-            box-shadow: 0 0 0 2px var(--color-info); /* Diperkecil */
+            box-shadow: 0 0 0 2px var(--color-info);
             animation: pulse 2s infinite;
         }
         
         .forecast-card {
-            border: 2px solid var(--color-purple); /* Diperkecil */
+            border: 2px solid var(--color-purple);
         }
         
         .cashflow-card {
-            border: 2px solid var(--color-info); /* Diperkecil */
+            border: 2px solid var(--color-info);
         }
         
         .wishlist-calculation-card {
-            border: 2px solid var(--color-purple); /* Diperkecil */
+            border: 2px solid var(--color-purple);
         }
         
         .wishlist-progress-container {
-            margin-top: 12px; /* Diperkecil */
-            padding: 12px; /* Diperkecil */
+            margin-top: 12px;
+            padding: 12px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 10px; /* Diperkecil */
-            border-left: 3px solid var(--color-purple); /* Diperkecil */
+            border-radius: 10px;
+            border-left: 3px solid var(--color-purple);
         }
         
         .daily-saving {
-            font-size: 0.85rem; /* Diperkecil */
+            font-size: 0.85rem;
             color: #6c757d;
-            margin-top: 6px; /* Diperkecil */
+            margin-top: 6px;
             font-weight: 500;
         }
         
         .priority-high {
-            border-left: 5px solid var(--color-warning); /* Diperkecil */
+            border-left: 5px solid var(--color-warning);
         }
         
         .priority-medium {
-            border-left: 5px solid var(--color-info); /* Diperkecil */
+            border-left: 5px solid var(--color-info);
         }
         
         .priority-low {
-            border-left: 5px solid var(--color-success); /* Diperkecil */
+            border-left: 5px solid var(--color-success);
         }
         
         .affordable-now {
-            border: 2px solid var(--color-success); /* Diperkecil */
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%); /* Diupdate */
+            border: 2px solid var(--color-success);
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
             position: relative;
         }
         
         .affordable-now::after {
             content: '✅ Dapat Dibeli!';
             position: absolute;
-            top: 8px; /* Diperkecil */
-            right: 8px; /* Diperkecil */
+            top: 8px;
+            right: 8px;
             background: var(--color-success);
             color: white;
-            padding: 4px 8px; /* Diperkecil */
-            border-radius: 15px; /* Diperkecil */
-            font-size: 0.75rem; /* Diperkecil */
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.75rem;
             font-weight: 600;
         }
         
         .insight-card {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%); /* Diupdate */
-            border-left: 3px solid var(--color-info); /* Diperkecil */
-            padding: 15px; /* Diperkecil */
-            border-radius: 10px; /* Diperkecil */
-            margin-top: 15px; /* Diperkecil */
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
+            border-left: 3px solid var(--color-info);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
         }
         
         .history-card {
-            border: 2px solid #F39C12; /* Diperkecil */
+            border: 2px solid #F39C12;
             position: relative;
         }
         
         .history-item {
             border-bottom: 2px dashed #eee;
-            padding: 12px 0; /* Diperkecil */
+            padding: 12px 0;
             transition: all 0.3s ease;
         }
         
@@ -683,16 +684,16 @@
         }
         
         .history-item:hover {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%); /* Diupdate */
-            transform: translateX(8px); /* Diperkecil */
-            border-radius: 8px; /* Diperkecil */
-            padding: 12px; /* Diperkecil */
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
+            transform: translateX(8px);
+            border-radius: 8px;
+            padding: 12px;
         }
         
         .history-category {
-            font-size: 0.7rem; /* Diperkecil */
-            padding: 4px 10px; /* Diperkecil */
-            border-radius: 12px; /* Diperkecil */
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 12px;
             color: white;
             font-weight: 600;
             display: inline-block;
@@ -700,37 +701,35 @@
         
         .history-actions {
             display: flex;
-            gap: 6px; /* Diperkecil */
+            gap: 6px;
         }
         
-        /* Form Styling */
         .form-control, .form-select {
             border: 2px solid #e0e0e0;
-            border-radius: 10px; /* Diperkecil */
-            padding: 10px 14px; /* Diperkecil */
+            border-radius: 10px;
+            padding: 10px 14px;
             transition: all 0.3s ease;
-            font-size: 0.95rem; /* Diperkecil */
+            font-size: 0.95rem;
         }
         
         .form-control:focus, .form-select:focus {
             border-color: var(--color-secondary);
-            box-shadow: 0 0 0 0.2rem rgba(156, 207, 255, 0.25); /* Diupdate */
+            box-shadow: 0 0 0 0.2rem rgba(156, 207, 255, 0.25);
             transform: translateY(-2px);
         }
         
         .input-group-text {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             color: white;
             border: 2px solid var(--color-secondary);
             font-weight: 600;
         }
         
-        /* Alert Styling */
         .alert {
             border: none;
-            border-radius: 12px; /* Diperkecil */
-            padding: 15px; /* Diperkecil */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Diperkecil */
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
         }
@@ -741,61 +740,59 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px; /* Diperkecil */
+            height: 4px;
             background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
         }
         
         .alert-warning {
             background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
-            border-left: 4px solid #F39C12; /* Diperkecil */
+            border-left: 4px solid #F39C12;
         }
         
         .alert-success {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%); /* Diupdate */
-            border-left: 4px solid var(--color-success); /* Diperkecil */
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            border-left: 4px solid var(--color-success);
         }
         
         .alert-danger {
             background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
-            border-left: 4px solid var(--color-warning); /* Diperkecil */
+            border-left: 4px solid var(--color-warning);
         }
         
         .alert-info {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%); /* Diupdate */
-            border-left: 4px solid var(--color-info); /* Diperkecil */
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            border-left: 4px solid var(--color-info);
         }
         
-        /* Modal Styling */
         .modal-content {
-            border-radius: 20px; /* Diperkecil */
+            border-radius: 20px;
             border: none;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Diperkecil */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             overflow: hidden;
         }
         
         .modal-header {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
             color: white;
             border-bottom: none;
-            padding: 20px; /* Diperkecil */
+            padding: 20px;
         }
         
         .modal-body {
-            padding: 25px; /* Diperkecil */
+            padding: 25px;
         }
         
         .modal-footer {
             border-top: 2px solid #f0f0f0;
-            padding: 15px 25px; /* Diperkecil */
+            padding: 15px 25px;
         }
         
-        /* Stats Cards */
         .stat-card {
             background: white;
-            border-radius: 15px; /* Diperkecil */
-            padding: 15px; /* Diperkecil dari 25px */
+            border-radius: 15px;
+            padding: 15px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); /* Diperkecil */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 2px solid transparent;
             position: relative;
@@ -803,8 +800,8 @@
         }
         
         .stat-card:hover {
-            transform: translateY(-8px); /* Diperkecil */
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); /* Diperkecil */
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
             border-color: var(--color-secondary);
         }
         
@@ -814,13 +811,13 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px; /* Diperkecil */
+            height: 4px;
             background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
         }
         
         .stat-card .icon {
-            font-size: 2rem; /* Diperkecil dari 3rem */
-            margin-bottom: 10px; /* Diperkecil dari 20px */
+            font-size: 2rem;
+            margin-bottom: 10px;
             background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
             -webkit-background-clip: text;
             background-clip: text;
@@ -828,14 +825,13 @@
             display: inline-block;
         }
         
-        /* TIPS CARD STYLES */
         .tips-card {
             border: 2px solid var(--color-success);
             margin-bottom: 0.5rem;
         }
         
         .tips-card .card-header {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%) !important; /* Diupdate */
+            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%) !important;
             padding: 0.75rem 1rem;
         }
         
@@ -848,64 +844,77 @@
             line-height: 1.3;
         }
         
-        /* Responsive Design */
+        .expense-warning-70 {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.05) 100%);
+            border-left: 5px solid var(--color-warning);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            animation: warningPulse 2s infinite;
+        }
+        
+        @keyframes warningPulse {
+            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.2); }
+            70% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        }
+        
         @media (max-width: 768px) {
             .budget-display {
-                font-size: 1.8rem; /* Diperkecil */
-                padding: 6px 12px; /* Diperkecil */
+                font-size: 1.8rem;
+                padding: 6px 12px;
             }
             
             .remaining-budget {
-                font-size: 2.2rem; /* Diperkecil */
-                padding: 8px 15px; /* Diperkecil */
+                font-size: 2.2rem;
+                padding: 8px 15px;
             }
             
             .chart-container {
-                height: 250px; /* Diperkecil */
+                height: 250px;
             }
             
             .navbar-brand {
-                font-size: 1.4rem; /* Diperkecil */
+                font-size: 1.4rem;
             }
             
             .card-header {
-                padding: 0.8rem; /* Diperkecil */
+                padding: 0.8rem;
             }
             
             .btn {
-                padding: 0.5rem 1rem; /* Diperkecil */
+                padding: 0.5rem 1rem;
             }
             
             .login-container {
-                margin: 40px auto; /* Diperkecil */
-                padding: 25px; /* Diperkecil */
+                margin: 40px auto;
+                padding: 25px;
             }
         }
         
         @media (max-width: 576px) {
             .section-title {
-                padding-left: 45px; /* Diperkecil */
-                font-size: 1.3rem; /* Diperkecil */
+                padding-left: 45px;
+                font-size: 1.3rem;
             }
             
             .section-title::before {
-                font-size: 1.8rem; /* Diperkecil */
+                font-size: 1.8rem;
             }
             
             .budget-display {
-                font-size: 1.6rem; /* Diperkecil */
+                font-size: 1.6rem;
             }
             
             .remaining-budget {
-                font-size: 2rem; /* Diperkecil */
+                font-size: 2rem;
             }
         }
         
-        /* Animation for new elements */
         @keyframes slideInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px); /* Diperkecil */
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -939,35 +948,33 @@
             }
         }
         
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px; /* Diperkecil */
+            width: 10px;
         }
         
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 8px; /* Diperkecil */
+            border-radius: 8px;
         }
         
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%); /* Diupdate */
-            border-radius: 8px; /* Diperkecil */
-            border: 2px solid #f1f1f1; /* Diperkecil */
+            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
+            border-radius: 8px;
+            border: 2px solid #f1f1f1;
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%); /* Diupdate */
+            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
         }
         
-        /* Loading Spinner */
         .loading-spinner {
-            width: 40px; /* Diperkecil */
-            height: 40px; /* Diperkecil */
-            border: 4px solid rgba(156, 207, 255, 0.2); /* Diupdate */
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(156, 207, 255, 0.2);
             border-top-color: var(--color-secondary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 40px auto; /* Diperkecil */
+            margin: 40px auto;
         }
         
         @keyframes spin {
@@ -976,38 +983,37 @@
             }
         }
         
-        /* Badge Enhancement */
         .badge {
-            padding: 5px 10px; /* Diperkecil */
-            border-radius: 15px; /* Diperkecil */
+            padding: 5px 10px;
+            border-radius: 15px;
             font-weight: 600;
-            font-size: 0.8rem; /* Diperkecil */
+            font-size: 0.8rem;
             transition: all 0.3s ease;
         }
         
         .badge:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Diperkecil */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
-        /* PERINGATAN PENGELUARAN DI ATAS 70% */
-        .expense-warning-70 {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.05) 100%);
-            border-left: 5px solid var(--color-warning); /* Diperkecil */
-            border-radius: 8px; /* Diperkecil */
-            padding: 12px; /* Diperkecil */
-            margin: 8px 0; /* Diperkecil */
-            animation: warningPulse 2s infinite;
+        .bg-purple {
+            background-color: var(--color-purple) !important;
         }
         
-        @keyframes warningPulse {
-            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.2); }
-            70% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); } /* Diperkecil */
-            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+        .text-purple {
+            color: var(--color-purple) !important;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, rgba(156, 207, 255, 0.2) 0%, rgba(156, 207, 255, 0.1) 100%);
+            color: var(--color-dark);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(156, 207, 255, 0.25);
+            border-color: var(--color-secondary);
         }
     </style>
-    <!-- Ikon Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Login Screen -->
@@ -1099,6 +1105,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#simulation"><i class="fas fa-calculator"></i> Simulasi</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-sm btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#userGuideModal">
+                                <i class="fas fa-question-circle"></i> Panduan
+                            </button>
                         </li>
                         <li class="nav-item">
                             <div class="btn-group ms-2 mt-1">
@@ -1203,9 +1214,7 @@
                                             <label class="form-label">Tambah Tabungan (Rp)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="savingsInput" placeholder="Jumlah">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-success" id="addSavingsBtn">+</button>
-                                                </div>
+                                                <button class="btn btn-success" id="addSavingsBtn">+</button>
                                             </div>
                                             <small class="text-muted">Uang akan diambil dari saldo</small>
                                         </div>
@@ -1215,9 +1224,7 @@
                                             <label class="form-label">Tarik Tabungan (Rp)</label>
                                             <div class="input-group">
                                                 <input type="number" class="form-control" id="withdrawInput" placeholder="Jumlah">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-outline-warning" id="withdrawSavingsBtn">-</button>
-                                                </div>
+                                                <button class="btn btn-outline-warning" id="withdrawSavingsBtn">-</button>
                                             </div>
                                             <small class="text-muted">Uang akan ditambahkan ke saldo</small>
                                         </div>
@@ -1228,6 +1235,25 @@
                     </div>
                     
                     <div class="col-md-6">
+                        <!-- PERINGATAN PENGELUARAN DI ATAS 70% -->
+                        <div id="expenseWarning70" class="expense-warning-70 mb-3" style="display: none;">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-exclamation-triangle fa-2x text-warning me-3"></i>
+                                <div>
+                                    <h5 class="mb-1">Peringatan: Pengeluaran Melebihi 70%</h5>
+                                    <p class="mb-0" id="expenseWarningMessage"></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Peringatan -->
+                        <div class="alert alert-warning alert-dismissible fade mb-3" id="budgetWarning" role="alert" style="display: none;">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Peringatan!</strong> <span id="warningMessage"></span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            <div class="mt-2" id="savingTips"></div>
+                        </div>
+                        
                         <div class="card">
                             <div class="card-header">
                                 <i class="fas fa-chart-line"></i> Ringkasan Keuangan
@@ -1261,7 +1287,7 @@
                             </div>
                         </div>
                         
-                        <!-- TIPS MENGHEMAT UANG - TAMBAHAN BARU -->
+                        <!-- TIPS MENGHEMAT UANG -->
                         <div class="card mt-3 tips-card">
                             <div class="card-header">
                                 <i class="fas fa-lightbulb"></i> Tips Menghemat Uang
@@ -1304,26 +1330,7 @@
                             </div>
                         </div>
                         
-                        <!-- PERINGATAN PENGELUARAN DI ATAS 70% (DIPINDAHKAN DI SINI) -->
-                        <div id="expenseWarning70" class="expense-warning-70 mt-3" style="display: none;">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-exclamation-triangle fa-2x text-warning me-3"></i>
-                                <div>
-                                    <h5 class="mb-1">Peringatan: Pengeluaran Melebihi 70%</h5>
-                                    <p class="mb-0" id="expenseWarningMessage"></p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Peringatan -->
-                        <div class="alert alert-warning alert-dismissible fade mt-3" id="budgetWarning" role="alert" style="display: none;">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <strong>Peringatan!</strong> <span id="warningMessage"></span>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                            <div class="mt-2" id="savingTips"></div>
-                        </div>
-                        
-                        <!-- Stats Cards - JARAK DIPERKECIL -->
+                        <!-- Stats Cards -->
                         <div class="row mt-2">
                             <div class="col-md-6 mb-2">
                                 <div class="stat-card">
@@ -1387,8 +1394,7 @@
                                     <label for="dataType" class="form-label">Tipe Data</label>
                                     <select class="form-select" id="dataType">
                                         <option value="expense">Pengeluaran per Kategori</option>
-                                        <option value="income">Pemasukan</option>
-                                        <option value="both">Pemasukan vs Pengeluaran</option>
+                                        <option value="income">Pemasukan vs Pengeluaran</option>
                                     </select>
                                 </div>
                             </div>
@@ -1872,7 +1878,837 @@
         <!-- Footer -->
         <div class="footer">
             <div class="container">
-                <span>Cashio &copy; 2023 - Aplikasi Manajemen Keuangan Pribadi</span>
+                <span>Cashio &copy; 2025 - Aplikasi Manajemen Keuangan Pribadi | <a href="#" data-bs-toggle="modal" data-bs-target="#userGuideModal" class="text-white">Panduan</a> | v2.0.0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL USER GUIDE - Panduan Lengkap -->
+    <div class="modal fade" id="userGuideModal" tabindex="-1" aria-labelledby="userGuideModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userGuideModalLabel">
+                        <i class="fas fa-book-open me-2"></i> 
+                        📘 Panduan Lengkap Cashio - Aplikasi Manajemen Keuangan
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Daftar Isi Interaktif -->
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <div class="card bg-light border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h6 class="fw-bold"><i class="fas fa-list-ul me-2 text-primary"></i> Daftar Isi Cepat</h6>
+                                    <div class="row">
+                                        <div class="col-md-3 col-6">
+                                            <a href="#guide-section1" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse1').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 1. Memulai
+                                            </a>
+                                            <a href="#guide-section2" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse2').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 2. Beranda
+                                            </a>
+                                            <a href="#guide-section3" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse3').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 3. Tabungan
+                                            </a>
+                                            <a href="#guide-section4" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse4').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 4. Cashflow
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <a href="#guide-section5" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse5').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 5. History
+                                            </a>
+                                            <a href="#guide-section6" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 6. Wishlist
+                                            </a>
+                                            <a href="#guide-section7" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse7').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 7. Kalkulator Wishlist
+                                            </a>
+                                            <a href="#guide-section8" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse8').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 8. Simulasi
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <a href="#guide-section9" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse9').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 9. Reset Data
+                                            </a>
+                                            <a href="#guide-section10" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse10').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 10. Tips
+                                            </a>
+                                            <a href="#guide-section11" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse11').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 11. FAQ
+                                            </a>
+                                            <a href="#guide-section12" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse12').classList.add('show')">
+                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 12. Shortcut
+                                            </a>
+                                        </div>
+                                        <div class="col-md-3 col-6">
+                                            <div class="bg-primary bg-opacity-10 p-2 rounded">
+                                                <span class="badge bg-danger mb-1">HOT</span>
+                                                <a href="#guide-section6" class="d-block text-decoration-none text-dark fw-bold" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
+                                                    🔥 Fitur Perhitungan Otomatis
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Konten Panduan dengan Accordion -->
+                    <div class="accordion" id="userGuideAccordion">
+                        <!-- SECTION 1: MEMULAI APLIKASI -->
+                        <div class="accordion-item" id="guide-section1">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse1">
+                                    <span class="badge bg-primary me-2">1</span> 🚀 Memulai Aplikasi Cashio
+                                </button>
+                            </h2>
+                            <div id="guide-collapse1" class="accordion-collapse collapse show" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-primary"><i class="fas fa-sign-in-alt me-2"></i>Cara Masuk ke Aplikasi</h6>
+                                            <div class="ms-3">
+                                                <div class="mb-3 d-flex">
+                                                    <div class="me-3"><span class="badge bg-success">1</span></div>
+                                                    <div>
+                                                        <strong>Login dengan Google:</strong> Klik tombol "Lanjutkan dengan Google" - paling cepat, tidak perlu registrasi.
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 d-flex">
+                                                    <div class="me-3"><span class="badge bg-success">2</span></div>
+                                                    <div>
+                                                        <strong>Registrasi Akun Baru:</strong> 
+                                                        <ul class="mt-1">
+                                                            <li>Klik "Daftar disini" di halaman login</li>
+                                                            <li>Isi Nama Lengkap, Email, Password (min 6 karakter)</li>
+                                                            <li>Konfirmasi password, klik "Daftar"</li>
+                                                            <li class="text-success">✅ Akun tersimpan otomatis, login langsung</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 d-flex">
+                                                    <div class="me-3"><span class="badge bg-success">3</span></div>
+                                                    <div>
+                                                        <strong>Mode Tamu:</strong> Klik "Lanjutkan tanpa login" - data hanya tersimpan di browser ini.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-info mt-3">
+                                                <i class="fas fa-database me-2"></i>
+                                                <strong>Penyimpanan Data:</strong>
+                                                <ul class="mb-0 mt-2">
+                                                    <li>✓ Akun terdaftar: Data tersimpan per user, tidak tercampur</li>
+                                                    <li>✓ Mode Tamu: Data di localStorage, aman selama tidak clear cache</li>
+                                                    <li>✓ Login Google: Simulasi login, data tetap lokal</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                                                    <h6>Status Aplikasi</h6>
+                                                    <hr>
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <span>Versi:</span>
+                                                        <span class="badge bg-success">2.0.0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <span>PWA Ready:</span>
+                                                        <span class="badge bg-info">Bisa diinstal</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <span>Update:</span>
+                                                        <span class="badge bg-secondary">Februari 2025</span>
+                                                    </div>
+                                                    <hr>
+                                                    <small class="text-muted">💡 Mode Tamu = Tanpa login</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 2: BERANDA -->
+                        <div class="accordion-item" id="guide-section2">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse2">
+                                    <span class="badge bg-primary me-2">2</span> 🏠 Beranda - Pusat Kontrol Keuangan
+                                </button>
+                            </h2>
+                            <div id="guide-collapse2" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-success"><i class="fas fa-plus-circle me-2"></i>Mencatat Transaksi</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm table-bordered">
+                                                    <tr class="table-light">
+                                                        <th width="35%">Aksi</th>
+                                                        <th>Cara</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="badge bg-success">+</span> Pemasukan</td>
+                                                        <td>Masukkan jumlah → klik "Tambah Pemasukan"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="badge bg-danger">-</span> Pengeluaran</td>
+                                                        <td>Isi Nama, Jumlah, Kategori, Tanggal → klik "Tambah Pengeluaran"</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><span class="badge bg-warning">↻</span> Reset Bulanan</td>
+                                                        <td>Klik tombol "Reset Bulan Ini" di pojok kanan card</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            
+                                            <h6 class="mt-4 text-danger"><i class="fas fa-exclamation-triangle me-2"></i>Sistem Peringatan Cerdas</h6>
+                                            <div class="ms-2">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-success me-2">Aman</span>
+                                                    <span>Pengeluaran < 70%</span>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-warning me-2">Hati-hati</span>
+                                                    <span>Pengeluaran 70% - 90%</span>
+                                                </div>
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="badge bg-danger me-2">Darurat</span>
+                                                    <span>Pengeluaran > 90%</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-primary"><i class="fas fa-chart-line me-2"></i>Ringkasan Keuangan</h6>
+                                            <div class="card bg-light p-3">
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Total Pemasukan:</span>
+                                                    <span class="fw-bold text-success">Rp ...</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Total Pengeluaran:</span>
+                                                    <span class="fw-bold text-danger">Rp ...</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Saldo Tersedia:</span>
+                                                    <span class="fw-bold text-primary">Rp ...</span>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex justify-content-between">
+                                                    <span>Rasio:</span>
+                                                    <span><span id="expenseRatio">0%</span></span>
+                                                </div>
+                                                <div class="progress mt-1" style="height: 8px;">
+                                                    <div class="progress-bar" style="width: 0%;"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-success mt-3 mb-0">
+                                                <i class="fas fa-lightbulb me-2"></i>
+                                                <strong>Tips:</strong> Lakukan reset bulanan setiap awal bulan untuk memulai catatan keuangan yang baru!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 3: TABUNGAN -->
+                        <div class="accordion-item" id="guide-section3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse3">
+                                    <span class="badge bg-primary me-2">3</span> 🐷 Manajemen Tabungan
+                                </button>
+                            </h2>
+                            <div id="guide-collapse3" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h6 class="text-success">Operasi Tabungan</h6>
+                                            <div class="card mb-3 border-success">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="bg-success text-white rounded-circle p-2 me-3" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
+                                                            <i class="fas fa-plus"></i>
+                                                        </div>
+                                                        <div>
+                                                            <strong>Tambah Tabungan:</strong>
+                                                            <p class="mb-0 text-muted">Ambil dari saldo → pindahkan ke tabungan. Otomatis tercatat sebagai pengeluaran.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="bg-warning text-white rounded-circle p-2 me-3" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;">
+                                                            <i class="fas fa-minus"></i>
+                                                        </div>
+                                                        <div>
+                                                            <strong>Tarik Tabungan:</strong>
+                                                            <p class="mb-0 text-muted">Ambil dari tabungan → tambah ke saldo. Otomatis tercatat sebagai pemasukan.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-info">
+                                                <i class="fas fa-calculator me-2"></i>
+                                                <strong>Integrasi Otomatis:</strong> Tabungan Anda akan terhubung langsung dengan fitur Wishlist untuk menghitung progress pembelian!
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="card bg-light h-100">
+                                                <div class="card-body">
+                                                    <h6 class="text-center"><i class="fas fa-chart-simple me-2"></i>Statistik Tabungan</h6>
+                                                    <canvas id="savingsChart" style="height: 120px; width: 100%; display: none;"></canvas>
+                                                    <div class="text-center p-2">
+                                                        <span class="display-6 fw-bold text-success" id="totalSavingsDisplay-mini">Rp 0</span>
+                                                        <p class="text-muted mb-0">Total Tabungan Saat Ini</p>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="small">
+                                                        <span class="badge bg-success me-1">Tips</span> Menabung 20% dari pendapatan adalah awal yang baik!
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 4: CASHFLOW VISUALIZER -->
+                        <div class="accordion-item" id="guide-section4">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse4">
+                                    <span class="badge bg-primary me-2">4</span> 📊 Cashflow Visualizer
+                                </button>
+                            </h2>
+                            <div id="guide-collapse4" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h6>Fitur Visualisasi Data Keuangan</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th>Pengaturan</th>
+                                                            <th>Pilihan</th>
+                                                            <th>Fungsi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><span class="badge bg-info">Tipe Chart</span></td>
+                                                            <td>Pie, Bar, Doughnut</td>
+                                                            <td>Memilih bentuk visualisasi chart</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="badge bg-info">Rentang Tanggal</span></td>
+                                                            <td>Semua, Bulan Ini, 3 Bulan, Tahun Ini</td>
+                                                            <td>Filter data berdasarkan periode</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><span class="badge bg-info">Tipe Data</span></td>
+                                                            <td>Pengeluaran per Kategori, Pemasukan vs Pengeluaran</td>
+                                                            <td>Memilih data yang ditampilkan</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                            <div class="mt-4">
+                                                <h6><i class="fas fa-palette me-2"></i>Kode Warna Kategori Pengeluaran</h6>
+                                                <div class="row">
+                                                    <div class="col-md-3 col-6"><span style="color:#FF6384">●</span> Makanan</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#36A2EB">●</span> Transportasi</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#FFCE56">●</span> Hiburan</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#4BC0C0">●</span> Belanja</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#9966FF">●</span> Pendidikan</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#FF9F40">●</span> Kesehatan</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#2ECC71">●</span> Tabungan</div>
+                                                    <div class="col-md-3 col-6"><span style="color:#E74C3C">●</span> Hutang</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-warning mt-4">
+                                                <i class="fas fa-lightbulb me-2"></i>
+                                                <strong>Penggunaan:</strong> Gunakan chart untuk melihat kategori pengeluaran terbesar, lalu evaluasi apakah bisa dikurangi.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 5: HISTORY PENGELUARAN -->
+                        <div class="accordion-item" id="guide-section5">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse5">
+                                    <span class="badge bg-primary me-2">5</span> 📜 History Pengeluaran
+                                </button>
+                            </h2>
+                            <div id="guide-collapse5" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6><i class="fas fa-search me-2"></i>Fitur Pencarian & Filter</h6>
+                                            <ul>
+                                                <li><strong>Search box:</strong> Cari berdasarkan nama atau kategori</li>
+                                                <li><strong>Filter kategori:</strong> Tampilkan pengeluaran dari kategori tertentu</li>
+                                                <li><strong>Urutkan:</strong> Berdasarkan tanggal, jumlah, atau nama</li>
+                                                <li><strong>Pagination:</strong> Navigasi halaman untuk history panjang</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6><i class="fas fa-edit me-2"></i>Aksi pada History</h6>
+                                            <div class="d-flex mb-3">
+                                                <span class="badge bg-info me-2 p-2">✏️</span>
+                                                <span><strong>Edit:</strong> Klik ikon pensil - data akan muncul di form untuk diedit</span>
+                                            </div>
+                                            <div class="d-flex">
+                                                <span class="badge bg-danger me-2 p-2">🗑️</span>
+                                                <span><strong>Hapus:</strong> Klik ikon tong sampah - hapus permanen</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 6: WISHLIST & PERHITUNGAN OTOMATIS -->
+                        <div class="accordion-item" id="guide-section6">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse6">
+                                    <span class="badge bg-primary me-2">6</span> 🎯 Wishlist + AI Kalkulator
+                                </button>
+                            </h2>
+                            <div id="guide-collapse6" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <div class="card border-purple mb-3">
+                                                <div class="card-header bg-purple text-white">
+                                                    <i class="fas fa-robot me-2"></i>Fitur Perhitungan Otomatis (Favorit Pengguna!)
+                                                </div>
+                                                <div class="card-body">
+                                                    <h6 class="fw-bold">Cara Menggunakan:</h6>
+                                                    <ol class="list-group list-group-numbered mb-3">
+                                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                            <div class="ms-2 me-auto">
+                                                                <div class="fw-bold">Tambah Wishlist</div>
+                                                                Nama barang, harga, target tanggal, prioritas, kategori
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                            <div class="ms-2 me-auto">
+                                                                <div class="fw-bold">Masukkan Tabungan Bulanan</div>
+                                                                Contoh: Rp 500.000 per bulan untuk semua wishlist
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                                            <div class="ms-2 me-auto">
+                                                                <div class="fw-bold">Klik "Hitung Semua Wishlist"</div>
+                                                                Sistem akan otomatis menghitung estimasi waktu untuk setiap item
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                    
+                                                    <h6 class="fw-bold mt-3">✨ Hasil yang Didapat:</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <ul class="list-unstyled">
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Estimasi bulan pembelian</li>
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Target tanggal real-time</li>
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Tabungan per hari yang diperlukan</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <ul class="list-unstyled">
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Progress bar per wishlist</li>
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Badge "Bisa Dibeli Sekarang"</li>
+                                                                <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Insight & rekomendasi prioritas</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-success">
+                                                <i class="fas fa-crown me-2"></i>
+                                                <strong>Fitur Premium Gratis:</strong> Perhitungan otomatis untuk semua wishlist, tidak terbatas!
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="text-center">Contoh Kasus</h6>
+                                                    <hr>
+                                                    <p><strong>Wishlist:</strong> Laptop Rp 10jt</p>
+                                                    <p><strong>Tabungan:</strong> Rp 2jt</p>
+                                                    <p><strong>Menabung/bulan:</strong> Rp 1jt</p>
+                                                    <div class="bg-white p-2 rounded">
+                                                        <span class="badge bg-info">Hasil Kalkulasi:</span>
+                                                        <p class="mt-2 mb-0">⏱️ Estimasi: <strong>8 bulan lagi</strong></p>
+                                                        <p class="mb-0">📅 Target: <strong>Oktober 2025</strong></p>
+                                                        <p>💰 Per hari: <strong>Rp 33.333</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 7: INSIGHT & REKOMENDASI -->
+                        <div class="accordion-item" id="guide-section7">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse7">
+                                    <span class="badge bg-primary me-2">7</span> 💡 Insight & Rekomendasi Otomatis
+                                </button>
+                            </h2>
+                            <div id="guide-collapse7" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <p>Setelah menghitung wishlist, sistem akan menghasilkan insight pintar:</p>
+                                    
+                                    <div class="card mb-2 border-success">
+                                        <div class="card-body py-2">
+                                            <i class="fas fa-check-circle text-success me-2"></i>
+                                            "Selamat! Anda bisa membeli 2 dari 5 wishlist sekarang!"
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2 border-warning">
+                                        <div class="card-body py-2">
+                                            <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                            "Fokus prioritas tinggi: Laptop Gaming - bisa dibeli dalam 8 bulan"
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2 border-info">
+                                        <div class="card-body py-2">
+                                            <i class="fas fa-chart-pie text-info me-2"></i>
+                                            "Breakdown kategori: Elektronik 60%, Fashion 25%, Travel 15%"
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2 border-primary">
+                                        <div class="card-body py-2">
+                                            <i class="fas fa-calculator text-primary me-2"></i>
+                                            "Target 1 tahun: Anda perlu menabung Rp 25.000 per hari"
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 8: SIMULASI KEUANGAN -->
+                        <div class="accordion-item" id="guide-section8">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse8">
+                                    <span class="badge bg-primary me-2">8</span> 🔮 Simulasi Keuangan (Cash vs Kredit)
+                                </button>
+                            </h2>
+                            <div id="guide-collapse8" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6 class="text-warning"><i class="fas fa-sync-alt me-2"></i>Simulasi Pemulihan Tabungan</h6>
+                                            <p><strong>Kegunaan:</strong> Menghitung waktu pemulihan setelah pengeluaran besar</p>
+                                            <div class="bg-light p-3 rounded">
+                                                <p class="mb-1"><strong>Cara:</strong></p>
+                                                <ol class="mb-0">
+                                                    <li>Masukkan jumlah tabungan yang berkurang (contoh: beli motor Rp 20jt)</li>
+                                                    <li>Masukkan kapasitas menabung per bulan (Rp 1jt)</li>
+                                                    <li>Target pemulihan (default 100%)</li>
+                                                    <li>Klik "Hitung Simulasi Pemulihan"</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6 class="text-success"><i class="fas fa-balance-scale me-2"></i>Simulasi Cash vs Kredit</h6>
+                                            <p><strong>Kegunaan:</strong> Membandingkan total pembayaran cash vs kredit</p>
+                                            <div class="bg-light p-3 rounded">
+                                                <p class="mb-1"><strong>Cara:</strong></p>
+                                                <ol class="mb-0">
+                                                    <li>Nama barang & harga</li>
+                                                    <li>Pilih metode Cash atau Kredit</li>
+                                                    <li>Jika kredit: isi tenor, bunga, DP</li>
+                                                    <li>Tabungan per bulan untuk opsi cash</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="alert alert-info mt-3">
+                                        <i class="fas fa-calculator me-2"></i>
+                                        <strong>Rumus Kredit:</strong> Cicilan = (Harga - DP) × (bunga/12) × (1+bunga/12)^tenor / ((1+bunga/12)^tenor - 1)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 9: MANAJEMEN DATA & RESET -->
+                        <div class="accordion-item" id="guide-section9">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse9">
+                                    <span class="badge bg-primary me-2">9</span> 💾 Reset & Manajemen Data
+                                </button>
+                            </h2>
+                            <div id="guide-collapse9" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6><i class="fas fa-calendar me-2"></i>Reset Bulan Ini</h6>
+                                            <p class="text-muted">Klik tombol "Reset Bulan Ini" di card Beranda. Fungsi:</p>
+                                            <ul>
+                                                <li>✓ Hapus semua pengeluaran bulan berjalan</li>
+                                                <li>✓ Hapus semua pemasukan bulan berjalan</li>
+                                                <li>✓ Tabungan & wishlist tetap aman</li>
+                                                <li class="text-success">✅ Cocok untuk awal bulan baru</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h6><i class="fas fa-redo me-2"></i>Reset Data Spesifik</h6>
+                                            <p class="text-muted">Klik tombol "Reset" di navbar → pilih komponen:</p>
+                                            <ul>
+                                                <li>Reset pengeluaran saja</li>
+                                                <li>Reset pemasukan saja</li>
+                                                <li>Reset tabungan</li>
+                                                <li>Reset wishlist</li>
+                                                <li>Reset SEMUA data</li>
+                                            </ul>
+                                            <div class="alert alert-danger py-2">
+                                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                                <small>Data yang direset TIDAK BISA dikembalikan!</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 10: TIPS & TRIK OPTIMAL -->
+                        <div class="accordion-item" id="guide-section10">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse10">
+                                    <span class="badge bg-primary me-2">10</span> 💎 Tips & Trik Penggunaan
+                                </button>
+                            </h2>
+                            <div id="guide-collapse10" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-success">
+                                                <div class="card-header bg-success text-white">Untuk Pemula</div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Catat semua pengeluaran, minimal Rp 1.000</li>
+                                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Gunakan mode tamu dulu sebelum registrasi</li>
+                                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Reset bulanan setiap awal bulan</li>
+                                                        <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Targetkan pengeluaran ≤ 70% pemasukan</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card h-100 border-warning">
+                                                <div class="card-header bg-warning text-dark">Untuk Power User</div>
+                                                <div class="card-body">
+                                                    <ul class="list-unstyled">
+                                                        <li class="mb-2"><i class="fas fa-star text-warning me-2"></i> Kombinasi Wishlist + Simulasi untuk belanja besar</li>
+                                                        <li class="mb-2"><i class="fas fa-star text-warning me-2"></i> Analisis kategori terbesar di Cashflow Visualizer</li>
+                                                        <li class="mb-2"><i class="fas fa-star text-warning me-2"></i> Cek simulasi kredit sebelum ajukan pinjaman</li>
+                                                        <li class="mb-2"><i class="fas fa-star text-warning me-2"></i> Edit expense cepat dengan ikon pensil</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <div class="card bg-primary bg-opacity-10">
+                                                <div class="card-body">
+                                                    <h6><i class="fas fa-rocket text-primary me-2"></i>Rahasia Cashio yang Jarang Diketahui:</h6>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <span class="badge bg-danger me-1">#1</span> 
+                                                            Peringatan merah muncul otomatis jika pengeluaran >90%
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="badge bg-danger me-1">#2</span> 
+                                                            Progress bar wishlist update real-time
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="badge bg-danger me-1">#3</span> 
+                                                            Bisa akses via HP & diinstall sebagai aplikasi
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 11: FAQ -->
+                        <div class="accordion-item" id="guide-section11">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse11">
+                                    <span class="badge bg-primary me-2">11</span> ❓ Tanya Jawab (FAQ)
+                                </button>
+                            </h2>
+                            <div id="guide-collapse11" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <div class="accordion" id="faqAccordion">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                                    Apakah data aman jika login dengan Google?
+                                                </button>
+                                            </h2>
+                                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                                <div class="accordion-body">
+                                                    <span class="text-success">✓ Aman.</span> Login Google di Cashio adalah simulasi - semua data tetap tersimpan di localStorage browser Anda, TIDAK dikirim ke server manapun. Data hanya bisa diakses dari perangkat Anda sendiri.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                                    Bagaimana cara hapus 1 transaksi?
+                                                </button>
+                                            </h2>
+                                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                                <div class="accordion-body">
+                                                    Buka menu <strong>Cashflow → History Pengeluaran</strong>, cari transaksi yang ingin dihapus, klik ikon <span class="badge bg-danger">🗑️</span> di sebelah kanan.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                                    Apakah bisa akses di HP?
+                                                </button>
+                                            </h2>
+                                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                                <div class="accordion-body">
+                                                    <strong>Bisa!</strong> Cashio sudah responsive dan mendukung PWA. Buka di Chrome/Android → install ke home screen.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                                    Kenapa saldo saya minus?
+                                                </button>
+                                            </h2>
+                                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                                <div class="accordion-body">
+                                                    Saldo minus terjadi karena total pengeluaran <span class="text-danger">melebihi</span> total pemasukan. Segera evaluasi keuangan Anda, kurangi pengeluaran yang tidak perlu.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                                    Apakah ada batasan jumlah transaksi?
+                                                </button>
+                                            </h2>
+                                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                                <div class="accordion-body">
+                                                    <span class="fw-bold">Tidak ada batasan!</span> Anda bisa mencatat ribuan hingga puluhan ribu transaksi, selama localStorage masih mencukupi.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- SECTION 12: SHORTCUT & FITUR CEPAT -->
+                        <div class="accordion-item" id="guide-section12">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse12">
+                                    <span class="badge bg-primary me-2">12</span> ⚡ Shortcut & Fitur Cepat
+                                </button>
+                            </h2>
+                            <div id="guide-collapse12" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+                                <div class="accordion-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Fitur Cepat</th>
+                                                <th>Cara</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><span class="badge bg-dark">↻ Reset Bulan Ini</span></td>
+                                                <td>Tombol di card Beranda (pojok kanan header)</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-dark">✏️ Edit Pengeluaran</span></td>
+                                                <td>Ikon pensil di History → otomatis isi form untuk edit</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-dark">✅ Wishlist Siap Beli</span></td>
+                                                <td>Card akan hijau dengan badge "Dapat Dibeli!"</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-dark">📊 Update Chart</span></td>
+                                                <td>Pilih filter, klik "Update Chart" - realtime</td>
+                                            </tr>
+                                            <tr>
+                                                <td><span class="badge bg-dark">🔍 Cepat Cari</span></td>
+                                                <td>Kotak search di History Pengeluaran</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tombol Aksi Cepat -->
+                    <div class="row mt-4">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-sm btn-outline-primary me-2" onclick="window.print()">
+                                <i class="fas fa-print me-1"></i> Cetak Panduan
+                            </button>
+                            <button class="btn btn-sm btn-outline-success" onclick="localStorage.setItem('cashio_guide_read', 'true'); showNotification('Panduan telah ditandai sebagai dibaca! ✓', 'success');">
+                                <i class="fas fa-check me-1"></i> Tandai Sudah Baca
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">
+                                <i class="fas fa-rocket me-1"></i> Mulai Aplikasi
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-3">
+                        <span class="text-muted small">
+                            <i class="fas fa-heart text-danger me-1"></i> 
+                            Cashio v2.0.0 - Gratis untuk selamanya | 
+                            <a href="#" class="text-decoration-none" onclick="showNotification('Support: support@cashio.id (simulasi)', 'info');">Kontak Kami</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                        <div>
+                            <span class="badge bg-info me-1">TIPS</span>
+                            <small class="text-muted">Tekan Ctrl+F untuk mencari kata dalam panduan ini</small>
+                        </div>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                            <i class="fas fa-check me-1"></i> Mengerti, Tutup Panduan
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -1975,7 +2811,6 @@
         
         // Chart instances
         let cashflowChart = null;
-        let expenseHistoryChart = null;
         
         // DOM Elements
         const loginScreen = document.getElementById('loginScreen');
@@ -2001,7 +2836,6 @@
         
         // Reset elements
         const resetBtn = document.getElementById('resetBtn');
-        const resetMonthlyBtn = document.getElementById('resetMonthlyBtn');
         const confirmResetBtn = document.getElementById('confirmResetBtn');
         const confirmResetBudgetBtn = document.getElementById('confirmResetBudgetBtn');
         
@@ -2049,7 +2883,7 @@
         const historySort = document.getElementById('historySort');
         const historyPagination = document.getElementById('historyPagination');
         
-        // Wishlist elements - PERHITUNGAN OTOMATIS
+        // Wishlist elements
         const wishlistName = document.getElementById('wishlistName');
         const wishlistPrice = document.getElementById('wishlistPrice');
         const wishlistDeadline = document.getElementById('wishlistDeadline');
@@ -2112,47 +2946,56 @@
         const expenseWarning70 = document.getElementById('expenseWarning70');
         const expenseWarningMessage = document.getElementById('expenseWarningMessage');
         
-        // Pagination variables untuk history
+        // Pagination variables
         let currentPage = 1;
         const itemsPerPage = 10;
         
         // Inisialisasi tanggal default
         expenseDateInput.valueAsDate = new Date();
-        wishlistDeadline.valueAsDate = new Date(new Date().setMonth(new Date().getMonth() + 6));
+        if (wishlistDeadline) {
+            const defaultDate = new Date();
+            defaultDate.setMonth(defaultDate.getMonth() + 6);
+            wishlistDeadline.valueAsDate = defaultDate;
+        }
         
         // Event Listeners
         document.addEventListener('DOMContentLoaded', initializeApp);
-        loginBtn.addEventListener('click', login);
-        registerBtn.addEventListener('click', register);
-        showRegister.addEventListener('click', () => toggleForms('register'));
-        showLogin.addEventListener('click', () => toggleForms('login'));
-        skipLoginBtn.addEventListener('click', skipLogin);
-        logoutBtn.addEventListener('click', logout);
-        googleLoginBtn.addEventListener('click', handleGoogleLogin);
         
-        resetBtn.addEventListener('click', showResetModal);
-        confirmResetBtn.addEventListener('click', confirmReset);
-        confirmResetBudgetBtn.addEventListener('click', resetMonthlyData);
+        if (loginBtn) loginBtn.addEventListener('click', login);
+        if (registerBtn) registerBtn.addEventListener('click', register);
+        if (showRegister) showRegister.addEventListener('click', (e) => { e.preventDefault(); toggleForms('register'); });
+        if (showLogin) showLogin.addEventListener('click', (e) => { e.preventDefault(); toggleForms('login'); });
+        if (skipLoginBtn) skipLoginBtn.addEventListener('click', skipLogin);
+        if (logoutBtn) logoutBtn.addEventListener('click', logout);
+        if (googleLoginBtn) googleLoginBtn.addEventListener('click', handleGoogleLogin);
         
-        addIncomeBtn.addEventListener('click', addIncome);
-        addExpenseBtn.addEventListener('click', addExpense);
-        addSavingsBtn.addEventListener('click', addSavings);
-        withdrawSavingsBtn.addEventListener('click', withdrawSavings);
+        if (confirmResetBtn) confirmResetBtn.addEventListener('click', confirmReset);
+        if (confirmResetBudgetBtn) confirmResetBudgetBtn.addEventListener('click', resetMonthlyData);
         
-        updateChartBtn.addEventListener('click', updateCashflowChart);
+        if (addIncomeBtn) addIncomeBtn.addEventListener('click', addIncome);
+        if (addExpenseBtn) addExpenseBtn.addEventListener('click', addExpense);
+        if (addSavingsBtn) addSavingsBtn.addEventListener('click', addSavings);
+        if (withdrawSavingsBtn) withdrawSavingsBtn.addEventListener('click', withdrawSavings);
         
-        addWishlistBtn.addEventListener('click', addWishlist);
-        calculateAllWishlistBtn.addEventListener('click', calculateAllWishlists);
+        if (updateChartBtn) updateChartBtn.addEventListener('click', updateCashflowChart);
         
-        purchaseOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                purchaseOptions.forEach(opt => opt.classList.remove('active'));
-                this.classList.add('active');
-                creditOptionsDiv.style.display = this.getAttribute('data-type') === 'credit' ? 'block' : 'none';
+        if (addWishlistBtn) addWishlistBtn.addEventListener('click', addWishlist);
+        if (calculateAllWishlistBtn) calculateAllWishlistBtn.addEventListener('click', calculateAllWishlists);
+        
+        if (purchaseOptions) {
+            purchaseOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    purchaseOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    if (creditOptionsDiv) {
+                        creditOptionsDiv.style.display = this.getAttribute('data-type') === 'credit' ? 'block' : 'none';
+                    }
+                });
             });
-        });
-        calculatePurchaseBtn.addEventListener('click', calculatePurchase);
-        calculateRecoveryBtn.addEventListener('click', calculateRecovery);
+        }
+        
+        if (calculatePurchaseBtn) calculatePurchaseBtn.addEventListener('click', calculatePurchase);
+        if (calculateRecoveryBtn) calculateRecoveryBtn.addEventListener('click', calculateRecovery);
         
         navbarLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -2165,9 +3008,9 @@
         });
         
         // Event listeners untuk history pengeluaran
-        historySearch.addEventListener('input', updateExpenseHistory);
-        historyCategoryFilter.addEventListener('change', updateExpenseHistory);
-        historySort.addEventListener('change', updateExpenseHistory);
+        if (historySearch) historySearch.addEventListener('input', updateExpenseHistory);
+        if (historyCategoryFilter) historyCategoryFilter.addEventListener('change', updateExpenseHistory);
+        if (historySort) historySort.addEventListener('change', updateExpenseHistory);
         
         // Initialize App
         function initializeApp() {
@@ -2177,29 +3020,37 @@
                 isLoggedIn = true;
                 showMainApp(user);
             }
+            
+            // Welcome message
+            if (!localStorage.getItem('cashio_welcome_shown')) {
+                setTimeout(() => {
+                    showNotification('👋 Selamat datang di Cashio! Kelola keuangan lebih mudah.', 'info');
+                    localStorage.setItem('cashio_welcome_shown', 'true');
+                }, 1000);
+            }
         }
         
         function toggleForms(form) {
-            loginForm.style.display = form === 'login' ? 'block' : 'none';
-            registerForm.style.display = form === 'register' ? 'block' : 'none';
+            if (loginForm) loginForm.style.display = form === 'login' ? 'block' : 'none';
+            if (registerForm) registerForm.style.display = form === 'register' ? 'block' : 'none';
         }
         
         // Navigation
         function navigateTo(section) {
             [homeSection, cashflowSection, wishlistSection, simulationSection]
-                .forEach(s => s.style.display = 'none');
+                .forEach(s => { if (s) s.style.display = 'none'; });
             
-            if (section === 'home') {
+            if (section === 'home' && homeSection) {
                 homeSection.style.display = 'block';
                 updateSummaryDisplay();
-            } else if (section === 'cashflow') {
+            } else if (section === 'cashflow' && cashflowSection) {
                 cashflowSection.style.display = 'block';
                 updateCashflowChart();
                 updateExpenseHistory();
-            } else if (section === 'wishlist') {
+            } else if (section === 'wishlist' && wishlistSection) {
                 wishlistSection.style.display = 'block';
                 updateWishlistDisplay();
-            } else if (section === 'simulation') {
+            } else if (section === 'simulation' && simulationSection) {
                 simulationSection.style.display = 'block';
             }
         }
@@ -2210,18 +3061,17 @@
                 id: Date.now(),
                 name: 'Pengguna Google',
                 email: 'user@gmail.com',
-                isGoogleUser: true,
-                picture: 'https://www.google.com/favicon.ico'
+                isGoogleUser: true
             };
             
             isLoggedIn = true;
             user = { ...googleUser, loggedIn: true };
             localStorage.setItem('currentUser', JSON.stringify(user));
             showMainApp(user);
-            showNotification('Login dengan Google berhasil!', 'success');
+            showNotification('✅ Login dengan Google berhasil!', 'success');
         }
         
-        // Login/Register
+        // Login
         function login() {
             const email = loginEmail.value.trim();
             const password = loginPassword.value.trim();
@@ -2239,12 +3089,13 @@
                 user = { ...foundUser, loggedIn: true };
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 showMainApp(user);
-                showNotification('Login berhasil!', 'success');
+                showNotification('✅ Login berhasil!', 'success');
             } else {
                 showNotification('Email atau password salah!', 'error');
             }
         }
         
+        // Register
         function register() {
             const name = registerName.value.trim();
             const email = registerEmail.value.trim();
@@ -2288,9 +3139,10 @@
             user = { ...newUser, loggedIn: true };
             localStorage.setItem('currentUser', JSON.stringify(user));
             showMainApp(user);
-            showNotification('Registrasi berhasil!', 'success');
+            showNotification('✅ Registrasi berhasil!', 'success');
         }
         
+        // Skip Login
         function skipLogin() {
             isLoggedIn = false;
             user = {
@@ -2299,9 +3151,10 @@
                 isGuest: true
             };
             showMainApp(user);
-            showNotification('Anda menggunakan mode tamu. Data hanya disimpan di perangkat ini.', 'info');
+            showNotification('👤 Mode tamu - data hanya di perangkat ini', 'info');
         }
         
+        // Logout
         function logout() {
             if (confirm('Apakah Anda yakin ingin logout?')) {
                 localStorage.removeItem('currentUser');
@@ -2309,20 +3162,22 @@
                 user = null;
                 loginScreen.style.display = 'block';
                 mainApp.style.display = 'none';
-                showNotification('Logout berhasil!', 'info');
+                showNotification('👋 Logout berhasil!', 'info');
             }
         }
         
+        // Show Main App
         function showMainApp(userData) {
             user = userData;
-            userNameDisplay.textContent = user.name;
+            if (userNameDisplay) userNameDisplay.textContent = `(${user.name})`;
             loginScreen.style.display = 'none';
             mainApp.style.display = 'block';
             loadUserData();
             updateSummaryDisplay();
+            navigateTo('home');
         }
         
-        // Data Management
+        // Save Data
         function saveData() {
             const userData = {
                 expenses,
@@ -2339,10 +3194,10 @@
                 localStorage.setItem('cashio_guest', JSON.stringify(userData));
             }
             
-            // Show saving animation
             showSavingIndicator();
         }
         
+        // Load User Data
         function loadUserData() {
             let savedData = null;
             
@@ -2360,8 +3215,6 @@
                     savings = data.savings || 0;
                     wishlist = data.wishlist || [];
                     savingsHistory = data.savingsHistory || [];
-                    
-                    showNotification('Data berhasil dimuat!', 'success');
                 } catch (error) {
                     console.error('Error loading data:', error);
                 }
@@ -2369,20 +3222,15 @@
         }
         
         // Reset Functions
-        function showResetModal() {
-            ['resetExpenses', 'resetIncomes', 'resetSavings', 'resetWishlist', 'resetAll']
-                .forEach(id => document.getElementById(id).checked = false);
-        }
-        
         function confirmReset() {
-            const resetExpenses = document.getElementById('resetExpenses').checked;
-            const resetIncomes = document.getElementById('resetIncomes').checked;
-            const resetSavings = document.getElementById('resetSavings').checked;
-            const resetWishlist = document.getElementById('resetWishlist').checked;
-            const resetAll = document.getElementById('resetAll').checked;
+            const resetExpenses = document.getElementById('resetExpenses')?.checked || false;
+            const resetIncomes = document.getElementById('resetIncomes')?.checked || false;
+            const resetSavings = document.getElementById('resetSavings')?.checked || false;
+            const resetWishlist = document.getElementById('resetWishlist')?.checked || false;
+            const resetAll = document.getElementById('resetAll')?.checked || false;
             
             if (resetAll || resetExpenses || resetIncomes || resetSavings || resetWishlist) {
-                if (confirm('Apakah Anda yakin ingin mereset data yang dipilih? Tindakan ini tidak dapat dibatalkan.')) {
+                if (confirm('⚠️ Yakin ingin mereset data? Tindakan ini tidak dapat dibatalkan.')) {
                     if (resetAll || resetExpenses) expenses = [];
                     if (resetAll || resetIncomes) incomes = [];
                     if (resetAll || resetSavings) { savings = 0; savingsHistory = []; }
@@ -2394,7 +3242,7 @@
                     updateExpenseHistory();
                     
                     const resetModal = bootstrap.Modal.getInstance(document.getElementById('resetModal'));
-                    resetModal.hide();
+                    if (resetModal) resetModal.hide();
                     showNotification('Data berhasil direset!', 'success');
                 }
             } else {
@@ -2414,9 +3262,7 @@
                 
                 incomes = incomes.filter(income => {
                     const incomeDate = new Date(income.date);
-                    const isThisMonth = incomeDate.getMonth() === currentMonth && incomeDate.getFullYear() === currentYear;
-                    const isFromSavings = income.description.includes('Tabungan');
-                    return !isThisMonth || isFromSavings;
+                    return incomeDate.getMonth() !== currentMonth || incomeDate.getFullYear() !== currentYear;
                 });
                 
                 saveData();
@@ -2424,12 +3270,12 @@
                 updateExpenseHistory();
                 
                 const resetBudgetModal = bootstrap.Modal.getInstance(document.getElementById('resetBudgetModal'));
-                resetBudgetModal.hide();
+                if (resetBudgetModal) resetBudgetModal.hide();
                 showNotification('Data bulanan berhasil direset!', 'success');
             }
         }
         
-        // Financial Transactions
+        // Add Income
         function addIncome() {
             const amount = parseInt(incomeAmountInput.value);
             
@@ -2450,9 +3296,10 @@
             incomeAmountInput.value = '';
             saveData();
             updateSummaryDisplay();
-            showNotification('Pemasukan berhasil ditambahkan!', 'success');
+            showNotification(`💰 Pemasukan ${formatCurrency(amount)} berhasil ditambahkan!`, 'success');
         }
         
+        // Add Expense
         function addExpense() {
             const name = expenseNameInput.value.trim();
             const amount = parseInt(expenseAmountInput.value);
@@ -2488,19 +3335,38 @@
             saveData();
             updateSummaryDisplay();
             updateExpenseHistory();
-            showNotification('Pengeluaran berhasil dicatat!', 'success');
+            showNotification(`📝 Pengeluaran ${name} berhasil dicatat!`, 'success');
         }
         
-        function deleteExpense(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus pengeluaran ini?')) {
+        // Delete Expense
+        window.deleteExpense = function(id) {
+            if (confirm('Hapus pengeluaran ini?')) {
                 expenses = expenses.filter(expense => expense.id !== id);
                 saveData();
                 updateSummaryDisplay();
                 updateExpenseHistory();
-                showNotification('Pengeluaran berhasil dihapus!', 'info');
+                showNotification('Pengeluaran dihapus!', 'info');
             }
-        }
+        };
         
+        // Edit Expense
+        window.editExpense = function(id) {
+            const expense = expenses.find(e => e.id === id);
+            if (!expense) return;
+            
+            expenseNameInput.value = expense.name;
+            expenseAmountInput.value = expense.amount;
+            expenseCategoryInput.value = expense.category;
+            expenseDateInput.value = expense.date;
+            
+            expenses = expenses.filter(e => e.id !== id);
+            
+            showNotification('✏️ Edit pengeluaran, lalu klik "Tambah Pengeluaran" untuk menyimpan.', 'info');
+            navigateTo('home');
+            setTimeout(() => expenseNameInput.focus(), 100);
+        };
+        
+        // Add Savings
         function addSavings() {
             const amount = parseInt(savingsInput.value);
             
@@ -2538,13 +3404,14 @@
             };
             expenses.push(expense);
             
-            showNotification(`Tabungan berhasil ditambah ${formatCurrency(amount)}`, 'success');
             savingsInput.value = '';
             saveData();
             updateSummaryDisplay();
             updateExpenseHistory();
+            showNotification(`💰 Tabungan +${formatCurrency(amount)}`, 'success');
         }
         
+        // Withdraw Savings
         function withdrawSavings() {
             const amount = parseInt(withdrawInput.value);
             
@@ -2577,107 +3444,99 @@
             };
             incomes.push(income);
             
-            showNotification(`Tabungan berhasil ditarik ${formatCurrency(amount)}`, 'success');
             withdrawInput.value = '';
             saveData();
             updateSummaryDisplay();
+            showNotification(`💸 Tabungan -${formatCurrency(amount)}`, 'success');
         }
         
-        // Summary Display
+        // Update Summary Display
         function updateSummaryDisplay() {
             const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
             const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
             const availableBalance = totalIncome - totalExpense;
-            const totalTransactions = expenses.length + incomes.length;
-            const avgTransaction = totalTransactions > 0 ? (totalIncome + totalExpense) / totalTransactions : 0;
+            const totalTrans = expenses.length + incomes.length;
+            const avgTrans = totalTrans > 0 ? (totalIncome + totalExpense) / totalTrans : 0;
             
-            // Update displays
-            totalIncomeDisplay.textContent = formatCurrency(totalIncome);
-            totalExpenseDisplay.textContent = formatCurrency(totalExpense);
-            remainingBudgetDisplay.textContent = formatCurrency(availableBalance);
-            totalSavingsDisplay.textContent = formatCurrency(savings);
+            if (totalIncomeDisplay) totalIncomeDisplay.textContent = formatCurrency(totalIncome);
+            if (totalExpenseDisplay) totalExpenseDisplay.textContent = formatCurrency(totalExpense);
+            if (remainingBudgetDisplay) remainingBudgetDisplay.textContent = formatCurrency(availableBalance);
+            if (totalSavingsDisplay) totalSavingsDisplay.textContent = formatCurrency(savings);
             
-            // Update stats
-            document.getElementById('totalTransactions').textContent = totalTransactions;
-            document.getElementById('avgTransaction').textContent = formatCurrency(avgTransaction);
+            if (totalTransactions) totalTransactions.textContent = totalTrans;
+            if (avgTransaction) avgTransaction.textContent = formatCurrency(avgTrans);
             
             const expenseRatioValue = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
-            expenseRatio.textContent = `${Math.round(expenseRatioValue)}%`;
+            if (expenseRatio) expenseRatio.textContent = `${Math.round(expenseRatioValue)}%`;
+            if (expenseRatioBar) expenseRatioBar.style.width = `${Math.min(100, expenseRatioValue)}%`;
             
-            // Animate progress bar
-            const progressBar = expenseRatioBar;
-            const targetWidth = Math.min(100, expenseRatioValue);
-            progressBar.style.width = `${targetWidth}%`;
-            
-            // Update peringatan pengeluaran di atas 70%
+            // Update peringatan 70%
             updateExpenseWarning70(expenseRatioValue, totalIncome, totalExpense, availableBalance);
-            
-            // Update warning
             updateBudgetWarning(totalIncome, totalExpense, availableBalance);
         }
         
-        // FUNGSI PERINGATAN PENGELUARAN DI ATAS 70%
+        // Update Expense Warning 70%
         function updateExpenseWarning70(expenseRatioValue, totalIncome, totalExpense, availableBalance) {
-            if (expenseRatioValue > 70) {
-                let warningMessage = '';
-                
-                if (expenseRatioValue >= 90) {
-                    warningMessage = `Pengeluaran Anda mencapai ${Math.round(expenseRatioValue)}% dari pemasukan! Status: DARURAT. Segera evaluasi pengeluaran dan kurangi yang tidak penting.`;
-                } else if (expenseRatioValue >= 80) {
-                    warningMessage = `Pengeluaran Anda mencapai ${Math.round(expenseRatioValue)}% dari pemasukan! Status: BERBAHAYA. Pertimbangkan untuk mengurangi pengeluaran hiburan dan makan di luar.`;
+            if (expenseWarning70 && expenseWarningMessage) {
+                if (expenseRatioValue > 70) {
+                    let warningMessage = '';
+                    if (expenseRatioValue >= 90) {
+                        warningMessage = `🚨 DARURAT! Pengeluaran ${Math.round(expenseRatioValue)}% dari pemasukan! Segera evaluasi!`;
+                    } else if (expenseRatioValue >= 80) {
+                        warningMessage = `⚠️ BERBAHAYA! Pengeluaran ${Math.round(expenseRatioValue)}%! Kurangi pengeluaran!`;
+                    } else {
+                        warningMessage = `⚠️ HATI-HATI! Pengeluaran ${Math.round(expenseRatioValue)}%! Idealnya <70%`;
+                    }
+                    expenseWarningMessage.textContent = warningMessage;
+                    expenseWarning70.style.display = 'block';
                 } else {
-                    warningMessage = `Pengeluaran Anda mencapai ${Math.round(expenseRatioValue)}% dari pemasukan! Status: HATI-HATI. Idealnya pengeluaran di bawah 70% dari pemasukan.`;
+                    expenseWarning70.style.display = 'none';
                 }
-                
-                expenseWarningMessage.textContent = warningMessage;
-                expenseWarning70.style.display = 'block';
-            } else {
-                expenseWarning70.style.display = 'none';
             }
         }
         
+        // Update Budget Warning
         function updateBudgetWarning(totalIncome, totalExpense, availableBalance) {
+            if (!budgetWarning || !warningMessage || !savingTips) return;
+            
             const expenseRatioValue = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
             
             if (expenseRatioValue > 90) {
                 warningMessage.textContent = 'Pengeluaran melebihi 90% dari pemasukan!';
                 savingTips.innerHTML = '<strong>Darurat!</strong> Segera kurangi pengeluaran non-esensial.';
                 budgetWarning.style.display = 'block';
-                budgetWarning.classList.add('shake');
-                setTimeout(() => budgetWarning.classList.remove('shake'), 500);
             } else if (expenseRatioValue > 70) {
-                warningMessage.textContent = 'Pengeluaran mencapai ' + Math.round(expenseRatioValue) + '% dari pemasukan.';
-                savingTips.innerHTML = '<strong>Tips:</strong> Coba kurangi makan di luar dan hiburan yang tidak perlu.';
+                warningMessage.textContent = `Pengeluaran ${Math.round(expenseRatioValue)}% dari pemasukan.`;
+                savingTips.innerHTML = '<strong>Tips:</strong> Kurangi makan di luar dan hiburan.';
                 budgetWarning.style.display = 'block';
             } else if (availableBalance < 0) {
                 warningMessage.textContent = 'Anda mengalami defisit keuangan!';
-                savingTips.innerHTML = '<strong>Peringatan:</strong> Pengeluaran melebihi pemasukan.';
+                savingTips.innerHTML = '<strong>Peringatan:</strong> Pengeluaran > pemasukan.';
                 budgetWarning.style.display = 'block';
             } else {
                 budgetWarning.style.display = 'none';
             }
         }
         
-        // Cashflow Visualizer
+        // Update Cashflow Chart
         function updateCashflowChart() {
+            if (!chartTypeSelect || !dateRangeSelect || !dataTypeSelect) return;
+            
             const chartType = chartTypeSelect.value;
             const dateRange = dateRangeSelect.value;
             const dataType = dataTypeSelect.value;
             
-            // Filter data berdasarkan rentang tanggal
             let filteredExpenses = filterDataByDateRange(expenses, dateRange);
             let filteredIncomes = filterDataByDateRange(incomes, dateRange);
             
-            const ctx = document.getElementById('cashflowChart').getContext('2d');
+            const ctx = document.getElementById('cashflowChart')?.getContext('2d');
+            if (!ctx) return;
             
-            if (cashflowChart) {
-                cashflowChart.destroy();
-            }
+            if (cashflowChart) cashflowChart.destroy();
             
             let chartData, chartOptions;
             
             if (dataType === 'expense') {
-                // Pengeluaran per kategori
                 const categories = {};
                 filteredExpenses.forEach(expense => {
                     categories[expense.category] = (categories[expense.category] || 0) + expense.amount;
@@ -2701,21 +3560,13 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            position: 'right'
-                        },
-                        title: {
-                            display: true,
-                            text: 'Pengeluaran per Kategori'
-                        }
+                        legend: { position: 'right' },
+                        title: { display: true, text: 'Pengeluaran per Kategori' }
                     }
                 };
                 
-                // Update category details
                 updateCategoryDetails(categories);
-                
-            } else if (dataType === 'income') {
-                // Pemasukan
+            } else {
                 const totalIncome = filteredIncomes.reduce((sum, i) => sum + i.amount, 0);
                 const totalExpense = filteredExpenses.reduce((sum, e) => sum + e.amount, 0);
                 
@@ -2723,7 +3574,7 @@
                     labels: ['Pemasukan', 'Pengeluaran'],
                     datasets: [{
                         data: [totalIncome, totalExpense],
-                        backgroundColor: ['#9CCFFF', '#E74C3C'], /* Diupdate */
+                        backgroundColor: ['#9CCFFF', '#E74C3C'],
                         borderWidth: 1,
                         hoverOffset: 15
                     }]
@@ -2733,22 +3584,18 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            position: 'right'
-                        },
-                        title: {
-                            display: true,
-                            text: 'Pemasukan vs Pengeluaran'
-                        }
+                        legend: { position: 'right' },
+                        title: { display: true, text: 'Pemasukan vs Pengeluaran' }
                     }
                 };
                 
-                // Update category details
-                categoryDetails.innerHTML = `
-                    <p><strong>Total Pemasukan:</strong> ${formatCurrency(totalIncome)}</p>
-                    <p><strong>Total Pengeluaran:</strong> ${formatCurrency(totalExpense)}</p>
-                    <p><strong>Saldo:</strong> ${formatCurrency(totalIncome - totalExpense)}</p>
-                `;
+                if (categoryDetails) {
+                    categoryDetails.innerHTML = `
+                        <p><strong>Total Pemasukan:</strong> ${formatCurrency(totalIncome)}</p>
+                        <p><strong>Total Pengeluaran:</strong> ${formatCurrency(totalExpense)}</p>
+                        <p><strong>Saldo:</strong> ${formatCurrency(totalIncome - totalExpense)}</p>
+                    `;
+                }
             }
             
             cashflowChart = new Chart(ctx, {
@@ -2758,6 +3605,7 @@
             });
         }
         
+        // Filter Data by Date Range
         function filterDataByDateRange(data, range) {
             const now = new Date();
             const currentMonth = now.getMonth();
@@ -2769,21 +3617,18 @@
                 const itemYear = itemDate.getFullYear();
                 
                 switch (range) {
-                    case 'month':
-                        return itemMonth === currentMonth && itemYear === currentYear;
-                    case 'last3':
-                        const threeMonthsAgo = new Date(now);
-                        threeMonthsAgo.setMonth(now.getMonth() - 3);
-                        return itemDate >= threeMonthsAgo;
-                    case 'year':
-                        return itemYear === currentYear;
-                    default:
-                        return true;
+                    case 'month': return itemMonth === currentMonth && itemYear === currentYear;
+                    case 'last3': return itemDate >= new Date(now.setMonth(now.getMonth() - 3));
+                    case 'year': return itemYear === currentYear;
+                    default: return true;
                 }
             });
         }
         
+        // Update Category Details
         function updateCategoryDetails(categories) {
+            if (!categoryDetails) return;
+            
             let html = '';
             const total = Object.values(categories).reduce((sum, amount) => sum + amount, 0);
             
@@ -2794,7 +3639,7 @@
                 html += `
                     <div class="mb-2">
                         <div class="d-flex justify-content-between">
-                            <span><span class="category-color" style="background-color: ${color}; width: 10px; height: 10px; display: inline-block; border-radius: 50%; margin-right: 8px;"></span>${category}</span>
+                            <span><span style="background-color: ${color}; width: 10px; height: 10px; display: inline-block; border-radius: 50%; margin-right: 8px;"></span>${category}</span>
                             <span>${formatCurrency(amount)} (${percentage}%)</span>
                         </div>
                         <div class="progress" style="height: 5px;">
@@ -2807,6 +3652,7 @@
             categoryDetails.innerHTML = html;
         }
         
+        // Get Category Color
         function getCategoryColor(category) {
             const colors = {
                 'Makanan': '#FF6384',
@@ -2815,80 +3661,60 @@
                 'Belanja': '#4BC0C0',
                 'Pendidikan': '#9966FF',
                 'Kesehatan': '#FF9F40',
-                'Tabungan': '#9CCFFF', /* Diupdate */
+                'Tabungan': '#2ECC71',
                 'Hutang': '#E74C3C',
-                'Investasi': '#9CCFFF', /* Diupdate */
+                'Investasi': '#9CCFFF',
                 'Lainnya': '#95A5A6'
             };
-            
             return colors[category] || '#95A5A6';
         }
         
-        // History Pengeluaran
+        // Update Expense History
         function updateExpenseHistory() {
-            const searchTerm = historySearch.value.toLowerCase();
-            const categoryFilter = historyCategoryFilter.value;
-            const sortOption = historySort.value;
+            if (!expenseHistoryList) return;
             
-            // Filter data
+            const searchTerm = historySearch?.value.toLowerCase() || '';
+            const categoryFilter = historyCategoryFilter?.value || 'all';
+            const sortOption = historySort?.value || 'date-desc';
+            
             let filteredExpenses = expenses.filter(expense => {
-                // Filter berdasarkan pencarian
                 const matchesSearch = searchTerm === '' || 
                     expense.name.toLowerCase().includes(searchTerm) || 
                     expense.category.toLowerCase().includes(searchTerm);
-                
-                // Filter berdasarkan kategori
                 const matchesCategory = categoryFilter === 'all' || expense.category === categoryFilter;
-                
                 return matchesSearch && matchesCategory;
             });
             
-            // Urutkan data
             filteredExpenses.sort((a, b) => {
                 switch (sortOption) {
-                    case 'date-desc':
-                        return new Date(b.date) - new Date(a.date);
-                    case 'date-asc':
-                        return new Date(a.date) - new Date(b.date);
-                    case 'amount-desc':
-                        return b.amount - a.amount;
-                    case 'amount-asc':
-                        return a.amount - b.amount;
-                    case 'name-asc':
-                        return a.name.localeCompare(b.name);
-                    case 'name-desc':
-                        return b.name.localeCompare(a.name);
-                    default:
-                        return 0;
+                    case 'date-desc': return new Date(b.date) - new Date(a.date);
+                    case 'date-asc': return new Date(a.date) - new Date(b.date);
+                    case 'amount-desc': return b.amount - a.amount;
+                    case 'amount-asc': return a.amount - b.amount;
+                    case 'name-asc': return a.name.localeCompare(b.name);
+                    case 'name-desc': return b.name.localeCompare(a.name);
+                    default: return 0;
                 }
             });
             
-            // Pagination
             const totalPages = Math.ceil(filteredExpenses.length / itemsPerPage);
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const paginatedExpenses = filteredExpenses.slice(startIndex, endIndex);
             
-            // Tampilkan data
             if (paginatedExpenses.length === 0) {
                 expenseHistoryList.innerHTML = `
                     <div class="text-center py-5">
                         <i class="fas fa-receipt fa-3x text-muted mb-3"></i>
                         <h5>Belum ada history pengeluaran</h5>
-                        <p class="text-muted">Mulailah mencatat pengeluaran Anda di halaman beranda</p>
+                        <p class="text-muted">Mulai catat pengeluaran di halaman Beranda</p>
                     </div>
                 `;
             } else {
                 let html = '';
-                paginatedExpenses.forEach((expense, index) => {
+                paginatedExpenses.forEach(expense => {
                     const date = new Date(expense.date);
-                    const formattedDate = date.toLocaleDateString('id-ID', {
-                        weekday: 'short',
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric'
-                    });
-                    
+                    const formattedDate = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
                     const categoryColor = getCategoryColor(expense.category);
                     
                     html += `
@@ -2903,9 +3729,7 @@
                                         </div>
                                         <div>
                                             <h6 class="mb-1">${expense.name}</h6>
-                                            <small class="text-muted">
-                                                <i class="fas fa-calendar-alt"></i> ${formattedDate}
-                                            </small>
+                                            <small class="text-muted"><i class="fas fa-calendar-alt"></i> ${formattedDate}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -2929,95 +3753,57 @@
                 expenseHistoryList.innerHTML = html;
             }
             
-            // Update pagination
             updatePagination(totalPages);
         }
         
+        // Update Pagination
         function updatePagination(totalPages) {
+            if (!historyPagination) return;
+            
             if (totalPages <= 1) {
                 historyPagination.innerHTML = '';
                 return;
             }
             
-            let paginationHtml = `
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-            `;
+            let paginationHtml = `<nav><ul class="pagination justify-content-center">`;
             
-            // Tombol previous
-            paginationHtml += `
-                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">
-                        <i class="fas fa-chevron-left"></i>
-                    </a>
-                </li>
-            `;
+            paginationHtml += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${currentPage - 1})"><i class="fas fa-chevron-left"></i></a>
+            </li>`;
             
-            // Tombol halaman
             for (let i = 1; i <= totalPages; i++) {
                 if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
-                    paginationHtml += `
-                        <li class="page-item ${i === currentPage ? 'active' : ''}">
-                            <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
-                        </li>
-                    `;
+                    paginationHtml += `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                        <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                    </li>`;
                 } else if (i === currentPage - 3 || i === currentPage + 3) {
                     paginationHtml += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
                 }
             }
             
-            // Tombol next
-            paginationHtml += `
-                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </li>
-            `;
+            paginationHtml += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage(${currentPage + 1})"><i class="fas fa-chevron-right"></i></a>
+            </li>`;
             
-            paginationHtml += `
-                    </ul>
-                </nav>
-            `;
-            
+            paginationHtml += `</ul></nav>`;
             historyPagination.innerHTML = paginationHtml;
         }
         
-        function changePage(page) {
+        // Change Page
+        window.changePage = function(page) {
             currentPage = page;
             updateExpenseHistory();
-        }
+        };
         
-        function editExpense(id) {
-            const expense = expenses.find(e => e.id === id);
-            if (!expense) return;
-            
-            // Isi form edit
-            expenseNameInput.value = expense.name;
-            expenseAmountInput.value = expense.amount;
-            expenseCategoryInput.value = expense.category;
-            expenseDateInput.value = expense.date;
-            
-            // Hapus expense lama
-            expenses = expenses.filter(e => e.id !== id);
-            
-            // Tampilkan notifikasi
-            showNotification('Pengeluaran siap diedit. Klik "Tambah Pengeluaran" untuk menyimpan perubahan.', 'info');
-            
-            // Scroll ke form
-            navigateTo('home');
-            setTimeout(() => {
-                expenseNameInput.focus();
-            }, 100);
-        }
-        
-        // Wishlist dengan Perhitungan Otomatis
+        // Add Wishlist
         function addWishlist() {
+            if (!wishlistName || !wishlistPrice || !wishlistDeadline) return;
+            
             const name = wishlistName.value.trim();
             const price = parseInt(wishlistPrice.value);
             const deadline = wishlistDeadline.value;
-            const priority = wishlistPriority.value;
-            const category = wishlistCategory.value;
+            const priority = wishlistPriority?.value || 'medium';
+            const category = wishlistCategory?.value || 'Lainnya';
             
             if (!name) {
                 showNotification('Masukkan nama barang!', 'error');
@@ -3048,58 +3834,46 @@
             
             wishlistName.value = '';
             wishlistPrice.value = '';
-            wishlistDeadline.valueAsDate = new Date(new Date().setMonth(new Date().getMonth() + 6));
-            wishlistPriority.value = 'medium';
-            wishlistCategory.value = 'Elektronik';
+            const defaultDate = new Date();
+            defaultDate.setMonth(defaultDate.getMonth() + 6);
+            wishlistDeadline.valueAsDate = defaultDate;
+            if (wishlistPriority) wishlistPriority.value = 'medium';
+            if (wishlistCategory) wishlistCategory.value = 'Elektronik';
             
             saveData();
             updateWishlistDisplay();
-            showNotification('Wishlist berhasil ditambahkan!', 'success');
+            showNotification('🎯 Wishlist berhasil ditambahkan!', 'success');
         }
         
-        function deleteWishlist(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus wishlist ini?')) {
+        // Delete Wishlist
+        window.deleteWishlist = function(id) {
+            if (confirm('Hapus wishlist ini?')) {
                 wishlist = wishlist.filter(item => item.id !== id);
                 saveData();
                 updateWishlistDisplay();
-                showNotification('Wishlist berhasil dihapus!', 'info');
+                showNotification('Wishlist dihapus!', 'info');
             }
-        }
+        };
         
+        // Update Wishlist Display
         function updateWishlistDisplay() {
+            if (!wishlistItems) return;
+            
             if (wishlist.length === 0) {
-                wishlistItems.innerHTML = '<p class="text-center text-muted">Belum ada wishlist. Tambahkan wishlist pertama Anda!</p>';
+                wishlistItems.innerHTML = '<p class="text-center text-muted">✨ Belum ada wishlist. Tambahkan wishlist pertama Anda!</p>';
                 return;
             }
             
             let html = '';
-            wishlist.forEach((item, index) => {
+            wishlist.forEach(item => {
                 const daysLeft = Math.ceil((new Date(item.deadline) - new Date()) / (1000 * 60 * 60 * 24));
-                const priorityColors = {
-                    'high': 'danger',
-                    'medium': 'warning',
-                    'low': 'success'
-                };
-                
-                const priorityLabels = {
-                    'high': 'Tinggi',
-                    'medium': 'Sedang',
-                    'low': 'Rendah'
-                };
-                
-                const categoryColors = {
-                    'Elektronik': '#FF6384',
-                    'Fashion': '#36A2EB',
-                    'Hiburan': '#FFCE56',
-                    'Kendaraan': '#4BC0C0',
-                    'Perjalanan': '#9966FF',
-                    'Lainnya': '#95A5A6'
-                };
-                
+                const priorityColors = { 'high': 'danger', 'medium': 'warning', 'low': 'success' };
+                const priorityLabels = { 'high': 'Tinggi', 'medium': 'Sedang', 'low': 'Rendah' };
                 const progress = Math.min(100, Math.round((savings / item.price) * 100));
+                const isAffordable = item.price <= savings;
                 
                 html += `
-                    <div class="wishlist-item ${item.price <= savings ? 'affordable-now' : ''} priority-${item.priority}">
+                    <div class="wishlist-item ${isAffordable ? 'affordable-now' : ''} priority-${item.priority}">
                         <div class="d-flex justify-content-between align-items-start">
                             <div class="flex-grow-1">
                                 <div class="d-flex justify-content-between align-items-start mb-2">
@@ -3107,8 +3881,8 @@
                                         <h6 class="mb-1">${item.name}</h6>
                                         <div class="d-flex align-items-center mb-2">
                                             <span class="badge bg-${priorityColors[item.priority]} me-2">${priorityLabels[item.priority]}</span>
-                                            <span class="badge" style="background-color: ${categoryColors[item.category]}">${item.category}</span>
-                                            ${item.price <= savings ? '<span class="badge bg-success ms-2">Bisa dibeli sekarang!</span>' : ''}
+                                            <span class="badge" style="background-color: ${getCategoryColor(item.category)}">${item.category}</span>
+                                            ${isAffordable ? '<span class="badge bg-success ms-2">✅ Bisa dibeli sekarang!</span>' : ''}
                                         </div>
                                     </div>
                                     <div>
@@ -3120,7 +3894,7 @@
                                 
                                 <p class="mb-1"><strong>Harga:</strong> ${formatCurrency(item.price)}</p>
                                 <p class="mb-1"><strong>Target:</strong> ${formatDate(item.deadline)}</p>
-                                <small class="text-muted">${daysLeft > 0 ? `${daysLeft} hari lagi` : 'Sudah lewat'}</small>
+                                <small class="text-muted">${daysLeft > 0 ? `${daysLeft} hari lagi` : '⏰ Sudah lewat'}</small>
                                 
                                 <div class="wishlist-progress-container">
                                     <div class="d-flex justify-content-between mb-1">
@@ -3132,7 +3906,7 @@
                                              style="width: ${progress}%"></div>
                                     </div>
                                     ${progress < 100 ? 
-                                        `<small class="daily-saving">Perlu tabung ${formatCurrency(Math.ceil((item.price - savings) / Math.max(1, daysLeft)))} per hari</small>` : 
+                                        `<small class="daily-saving">💰 Perlu tabung ${formatCurrency(Math.ceil((item.price - savings) / Math.max(1, daysLeft)))} per hari</small>` : 
                                         `<small class="text-success"><i class="fas fa-check-circle"></i> Target tercapai!</small>`
                                     }
                                 </div>
@@ -3145,9 +3919,9 @@
             wishlistItems.innerHTML = html;
         }
         
-        // Perhitungan Otomatis Semua Wishlist
+        // Calculate All Wishlists
         function calculateAllWishlists() {
-            const monthlySaving = parseInt(allWishlistMonthlySaving.value);
+            const monthlySaving = parseInt(allWishlistMonthlySaving?.value || 0);
             
             if (isNaN(monthlySaving) || monthlySaving <= 0) {
                 showNotification('Masukkan jumlah tabungan per bulan yang valid!', 'error');
@@ -3155,13 +3929,14 @@
             }
             
             if (wishlist.length === 0) {
-                allWishlistCalculationResults.innerHTML = '<p class="text-center text-muted">Belum ada wishlist untuk dihitung.</p>';
-                wishlistInsightCard.style.display = 'none';
-                totalWishlistProgressCard.style.display = 'none';
+                if (allWishlistCalculationResults) {
+                    allWishlistCalculationResults.innerHTML = '<p class="text-center text-muted">📭 Belum ada wishlist untuk dihitung.</p>';
+                }
+                if (wishlistInsightCard) wishlistInsightCard.style.display = 'none';
+                if (totalWishlistProgressCard) totalWishlistProgressCard.style.display = 'none';
                 return;
             }
             
-            // Urutkan berdasarkan prioritas: tinggi > sedang > rendah
             const priorityOrder = { 'high': 3, 'medium': 2, 'low': 1 };
             const sortedWishlist = [...wishlist].sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
             
@@ -3169,7 +3944,7 @@
             let totalPrice = 0;
             let affordableNow = 0;
             
-            sortedWishlist.forEach((item, index) => {
+            sortedWishlist.forEach(item => {
                 const monthsNeeded = Math.max(1, Math.ceil((item.price - savings) / monthlySaving));
                 const targetDate = new Date();
                 targetDate.setMonth(targetDate.getMonth() + monthsNeeded);
@@ -3222,37 +3997,36 @@
                 `;
             });
             
-            allWishlistCalculationResults.innerHTML = html;
+            if (allWishlistCalculationResults) allWishlistCalculationResults.innerHTML = html;
             
-            // Update total progress card
+            // Update total progress
             const totalProgress = Math.min(100, Math.round((savings / totalPrice) * 100));
-            totalWishlistProgressBar.style.width = `${totalProgress}%`;
-            totalWishlistProgressText.textContent = `${totalProgress}%`;
-            currentSavingsDisplay.textContent = formatCurrency(savings);
-            totalWishlistPriceDisplay.textContent = formatCurrency(totalPrice);
-            
-            totalWishlistProgressCard.style.display = 'block';
+            if (totalWishlistProgressBar) totalWishlistProgressBar.style.width = `${totalProgress}%`;
+            if (totalWishlistProgressText) totalWishlistProgressText.textContent = `${totalProgress}%`;
+            if (currentSavingsDisplay) currentSavingsDisplay.textContent = formatCurrency(savings);
+            if (totalWishlistPriceDisplay) totalWishlistPriceDisplay.textContent = formatCurrency(totalPrice);
+            if (totalWishlistProgressCard) totalWishlistProgressCard.style.display = 'block';
             
             // Generate insights
             generateWishlistInsights(sortedWishlist, monthlySaving, totalPrice, affordableNow);
-            
-            wishlistInsightCard.style.display = 'block';
+            if (wishlistInsightCard) wishlistInsightCard.style.display = 'block';
         }
         
+        // Generate Wishlist Insights
         function generateWishlistInsights(wishlistItems, monthlySaving, totalPrice, affordableNow) {
+            if (!wishlistInsights) return;
+            
             let insightsHTML = '';
             
-            // Insight 1: Wishlist yang bisa dibeli sekarang
             if (affordableNow > 0) {
                 insightsHTML += `
                     <div class="alert alert-success">
                         <i class="fas fa-check-circle"></i>
-                        <strong>Selamat!</strong> Anda bisa membeli ${affordableNow} dari ${wishlistItems.length} wishlist sekarang dengan tabungan yang ada!
+                        <strong>Selamat!</strong> Anda bisa membeli ${affordableNow} dari ${wishlistItems.length} wishlist sekarang!
                     </div>
                 `;
             }
             
-            // Insight 2: Prioritas tertinggi
             const highPriorityItems = wishlistItems.filter(item => item.priority === 'high');
             if (highPriorityItems.length > 0) {
                 const cheapestHigh = highPriorityItems.reduce((min, item) => 
@@ -3261,13 +4035,11 @@
                 insightsHTML += `
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <strong>Fokus Prioritas Tinggi:</strong> Anda punya ${highPriorityItems.length} wishlist prioritas tinggi. 
-                        Mulailah dengan <strong>${cheapestHigh.name}</strong> (${formatCurrency(cheapestHigh.price)}) - bisa dibeli dalam ${Math.ceil((cheapestHigh.price - savings) / monthlySaving)} bulan.
+                        <strong>Fokus Prioritas Tinggi:</strong> Mulailah dengan <strong>${cheapestHigh.name}</strong> (${formatCurrency(cheapestHigh.price)})
                     </div>
                 `;
             }
             
-            // Insight 3: Rekomendasi tabungan
             const totalMonthsNeeded = wishlistItems.reduce((total, item) => {
                 return total + Math.ceil((item.price - savings) / monthlySaving);
             }, 0);
@@ -3276,27 +4048,17 @@
                 insightsHTML += `
                     <div class="alert alert-info">
                         <i class="fas fa-lightbulb"></i>
-                        <strong>Rekomendasi:</strong> Dengan tabungan ${formatCurrency(monthlySaving)}/bulan, semua wishlist akan tercapai dalam ${totalMonthsNeeded} bulan (${Math.round(totalMonthsNeeded/12 * 10)/10} tahun). 
-                        Pertimbangkan untuk meningkatkan tabungan bulanan atau memprioritaskan wishlist tertentu.
-                    </div>
-                `;
-            } else {
-                insightsHTML += `
-                    <div class="alert alert-success">
-                        <i class="fas fa-thumbs-up"></i>
-                        <strong>Bagus!</strong> Dengan tabungan ${formatCurrency(monthlySaving)}/bulan, semua wishlist akan tercapai dalam ${totalMonthsNeeded} bulan.
-                        Tetap konsisten menabung!
+                        <strong>Rekomendasi:</strong> Tingkatkan tabungan bulanan atau prioritaskan wishlist tertentu.
                     </div>
                 `;
             }
             
-            // Insight 4: Breakdown per kategori
             const categoryBreakdown = {};
             wishlistItems.forEach(item => {
                 categoryBreakdown[item.category] = (categoryBreakdown[item.category] || 0) + item.price;
             });
             
-            let breakdownHTML = '<strong>Breakdown per Kategori:</strong><ul>';
+            let breakdownHTML = '<strong>📊 Breakdown per Kategori:</strong><ul>';
             Object.entries(categoryBreakdown).forEach(([category, total]) => {
                 const percentage = Math.round((total / totalPrice) * 100);
                 breakdownHTML += `<li>${category}: ${formatCurrency(total)} (${percentage}%)</li>`;
@@ -3305,61 +4067,41 @@
             
             insightsHTML += `<div class="insight-card">${breakdownHTML}</div>`;
             
-            // Insight 5: Tips tambahan
-            const totalNeeded = totalPrice - savings;
-            const dailySavingTotal = Math.ceil(totalNeeded / (30 * 12)); // Rata-rata per hari untuk 1 tahun
-            
-            if (dailySavingTotal > 0) {
-                insightsHTML += `
-                    <div class="alert alert-secondary mt-3">
-                        <i class="fas fa-calculator"></i>
-                        <strong>Kalkulasi Harian:</strong> Untuk mencapai semua wishlist dalam 1 tahun, Anda perlu menabung rata-rata 
-                        <strong>${formatCurrency(dailySavingTotal)} per hari</strong>.
-                    </div>
-                `;
-            }
-            
             wishlistInsights.innerHTML = insightsHTML;
         }
         
-        // Simulation Functions
+        // Calculate Recovery
         function calculateRecovery() {
-            const loss = parseInt(savingsLossInput.value);
-            const monthlyCapacity = parseInt(monthlySavingCapacityInput.value);
-            const recoveryTarget = parseInt(savingsRecoveryTargetInput.value);
+            const loss = parseInt(savingsLossInput?.value || 0);
+            const monthlyCapacity = parseInt(monthlySavingCapacityInput?.value || 0);
+            const recoveryTarget = parseInt(savingsRecoveryTargetInput?.value || 100);
             
             if (isNaN(loss) || loss <= 0) {
-                showNotification('Masukkan jumlah pengurangan tabungan yang valid!', 'error');
+                showNotification('Masukkan jumlah pengurangan tabungan!', 'error');
                 return;
             }
             
             if (isNaN(monthlyCapacity) || monthlyCapacity <= 0) {
-                showNotification('Masukkan kapasitas menabung per bulan yang valid!', 'error');
-                return;
-            }
-            
-            if (isNaN(recoveryTarget) || recoveryTarget <= 0 || recoveryTarget > 100) {
-                showNotification('Masukkan target pemulihan yang valid (1-100%)!', 'error');
+                showNotification('Masukkan kapasitas menabung per bulan!', 'error');
                 return;
             }
             
             const targetAmount = loss * (recoveryTarget / 100);
             const monthsNeeded = Math.ceil(targetAmount / monthlyCapacity);
             
-            // Update display
-            recoveryTime.textContent = `${monthsNeeded} bulan`;
-            monthlySavingAmount.textContent = formatCurrency(monthlyCapacity);
-            initialSavings.textContent = formatCurrency(savings);
-            targetSavings.textContent = formatCurrency(targetAmount);
+            if (recoveryTime) recoveryTime.textContent = `${monthsNeeded} bulan`;
+            if (monthlySavingAmount) monthlySavingAmount.textContent = formatCurrency(monthlyCapacity);
+            if (initialSavings) initialSavings.textContent = formatCurrency(savings);
+            if (targetSavings) targetSavings.textContent = formatCurrency(targetAmount);
             
-            // Generate timeline
             generateRecoveryTimeline(loss, targetAmount, monthlyCapacity, monthsNeeded);
-            
-            // Show results
-            recoveryResultCard.style.display = 'block';
+            if (recoveryResultCard) recoveryResultCard.style.display = 'block';
         }
         
+        // Generate Recovery Timeline
         function generateRecoveryTimeline(loss, targetAmount, monthlyCapacity, monthsNeeded) {
+            if (!recoveryTimelineContent) return;
+            
             let timelineHTML = '';
             let currentAmount = 0;
             const today = new Date();
@@ -3379,13 +4121,9 @@
                     <div class="${timelineClass}">
                         <h6>Bulan ${month} - ${formatDate(monthDate.toISOString())}</h6>
                         <p class="mb-1">Tabungan Dipulihkan: <strong>${formatCurrency(currentAmount)}</strong></p>
-                        <small class="text-muted">+${formatCurrency(monthlyCapacity)} dari tabungan bulanan</small>
                         <div class="progress mt-2">
                             <div class="progress-bar ${currentAmount >= targetAmount ? 'bg-success' : 'bg-warning'}" 
-                                 role="progressbar" 
-                                 style="width: ${Math.min(100, percentComplete)}%">
-                                ${Math.min(100, Math.round(percentComplete))}%
-                            </div>
+                                 style="width: ${percentComplete}%">${percentComplete}%</div>
                         </div>
                     </div>
                 `;
@@ -3395,10 +4133,9 @@
             
             if (monthsNeeded > 12) {
                 timelineHTML += `
-                    <div class="timeline-item">
+                    <div class="timeline-item completed">
                         <h6>Bulan ${monthsNeeded} - Target Tercapai</h6>
                         <p class="mb-1">Tabungan Dipulihkan: <strong>${formatCurrency(targetAmount)}</strong></p>
-                        <small class="text-muted">Total waktu: ${monthsNeeded} bulan</small>
                     </div>
                 `;
             }
@@ -3406,46 +4143,46 @@
             recoveryTimelineContent.innerHTML = timelineHTML;
         }
         
+        // Calculate Purchase
         function calculatePurchase() {
-            const itemName = purchaseItemName.value.trim();
-            const itemPrice = parseFloat(purchaseItemPrice.value);
-            const monthlySaving = parseFloat(purchaseMonthlySaving.value);
-            const priority = purchasePriority.value;
-            const purchaseMethod = document.querySelector('.purchase-option.active').getAttribute('data-type');
+            const itemName = purchaseItemName?.value.trim() || 'Barang';
+            const itemPrice = parseFloat(purchaseItemPrice?.value || 0);
+            const monthlySaving = parseFloat(purchaseMonthlySaving?.value || 0);
+            const purchaseMethod = document.querySelector('.purchase-option.active')?.getAttribute('data-type') || 'cash';
             
-            if (!itemName || isNaN(itemPrice) || itemPrice <= 0) {
-                showNotification('Masukkan nama dan harga barang yang valid!', 'error');
+            if (isNaN(itemPrice) || itemPrice <= 0) {
+                showNotification('Masukkan harga barang yang valid!', 'error');
                 return;
             }
             
             if (isNaN(monthlySaving) || monthlySaving <= 0) {
-                showNotification('Masukkan jumlah tabungan per bulan yang valid!', 'error');
+                showNotification('Masukkan tabungan per bulan!', 'error');
                 return;
             }
             
-            // Hitung waktu tunggu untuk beli cash
             const waitMonths = Math.ceil(itemPrice / monthlySaving);
             
-            // Hitung untuk metode cash
             const cashResult = {
                 method: 'Cash',
                 totalPayment: itemPrice,
-                interest: 0,
-                months: waitMonths,
-                monthlyPayment: 0
+                months: waitMonths
             };
             
-            // Hitung untuk metode kredit
-            let creditResult = null;
-            if (purchaseMethod === 'credit') {
-                const term = parseInt(creditTermInput.value) || 12;
-                const interest = parseFloat(interestRateInput.value) || 12;
-                const downPay = parseFloat(downPaymentInput.value) || 0;
+            if (purchaseItemTitle) purchaseItemTitle.textContent = itemName;
+            if (purchaseTotalPrice) purchaseTotalPrice.textContent = formatCurrency(itemPrice);
+            
+            if (purchaseMethod === 'cash') {
+                if (purchaseWaitTime) purchaseWaitTime.textContent = `${waitMonths} bulan`;
+                if (purchaseTotalPayment) purchaseTotalPayment.textContent = formatCurrency(cashResult.totalPayment);
+                if (purchaseMonthlyPayment) purchaseMonthlyPayment.textContent = formatCurrency(monthlySaving);
+            } else {
+                const term = parseInt(creditTermInput?.value || 12);
+                const interest = parseFloat(interestRateInput?.value || 12);
+                const downPay = parseFloat(downPaymentInput?.value || 0);
                 
                 const principal = itemPrice - downPay;
                 const monthlyInterestRate = (interest / 100) / 12;
                 
-                // Hitung cicilan bulanan
                 let monthlyPayment = 0;
                 if (monthlyInterestRate > 0) {
                     monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, term) / 
@@ -3455,94 +4192,52 @@
                 }
                 
                 const totalPayment = downPay + (monthlyPayment * term);
-                const totalInterest = totalPayment - itemPrice;
                 
-                creditResult = {
-                    method: 'Kredit',
-                    totalPayment: Math.round(totalPayment),
-                    interest: Math.round(totalInterest),
-                    months: term,
-                    monthlyPayment: Math.round(monthlyPayment)
-                };
+                if (purchaseWaitTime) purchaseWaitTime.textContent = 'Sekarang (kredit)';
+                if (purchaseTotalPayment) purchaseTotalPayment.textContent = formatCurrency(Math.round(totalPayment));
+                if (purchaseMonthlyPayment) purchaseMonthlyPayment.textContent = formatCurrency(Math.round(monthlyPayment));
             }
             
-            // Tampilkan hasil
-            purchaseItemTitle.textContent = itemName;
-            purchaseTotalPrice.textContent = formatCurrency(itemPrice);
-            
-            if (purchaseMethod === 'cash') {
-                purchaseWaitTime.textContent = `${waitMonths} bulan`;
-                purchaseTotalPayment.textContent = formatCurrency(cashResult.totalPayment);
-                purchaseMonthlyPayment.textContent = formatCurrency(monthlySaving);
-            } else {
-                purchaseWaitTime.textContent = 'Sekarang (dengan kredit)';
-                purchaseTotalPayment.textContent = formatCurrency(creditResult.totalPayment);
-                purchaseMonthlyPayment.textContent = formatCurrency(creditResult.monthlyPayment);
-            }
-            
-            // Generate rekomendasi
-            generatePurchaseRecommendation(itemPrice, monthlySaving, purchaseMethod, cashResult, creditResult);
-            
-            // Tampilkan hasil
-            purchaseResultCard.style.display = 'block';
+            generatePurchaseRecommendation(itemPrice, monthlySaving, purchaseMethod, cashResult);
+            if (purchaseResultCard) purchaseResultCard.style.display = 'block';
         }
         
-        function generatePurchaseRecommendation(itemPrice, monthlySaving, purchaseMethod, cashResult, creditResult) {
-            const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
-            const avgMonthlyIncome = totalIncome / Math.max(1, incomes.length);
+        // Generate Purchase Recommendation
+        function generatePurchaseRecommendation(itemPrice, monthlySaving, purchaseMethod, cashResult) {
+            if (!purchaseSafetyRecommendation) return;
             
             let recommendationHTML = '';
             
-            // Cek kondisi tabungan
             if (savings > 0) {
                 const savingsPercent = (savings / itemPrice) * 100;
                 if (savingsPercent >= 100) {
                     recommendationHTML += `
                         <div class="alert alert-success">
                             <i class="fas fa-check-circle"></i>
-                            <strong>SELAMAT!</strong> Anda sudah memiliki cukup tabungan untuk membeli ini sekarang!
+                            <strong>SELAMAT!</strong> Tabungan Anda cukup untuk beli ini sekarang!
                         </div>
                     `;
                 } else {
                     recommendationHTML += `
                         <div class="alert alert-info">
                             <i class="fas fa-info-circle"></i>
-                            <strong>Info Tabungan:</strong> Anda sudah memiliki ${formatCurrency(savings)} tabungan (${Math.round(savingsPercent)}% dari harga barang)
+                            <strong>Info:</strong> Tabungan ${formatCurrency(savings)} (${Math.round(savingsPercent)}% dari harga)
                         </div>
                     `;
                 }
             }
             
-            // Rekomendasi metode pembelian
-            recommendationHTML += `<div class="mt-3"><h6>Rekomendasi Metode Pembelian:</h6>`;
+            recommendationHTML += `<div class="mt-3"><h6>Rekomendasi:</h6>`;
             
             if (purchaseMethod === 'cash') {
                 if (cashResult.months <= 3) {
-                    recommendationHTML += `<p><i class="fas fa-thumbs-up text-success"></i> <strong>Cash direkomendasikan</strong> - Hanya perlu menunggu ${cashResult.months} bulan</p>`;
+                    recommendationHTML += `<p><i class="fas fa-thumbs-up text-success"></i> <strong>Cash direkomendasikan</strong> - hanya ${cashResult.months} bulan</p>`;
                 } else if (cashResult.months <= 6) {
-                    recommendationHTML += `<p><i class="fas fa-info-circle text-info"></i> <strong>Cash masih baik</strong> - Butuh ${cashResult.months} bulan menabung</p>`;
+                    recommendationHTML += `<p><i class="fas fa-info-circle text-info"></i> <strong>Cash masih baik</strong> - butuh ${cashResult.months} bulan</p>`;
                 } else {
-                    recommendationHTML += `<p><i class="fas fa-question-circle text-warning"></i> <strong>Pertimbangkan kredit</strong> - Menabung terlalu lama (${cashResult.months} bulan)</p>`;
-                }
-            } else {
-                if (creditResult.interest > itemPrice * 0.3) {
-                    recommendationHTML += `<p><i class="fas fa-times-circle text-danger"></i> <strong>Kredit tidak direkomendasikan</strong> - Bunga terlalu tinggi (${formatCurrency(creditResult.interest)})</p>`;
-                } else if (creditResult.monthlyPayment > avgMonthlyIncome * 0.3) {
-                    recommendationHTML += `<p><i class="fas fa-exclamation-triangle text-warning"></i> <strong>Hati-hati dengan kredit</strong> - Cicilan (${formatCurrency(creditResult.monthlyPayment)}) melebihi 30% pendapatan rata-rata</p>`;
-                } else {
-                    recommendationHTML += `<p><i class="fas fa-check-circle text-success"></i> <strong>Kredit dapat dipertimbangkan</strong> - Cicilan terjangkau dan bunga wajar</p>`;
+                    recommendationHTML += `<p><i class="fas fa-question-circle text-warning"></i> <strong>Pertimbangkan kredit</strong> - menabung terlalu lama (${cashResult.months} bulan)</p>`;
                 }
             }
-            
-            // Tips tambahan
-            const priorityTips = {
-                'rendah': 'Karena prioritas rendah, Anda bisa menabung perlahan tanpa tekanan.',
-                'sedang': 'Pertahankan konsistensi menabung untuk mencapai target.',
-                'tinggi': 'Pertimbangkan untuk menambah sumber pendapatan atau mengurangi pengeluaran lain.'
-            };
-            
-            recommendationHTML += `<div class="mt-2"><small class="text-muted"><i class="fas fa-lightbulb"></i> Tips: ${priorityTips[purchasePriority.value]}</small></div>`;
-            recommendationHTML += `</div>`;
             
             purchaseSafetyRecommendation.innerHTML = recommendationHTML;
         }
@@ -3566,13 +4261,13 @@
         }
         
         function showNotification(message, type = 'info') {
-            // Create notification element
             const notification = document.createElement('div');
             notification.className = `alert alert-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'info'} alert-dismissible fade show position-fixed`;
             notification.style.top = '20px';
             notification.style.right = '20px';
-            notification.style.zIndex = '1050';
+            notification.style.zIndex = '9999';
             notification.style.minWidth = '300px';
+            notification.style.maxWidth = '400px';
             notification.innerHTML = `
                 <div class="d-flex align-items-center">
                     <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>
@@ -3582,66 +4277,28 @@
             `;
             
             document.body.appendChild(notification);
-            
-            // Auto remove after 3 seconds
-            setTimeout(() => {
-                if (notification.parentNode) {
-                    notification.remove();
-                }
-            }, 3000);
+            setTimeout(() => notification?.remove(), 3000);
         }
         
-        // Show saving indicator
         function showSavingIndicator() {
             const indicator = document.createElement('div');
             indicator.innerHTML = `
                 <div class="d-flex align-items-center">
                     <div class="spinner-border spinner-border-sm text-light me-2" role="status"></div>
-                    <span>Menyimpan data...</span>
+                    <span>Menyimpan...</span>
                 </div>
             `;
             indicator.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                right: 20px;
+                position: fixed; bottom: 100px; right: 20px;
                 background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-                color: white;
-                padding: 10px 15px;
-                border-radius: 10px;
-                z-index: 1000;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                color: white; padding: 10px 15px; border-radius: 10px;
+                z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             `;
-            
             document.body.appendChild(indicator);
-            
-            // Auto remove after 2 seconds
-            setTimeout(() => {
-                indicator.remove();
-            }, 2000);
+            setTimeout(() => indicator.remove(), 1500);
         }
         
-        // PWA Installation - TELAH DIHAPUS
-        
-        // Service Worker Registration
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').then((registration) => {
-                    console.log('ServiceWorker registered dengan scope: ', registration.scope);
-                }).catch((error) => {
-                    console.log('ServiceWorker registration gagal: ', error);
-                });
-            });
-        }
-        
-        // Welcome message on first load
-        if (!localStorage.getItem('cashio_welcome_shown')) {
-            setTimeout(() => {
-                showNotification('Selamat datang di Cashio! Mulailah mengelola keuangan Anda dengan lebih baik.', 'info');
-                localStorage.setItem('cashio_welcome_shown', 'true');
-            }, 1000);
-        }
-        
-        console.log('🎉 Cashio - Aplikasi Manajemen Keuangan berjalan dengan baik!');
+        console.log('🎉 Cashio v2.0.0 siap digunakan!');
     </script>
 </body>
 </html>
