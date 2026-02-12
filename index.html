@@ -4237,6 +4237,80 @@
                 } else {
                     recommendationHTML += `<p><i class="fas fa-question-circle text-warning"></i> <strong>Pertimbangkan kredit</strong> - menabung terlalu lama (${cashResult.months} bulan)</p>`;
                 }
+            } else {
+                // Rekomendasi untuk metode kredit
+                const term = parseInt(creditTermInput?.value || 12);
+                const interest = parseFloat(interestRateInput?.value || 12);
+                const downPay = parseFloat(downPaymentInput?.value || 0);
+                
+                const principal = itemPrice - downPay;
+                const monthlyInterestRate = (interest / 100) / 12;
+                
+                let monthlyPayment = 0;
+                if (monthlyInterestRate > 0) {
+                    monthlyPayment = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, term) / 
+                                    (Math.pow(1 + monthlyInterestRate, term) - 1);
+                } else {
+                    monthlyPayment = principal / term;
+                }
+                
+                const totalPayment = downPay + (monthlyPayment * term);
+                const interestCost = totalPayment - itemPrice;
+                const interestPercentage = ((interestCost / itemPrice) * 100).toFixed(1);
+                
+                // Cek kemampuan bayar berdasarkan tabungan bulanan
+                if (purchaseMonthlySaving?.value) {
+                    const monthlySavingValue = parseFloat(purchaseMonthlySaving.value);
+                    if (monthlyPayment <= monthlySavingValue * 0.3) {
+                        recommendationHTML += `<p><i class="fas fa-thumbs-up text-success"></i> <strong>Kredit sangat terjangkau</strong> - cicilan hanya ${Math.round((monthlyPayment/monthlySavingValue)*100)}% dari kapasitas tabungan bulanan</p>`;
+                    } else if (monthlyPayment <= monthlySavingValue * 0.5) {
+                        recommendationHTML += `<p><i class="fas fa-check-circle text-info"></i> <strong>Kredit masih masuk akal</strong> - cicilan ${Math.round((monthlyPayment/monthlySavingValue)*100)}% dari kapasitas tabungan</p>`;
+                    } else {
+                        recommendationHTML += `<p><i class="fas fa-exclamation-triangle text-warning"></i> <strong>Kredit cukup berat</strong> - cicilan ${Math.round((monthlyPayment/monthlySavingValue)*100)}% dari kapasitas tabungan, pertimbangkan DP lebih besar</p>`;
+                    }
+                }
+                
+                // Rekomendasi berdasarkan bunga
+                if (interest <= 5) {
+                    recommendationHTML += `<p><i class="fas fa-star text-success"></i> <strong>Bunga sangat rendah</strong> (${interest}%) - kredit sangat disarankan!</p>`;
+                } else if (interest <= 12) {
+                    recommendationHTML += `<p><i class="fas fa-check-circle text-info"></i> <strong>Bunga wajar</strong> (${interest}%) - kredit dapat dipertimbangkan</p>`;
+                } else if (interest <= 18) {
+                    recommendationHTML += `<p><i class="fas fa-exclamation-triangle text-warning"></i> <strong>Bunga cukup tinggi</strong> (${interest}%) - pertimbangkan DP lebih besar atau tenor lebih pendek</p>`;
+                } else {
+                    recommendationHTML += `<p><i class="fas fa-times-circle text-danger"></i> <strong>Bunga sangat tinggi</strong> (${interest}%) - lebih baik menabung untuk cash!</p>`;
+                }
+                
+                // Rekomendasi berdasarkan tenor
+                if (term <= 12) {
+                    recommendationHTML += `<p><i class="fas fa-clock text-success"></i> <strong>Tenor pendek</strong> (${term} bulan) - cepat lunas, total bunga lebih kecil</p>`;
+                } else if (term <= 24) {
+                    recommendationHTML += `<p><i class="fas fa-clock text-info"></i> <strong>Tenor sedang</strong> (${term} bulan) - cicilan cukup ringan</p>`;
+                } else {
+                    recommendationHTML += `<p><i class="fas fa-clock text-warning"></i> <strong>Tenor panjang</strong> (${term} bulan) - total bunga besar, pertimbangkan pelunasan dipercepat</p>`;
+                }
+                
+                // Rekomendasi berdasarkan DP
+                const dpPercentage = ((downPay / itemPrice) * 100).toFixed(1);
+                if (dpPercentage >= 30) {
+                    recommendationHTML += `<p><i class="fas fa-thumbs-up text-success"></i> <strong>DP ideal</strong> (${dpPercentage}%) - mengurangi cicilan dan total bunga</p>`;
+                } else if (dpPercentage >= 20) {
+                    recommendationHTML += `<p><i class="fas fa-check-circle text-info"></i> <strong>DP cukup</strong> (${dpPercentage}%)</p>`;
+                } else {
+                    recommendationHTML += `<p><i class="fas fa-exclamation-triangle text-warning"></i> <strong>DP minim</strong> (${dpPercentage}%) - cicilan lebih besar, pertimbangkan tambah DP</p>`;
+                }
+                
+                // Ringkasan biaya bunga
+                if (interestCost > 0) {
+                    recommendationHTML += `<p><i class="fas fa-calculator text-primary"></i> <strong>Total biaya bunga:</strong> ${formatCurrency(interestCost)} (${interestPercentage}% dari harga barang)</p>`;
+                }
+                
+                // Perbandingan dengan cash
+                if (cashResult.months > 0) {
+                    if (cashResult.months <= 6) {
+                        recommendationHTML += `<p><i class="fas fa-balance-scale text-info"></i> <strong>Alternatif:</strong> Cash hanya butuh ${cashResult.months} bulan, bandingkan dengan total bunga kredit</p>`;
+                    }
+                }
             }
             
             purchaseSafetyRecommendation.innerHTML = recommendationHTML;
