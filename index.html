@@ -15,33 +15,78 @@
     <!-- Manifest untuk PWA -->
     <link rel="manifest" href="manifest.json">
     <style>
+        /* ========== VARIABEL TEMA ========== */
         :root {
-            --color-primary: #EBF4DD;
-            --color-secondary: #9CCFFF;
-            --color-dark: #2C3E50;
-            --color-warning: #E74C3C;
-            --color-success: #9CCFFF;
-            --color-info: #9CCFFF;
-            --color-purple: #131010;
-            --color-gold: #FFD700;
-            --color-money-green: #2ECC71;
-            --color-bronze: #CD7F32;
-            --color-silver: #C0C0C0;
+            /* Light Mode - NEW COLORS */
+            --bg-primary: #EFECE3;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --navbar-bg: linear-gradient(90deg, #8FABD4, #4A70A9);
+            --border-color: rgba(0,0,0,0.05);
+            --accent-green: #1C4D8D;
+            --accent-purple: #4A70A9;
+            --accent-blue: #3B82F6;
+            
+            --text-primary: #000000;
+            --text-secondary: #000000;
+            --text-muted: #333333;
+            
+            --income-color: #4A70A9;
+            --expense-color: #EF4444;
+            
+            --dark-glass: rgba(0,0,0,0.02);
+            --glow-color: rgba(28, 77, 141, 0.3);
+            
+            /* Dark mode colors - akan ditimpa saat body.dark-mode */
+            --dark-bg-primary: #0B1120;
+            --dark-bg-secondary: #111827;
+            --dark-bg-card: #111827;
+            --dark-border: rgba(255,255,255,0.06);
+            --dark-text-primary: #F8FAFC;
+            --dark-text-secondary: #CBD5E1;
+            --dark-accent-green: #22C55E;
+            --dark-accent-blue: #3B82F6;
+            --dark-accent-purple: #8B5CF6;
         }
-        
+
+        /* Dark Mode */
+        body.dark-mode {
+            --bg-primary: var(--dark-bg-primary);
+            --bg-secondary: var(--dark-bg-secondary);
+            --bg-card: var(--dark-bg-card);
+            --navbar-bg: rgba(17, 24, 39, 0.85);
+            --border-color: var(--dark-border);
+            --accent-green: var(--dark-accent-green);
+            --accent-purple: var(--dark-accent-purple);
+            --accent-blue: var(--dark-accent-blue);
+            
+            --text-primary: var(--dark-text-primary);
+            --text-secondary: var(--dark-text-secondary);
+            --text-muted: #9CA3AF;
+            
+            --income-color: var(--dark-accent-green);
+            --expense-color: #EF4444;
+            
+            --dark-glass: rgba(255,255,255,0.02);
+            --glow-color: rgba(34, 197, 94, 0.3);
+        }
+
+        /* ========== BASE STYLES ========== */
         * {
             font-family: 'Lora', serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
         
         body {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: var(--color-dark);
+            background: var(--bg-primary);
+            color: var(--text-primary);
             padding-bottom: 80px;
             position: relative;
             overflow-x: hidden;
         }
         
-        body::before {
+        /* Dark mode background effect */
+        body.dark-mode::before {
             content: '';
             position: fixed;
             top: 0;
@@ -49,19 +94,30 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(156, 207, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(156, 207, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 40% 80%, rgba(156, 207, 255, 0.1) 0%, transparent 20%);
+                radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
             pointer-events: none;
             z-index: -1;
         }
         
+        body.light-mode::before {
+            display: none;
+        }
+
+        /* ========== NAVBAR ========== */
         .navbar {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: var(--navbar-bg) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             padding: 1rem 0;
             position: relative;
             overflow: hidden;
+        }
+        
+        body.dark-mode .navbar {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
         }
         
         .navbar-brand {
@@ -70,24 +126,85 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #FFFFFF !important;
         }
         
+        .navbar-brand small {
+            color: rgba(255,255,255,0.9) !important;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #FFFFFF !important;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: #FFFFFF !important;
+            opacity: 0.8;
+        }
+        
+        .navbar-nav .nav-link i {
+            margin-right: 6px;
+        }
+        
+        .btn-outline-light {
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            background: transparent !important;
+            color: #FFFFFF !important;
+        }
+        
+        .btn-outline-light:hover {
+            background: rgba(255,255,255,0.2) !important;
+            border-color: rgba(255,255,255,0.5) !important;
+            color: #FFFFFF !important;
+            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            border-radius: 50px;
+            padding: 0.4rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-left: 10px;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* ========== CARDS ========== */
         .card {
-            border: none;
+            border: 1px solid var(--border-color);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             margin-bottom: 15px;
-            background: white;
+            background: var(--bg-card);
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            border: 2px solid transparent;
+        }
+        
+        body.light-mode .card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
         }
         
         .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--accent-green);
+            border-color: var(--accent-green);
+        }
+        
+        body.dark-mode .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--accent-green);
         }
         
         .card::after {
@@ -96,8 +213,8 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-success), var(--color-info));
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -107,14 +224,20 @@
         }
         
         .card-header {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-            color: white;
+            background: #8FABD4 !important;
+            color: #000000 !important;
             border-radius: 20px 20px 0 0 !important;
             font-weight: 600;
             padding: 1rem 1.2rem;
             border: none;
+            border-bottom: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
+        }
+        
+        body.dark-mode .card-header {
+            background: rgba(34, 197, 94, 0.2) !important;
+            color: var(--dark-text-primary) !important;
         }
         
         .card-header::before {
@@ -124,7 +247,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%);
             animation: shine 3s infinite linear;
         }
         
@@ -132,7 +255,8 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
-        
+
+        /* ========== BUTTONS ========== */
         .btn {
             border-radius: 12px;
             font-weight: 600;
@@ -140,7 +264,10 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border: 2px solid transparent;
+            border: 1px solid transparent;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
         }
         
         .btn::before {
@@ -150,158 +277,173 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(28, 77, 141, 0.2), transparent);
             transition: left 0.6s ease;
+        }
+        
+        body.dark-mode .btn::before {
+            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
         }
         
         .btn:hover::before {
             left: 100%;
         }
         
+        .btn:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 15px var(--glow-color);
+            transform: translateY(-2px);
+        }
+        
         .btn-primary {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
+            background: var(--accent-green);
+            border-color: var(--accent-green);
             color: white;
-            border-color: var(--color-secondary);
         }
         
         .btn-primary:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
+            background: #4A70A9;
+            border-color: #4A70A9;
+            box-shadow: 0 0 20px rgba(74, 112, 169, 0.5);
         }
         
         .btn-success {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%);
+            background: var(--accent-green);
+            border-color: var(--accent-green);
             color: white;
-            border-color: var(--color-success);
         }
         
         .btn-success:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
+            background: #4A70A9;
+            border-color: #4A70A9;
         }
         
         .btn-danger {
-            background: linear-gradient(135deg, var(--color-warning) 0%, #C0392B 100%);
+            background: var(--expense-color);
+            border-color: var(--expense-color);
             color: white;
-            border-color: var(--color-warning);
         }
         
         .btn-danger:hover {
-            background: linear-gradient(135deg, #C0392B 0%, #A93226 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+            background: #DC2626;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
         }
         
         .btn-warning {
-            background: linear-gradient(135deg, #F39C12 0%, #D68910 100%);
+            background: #F59E0B;
+            border-color: #F59E0B;
             color: white;
-            border-color: #F39C12;
         }
         
         .btn-info {
-            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%);
+            background: #3B82F6;
+            border-color: #3B82F6;
             color: white;
-            border-color: var(--color-info);
         }
         
         .btn-info:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(156, 207, 255, 0.3);
+            background: #2563EB;
         }
         
         .btn-purple {
-            background: linear-gradient(135deg, var(--color-purple) 0%, #131010 100%);
-            color: white;
-            border-color: var(--color-purple);
-        }
-        
-        .btn-outline-light {
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: transparent;
+            background: #4A70A9;
+            border-color: #4A70A9;
             color: white;
         }
-        
-        .btn-outline-light:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: white;
-            transform: translateY(-3px);
+
+        /* ========== TEXT COLORS ========== */
+        .text-success {
+            color: var(--income-color) !important;
         }
         
+        .text-danger {
+            color: var(--expense-color) !important;
+        }
+        
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+        
+        .text-warning {
+            color: #F59E0B !important;
+        }
+
+        /* ========== FORM CONTROLS ========== */
+        .form-control, .form-select {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 0 0.2rem rgba(28, 77, 141, 0.25);
+            transform: translateY(-2px);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+        
+        body.dark-mode .form-control:focus, 
+        body.dark-mode .form-select:focus {
+            box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25);
+        }
+        
+        .input-group-text {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+        }
+
+        /* ========== BUDGET DISPLAYS ========== */
         .budget-display {
             font-size: 2.2rem;
             font-weight: 800;
-            color: var(--color-dark);
+            color: var(--text-primary);
             position: relative;
             display: inline-block;
             padding: 8px 15px;
-            background: white;
+            background: rgba(28, 77, 141, 0.1);
             border-radius: 12px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
             margin: 8px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        body.dark-mode .budget-display {
+            background: rgba(34, 197, 94, 0.1);
         }
         
         .remaining-budget {
             font-size: 2.8rem;
             font-weight: 900;
-            color: var(--color-success);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            color: var(--accent-green);
+            text-shadow: 0 0 20px rgba(28, 77, 141, 0.3);
             position: relative;
             display: inline-block;
             padding: 12px 25px;
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            background: linear-gradient(135deg, rgba(28, 77, 141, 0.1) 0%, rgba(28, 77, 141, 0.05) 100%);
             border-radius: 15px;
-            border: 2px solid var(--color-success);
+            border: 1px solid var(--accent-green);
         }
         
-        .expense-item {
-            border-left: 4px solid var(--color-secondary);
-            padding: 15px;
-            margin-bottom: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        body.dark-mode .remaining-budget {
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
         }
-        
-        .expense-item:hover {
-            transform: translateX(8px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .income-item {
-            border-left: 4px solid var(--color-success);
-            padding: 15px;
-            margin-bottom: 10px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .icon-lg {
-            font-size: 1.8rem;
-            margin-right: 12px;
-            background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-        }
-        
+
+        /* ========== PROGRESS BARS ========== */
         .progress {
             height: 12px;
             border-radius: 8px;
             margin-bottom: 12px;
-            background: #f0f0f0;
+            background: var(--bg-secondary);
             overflow: hidden;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             position: relative;
         }
         
@@ -314,9 +456,16 @@
             bottom: 0;
             background: linear-gradient(90deg, 
                 transparent 0%, 
-                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(28, 77, 141, 0.2) 50%, 
                 transparent 100%);
             animation: progressShine 2s infinite;
+        }
+        
+        body.dark-mode .progress::after {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(34, 197, 94, 0.2) 50%, 
+                transparent 100%);
         }
         
         @keyframes progressShine {
@@ -325,11 +474,15 @@
         }
         
         .progress-bar {
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
+            background: linear-gradient(90deg, var(--accent-green), #4A70A9);
             border-radius: 8px;
             transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
+        }
+        
+        body.dark-mode .progress-bar {
+            background: linear-gradient(90deg, var(--accent-green), #1A8F4E);
         }
         
         .progress-bar::before {
@@ -341,7 +494,7 @@
             bottom: 0;
             background: linear-gradient(45deg, 
                 transparent 30%, 
-                rgba(255, 255, 255, 0.4) 50%, 
+                rgba(255, 255, 255, 0.2) 50%, 
                 transparent 70%);
             animation: progressStripes 1s linear infinite;
         }
@@ -350,9 +503,10 @@
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
-        
+
+        /* ========== SECTION TITLE ========== */
         .section-title {
-            border-bottom: 2px solid var(--color-secondary);
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 12px;
             margin-bottom: 20px;
             display: flex;
@@ -368,39 +522,55 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 2rem;
-            background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
-        
-        .section-title i {
-            margin-right: 12px;
-            font-size: 1.5rem;
-        }
-        
+
+        /* ========== FOOTER ========== */
         .footer {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
+            background: var(--navbar-bg);
+            color: #FFFFFF;
             position: fixed;
             bottom: 0;
             width: 100%;
             padding: 12px 0;
             text-align: center;
-            color: white;
-            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.05);
             z-index: 100;
         }
         
+        body.dark-mode .footer {
+            background: var(--dark-bg-card);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .footer a {
+            color: #FFFFFF !important;
+            text-decoration: none;
+        }
+        
+        body.dark-mode .footer a {
+            color: var(--accent-green) !important;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========== LOGIN CONTAINER ========== */
         .login-container {
             max-width: 450px;
             margin: 80px auto;
             padding: 30px;
             border-radius: 20px;
-            background: white;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: var(--bg-card);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
-            border: 2px solid var(--color-secondary);
         }
         
         .login-container::after {
@@ -410,83 +580,14 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-success), var(--color-info));
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
         }
-        
-        .wishlist-item {
-            border: 2px solid var(--color-purple);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            background: white;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .wishlist-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(155, 89, 182, 0.2);
-            border-color: var(--color-purple);
-        }
-        
-        .savings-card {
-            border: 2px solid var(--color-success);
-            position: relative;
-        }
-        
-        .wishlist-card {
-            border: 2px solid var(--color-purple);
-            position: relative;
-        }
-        
-        .nav-tabs .nav-link {
-            border: none;
-            color: var(--color-dark);
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 8px 8px 0 0;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-tabs .nav-link.active {
-            background-color: white;
-            border-bottom: 3px solid var(--color-secondary);
-            color: var(--color-secondary);
-            font-weight: 600;
-            transform: translateY(-1px);
-        }
-        
-        .badge-priority-high {
-            background: linear-gradient(135deg, var(--color-warning) 0%, #C0392B 100%);
-            color: white;
-        }
-        
-        .badge-priority-medium {
-            background: linear-gradient(135deg, var(--color-info) 0%, #7BB5E3 100%);
-            color: white;
-        }
-        
-        .badge-priority-low {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%);
-            color: white;
-        }
-        
-        .reset-info {
-            font-size: 0.8rem;
-            color: #666;
-        }
-        
-        .wishlist-progress {
-            height: 10px;
-            margin-top: 8px;
-            border-radius: 5px;
-        }
-        
+
+        /* ========== GOOGLE LOGIN BUTTON ========== */
         .google-login-btn {
-            background: white;
-            border: 2px solid #ddd;
-            color: #444;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
             padding: 10px;
             border-radius: 8px;
             width: 100%;
@@ -499,79 +600,81 @@
         }
         
         .google-login-btn:hover {
-            background: #f5f5f5;
-            border-color: var(--color-secondary);
+            background: rgba(28, 77, 141, 0.1);
+            border-color: var(--accent-green);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.dark-mode .google-login-btn:hover {
+            background: rgba(34, 197, 94, 0.1);
         }
         
         .google-login-btn img {
             width: 18px;
             margin-right: 8px;
         }
-        
-        .simulation-card {
-            border: 2px solid var(--color-info);
-            position: relative;
-        }
-        
+
+        /* ========== PURCHASE OPTIONS ========== */
         .purchase-option {
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 2px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 15px;
             height: 100%;
+            background: var(--bg-secondary);
         }
         
         .purchase-option:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-info);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--accent-green);
+            border-color: var(--accent-green);
         }
         
         .purchase-option.active {
-            border: 2px solid var(--color-success) !important;
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            border: 1px solid var(--accent-green) !important;
+            background: linear-gradient(135deg, rgba(28, 77, 141, 0.15) 0%, rgba(28, 77, 141, 0.05) 100%);
+            box-shadow: 0 0 25px rgba(28, 77, 141, 0.2);
             animation: pulse 2s infinite;
         }
         
+        body.dark-mode .purchase-option.active {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.2);
+        }
+        
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0.4); }
-            70% { box-shadow: 0 0 0 12px rgba(156, 207, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(156, 207, 255, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(28, 77, 141, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(28, 77, 141, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(28, 77, 141, 0); }
         }
         
-        .recommendation-card {
-            border-left: 5px solid var(--color-success);
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 12px 0;
+        body.dark-mode .purchase-option.active {
+            animation: pulse-dark 2s infinite;
         }
         
-        .warning-recommendation {
-            border-left: 5px solid var(--color-warning);
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, transparent 100%);
+        @keyframes pulse-dark {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
-        
-        .danger-recommendation {
-            border-left: 5px solid #C0392B;
-            background: linear-gradient(135deg, rgba(192, 57, 43, 0.05) 0%, transparent 100%);
-        }
-        
+
+        /* ========== CHART CONTAINER ========== */
         .chart-container {
             position: relative;
             height: 280px;
             margin-bottom: 20px;
-            background: white;
+            background: var(--bg-secondary);
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
         }
-        
+
+        /* ========== TIMELINE ========== */
         .timeline-item {
-            border-left: 3px solid var(--color-secondary);
+            border-left: 3px solid var(--accent-green);
             padding-left: 20px;
             margin-bottom: 15px;
             position: relative;
@@ -586,65 +689,66 @@
             width: 16px;
             height: 16px;
             border-radius: 50%;
-            background: var(--color-secondary);
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px var(--color-secondary);
+            background: var(--accent-green);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 2px var(--accent-green);
         }
         
         .timeline-item.completed:before {
-            background: var(--color-success);
-            box-shadow: 0 0 0 2px var(--color-success);
+            background: var(--accent-green);
+            box-shadow: 0 0 0 2px var(--accent-green);
         }
         
         .timeline-item.current:before {
-            background: var(--color-info);
-            box-shadow: 0 0 0 2px var(--color-info);
+            background: var(--accent-blue);
+            box-shadow: 0 0 0 2px var(--accent-blue);
             animation: pulse 2s infinite;
         }
-        
-        .forecast-card {
-            border: 2px solid var(--color-purple);
+
+        /* ========== WISHLIST ========== */
+        .wishlist-item {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            background: var(--bg-secondary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
-        .cashflow-card {
-            border: 2px solid var(--color-info);
+        .wishlist-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(74, 112, 169, 0.2), 0 0 0 1px var(--accent-purple);
+            border-color: var(--accent-purple);
         }
         
-        .wishlist-calculation-card {
-            border: 2px solid var(--color-purple);
-        }
-        
-        .wishlist-progress-container {
-            margin-top: 12px;
-            padding: 12px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 10px;
-            border-left: 3px solid var(--color-purple);
-        }
-        
-        .daily-saving {
-            font-size: 0.85rem;
-            color: #6c757d;
-            margin-top: 6px;
-            font-weight: 500;
+        body.dark-mode .wishlist-item:hover {
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2), 0 0 0 1px var(--accent-purple);
         }
         
         .priority-high {
-            border-left: 5px solid var(--color-warning);
+            border-left: 5px solid #EF4444;
         }
         
         .priority-medium {
-            border-left: 5px solid var(--color-info);
+            border-left: 5px solid var(--accent-blue);
         }
         
         .priority-low {
-            border-left: 5px solid var(--color-success);
+            border-left: 5px solid var(--accent-green);
         }
         
         .affordable-now {
-            border: 2px solid var(--color-success);
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
+            border: 1px solid var(--accent-green) !important;
+            background: linear-gradient(135deg, rgba(28, 77, 141, 0.15) 0%, rgba(28, 77, 141, 0.05) 100%);
             position: relative;
+            box-shadow: 0 0 30px rgba(28, 77, 141, 0.2);
+        }
+        
+        body.dark-mode .affordable-now {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
         }
         
         .affordable-now::after {
@@ -652,29 +756,223 @@
             position: absolute;
             top: 8px;
             right: 8px;
-            background: var(--color-success);
+            background: linear-gradient(135deg, var(--accent-green) 0%, #4A70A9 100%);
             color: white;
             padding: 4px 8px;
             border-radius: 15px;
             font-size: 0.75rem;
             font-weight: 600;
+            box-shadow: 0 0 15px rgba(28, 77, 141, 0.3);
         }
         
-        .insight-card {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
-            border-left: 3px solid var(--color-info);
-            padding: 15px;
+        body.dark-mode .affordable-now::after {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #1A8F4E 100%);
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+        
+        .wishlist-progress-container {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(28, 77, 141, 0.05);
             border-radius: 10px;
-            margin-top: 15px;
+            border-left: 3px solid var(--accent-purple);
+            border: 1px solid var(--border-color);
         }
         
+        body.dark-mode .wishlist-progress-container {
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        .daily-saving {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* ========== PREMIUM INSIGHT BOX ========== */
+        .premium-insight-box {
+            background: rgba(28, 77, 141, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body.dark-mode .premium-insight-box {
+            background: rgba(34, 197, 94, 0.05);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .premium-insight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+            animation: glowPulse 3s infinite;
+        }
+        
+        @keyframes glowPulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        .premium-insight-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-primary);
+        }
+        
+        .premium-insight-title i {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+        }
+        
+        .premium-insight-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .insight-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .insight-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-green);
+            box-shadow: 0 5px 15px rgba(28, 77, 141, 0.2);
+        }
+        
+        body.dark-mode .insight-item:hover {
+            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2);
+        }
+        
+        .insight-item .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .insight-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .insight-item .value small {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: normal;
+        }
+        
+        .insight-item .trend-up {
+            color: var(--accent-green);
+            font-size: 0.9rem;
+        }
+        
+        .insight-item .trend-down {
+            color: #EF4444;
+            font-size: 0.9rem;
+        }
+
+        /* ========== STATUS INDICATORS ========== */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
+            border: 1px solid var(--border-color);
+            margin: 2px 4px;
+            color: var(--text-primary);
+        }
+        
+        .status-indicator i {
+            font-size: 0.6rem;
+            margin-right: 4px;
+        }
+        
+        .status-success {
+            background: rgba(28, 77, 141, 0.15);
+            border-color: rgba(28, 77, 141, 0.3);
+            color: var(--accent-green);
+        }
+        
+        body.dark-mode .status-success {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+        
+        .status-success i {
+            color: var(--accent-green);
+            text-shadow: 0 0 10px rgba(28, 77, 141, 0.5);
+        }
+        
+        body.dark-mode .status-success i {
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        
+        .status-warning {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.3);
+            color: #F59E0B;
+        }
+        
+        .status-danger {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+        
+        .status-info {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #3B82F6;
+        }
+        
+        .status-purple {
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
+            color: #8B5CF6;
+        }
+        
+        .status-indicator-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        /* ========== HISTORY ========== */
         .history-card {
-            border: 2px solid #F39C12;
+            border: 1px solid var(--border-color);
             position: relative;
         }
         
         .history-item {
-            border-bottom: 2px dashed #eee;
+            border-bottom: 1px dashed var(--border-color);
             padding: 12px 0;
             transition: all 0.3s ease;
         }
@@ -684,10 +982,14 @@
         }
         
         .history-item:hover {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.05) 0%, transparent 100%);
+            background: rgba(28, 77, 141, 0.05);
             transform: translateX(8px);
             border-radius: 8px;
             padding: 12px;
+        }
+        
+        body.dark-mode .history-item:hover {
+            background: rgba(34, 197, 94, 0.05);
         }
         
         .history-category {
@@ -703,106 +1005,24 @@
             display: flex;
             gap: 6px;
         }
-        
-        .form-control, .form-select {
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 10px 14px;
-            transition: all 0.3s ease;
-            font-size: 0.95rem;
-        }
-        
-        .form-control:focus, .form-select:focus {
-            border-color: var(--color-secondary);
-            box-shadow: 0 0 0 0.2rem rgba(156, 207, 255, 0.25);
-            transform: translateY(-2px);
-        }
-        
-        .input-group-text {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-            color: white;
-            border: 2px solid var(--color-secondary);
-            font-weight: 600;
-        }
-        
-        .alert {
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .alert::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
-        }
-        
-        .alert-warning {
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
-            border-left: 4px solid #F39C12;
-        }
-        
-        .alert-success {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
-            border-left: 4px solid var(--color-success);
-        }
-        
-        .alert-danger {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
-            border-left: 4px solid var(--color-warning);
-        }
-        
-        .alert-info {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.1) 0%, rgba(156, 207, 255, 0.05) 100%);
-            border-left: 4px solid var(--color-info);
-        }
-        
-        .modal-content {
-            border-radius: 20px;
-            border: none;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-        
-        .modal-header {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-            color: white;
-            border-bottom: none;
-            padding: 20px;
-        }
-        
-        .modal-body {
-            padding: 25px;
-        }
-        
-        .modal-footer {
-            border-top: 2px solid #f0f0f0;
-            padding: 15px 25px;
-        }
-        
+
+        /* ========== STAT CARDS ========== */
         .stat-card {
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 15px;
             padding: 15px;
             text-align: center;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
         }
         
         .stat-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-secondary);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 0 0 1px var(--accent-green);
+            border-color: var(--accent-green);
         }
         
         .stat-card::before {
@@ -812,27 +1032,32 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-success));
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
         }
         
         .stat-card .icon {
             font-size: 2rem;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, var(--color-secondary), var(--color-success));
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             display: inline-block;
         }
-        
+
+        /* ========== TIPS CARD ========== */
         .tips-card {
-            border: 2px solid var(--color-success);
+            border: 1px solid var(--border-color);
             margin-bottom: 0.5rem;
         }
         
         .tips-card .card-header {
-            background: linear-gradient(135deg, var(--color-success) 0%, #7BB5E3 100%) !important;
+            background: #8FABD4 !important;
             padding: 0.75rem 1rem;
+        }
+        
+        body.dark-mode .tips-card .card-header {
+            background: rgba(34, 197, 94, 0.1) !important;
         }
         
         .tips-card .card-body {
@@ -842,23 +1067,264 @@
         .tips-card small {
             font-size: 0.8rem;
             line-height: 1.3;
+            color: var(--text-secondary);
         }
-        
+
+        /* ========== EXPENSE WARNING ========== */
         .expense-warning-70 {
-            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(231, 76, 60, 0.05) 100%);
-            border-left: 5px solid var(--color-warning);
+            background: rgba(239, 68, 68, 0.15);
+            border-left: 5px solid #EF4444;
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 15px;
             animation: warningPulse 2s infinite;
+            border: 1px solid var(--border-color);
         }
         
         @keyframes warningPulse {
-            0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.2); }
-            70% { box-shadow: 0 0 0 8px rgba(231, 76, 60, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+            70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* ========== MODAL ========== */
+        .modal-content {
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: var(--bg-card);
+            color: var(--text-primary);
         }
         
+        .modal-header {
+            background: #8FABD4 !important;
+            color: #000000 !important;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px;
+        }
+        
+        body.dark-mode .modal-header {
+            background: rgba(34, 197, 94, 0.1) !important;
+            color: var(--dark-text-primary) !important;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 15px 25px;
+        }
+
+        /* ========== ALERTS ========== */
+        .alert {
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-primary);
+        }
+        
+        .alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));
+        }
+        
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.15);
+        }
+        
+        .alert-success {
+            background: rgba(28, 77, 141, 0.15);
+        }
+        
+        body.dark-mode .alert-success {
+            background: rgba(34, 197, 94, 0.15);
+        }
+        
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.15);
+        }
+        
+        .alert-info {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        /* ========== ACCORDION ========== */
+        .accordion-button:not(.collapsed) {
+            background: rgba(28, 77, 141, 0.1);
+            color: var(--text-primary);
+        }
+        
+        body.dark-mode .accordion-button:not(.collapsed) {
+            background: rgba(34, 197, 94, 0.1);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(28, 77, 141, 0.25);
+            border-color: var(--accent-green);
+        }
+        
+        body.dark-mode .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
+        }
+        
+        .accordion-button {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        /* ========== PAGINATION ========== */
+        .page-link {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .page-link:hover {
+            background: rgba(28, 77, 141, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        
+        body.dark-mode .page-link:hover {
+            background: rgba(34, 197, 94, 0.1);
+        }
+        
+        .page-item.active .page-link {
+            background: var(--accent-green);
+            border-color: var(--accent-green);
+            color: white;
+        }
+        
+        .page-item.disabled .page-link {
+            background: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* ========== BADGES ========== */
+        .badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge-success {
+            background: rgba(28, 77, 141, 0.2);
+            border: 1px solid rgba(28, 77, 141, 0.3);
+            color: var(--accent-green);
+        }
+        
+        body.dark-mode .badge-success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #F59E0B;
+        }
+        
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #EF4444;
+        }
+        
+        .badge-info {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3B82F6;
+        }
+        
+        .badge-purple {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #8B5CF6;
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #4A70A9 100%);
+            border-radius: 8px;
+            border: 2px solid var(--bg-secondary);
+        }
+        
+        body.dark-mode ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--accent-green) 0%, #1A8F4E 100%);
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #4A70A9 0%, var(--accent-green) 100%);
+        }
+        
+        body.dark-mode ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #1A8F4E 0%, var(--accent-green) 100%);
+        }
+
+        /* ========== UTILITY ========== */
+        hr {
+            border-color: var(--border-color);
+            opacity: 0.5;
+        }
+        
+        .table {
+            color: var(--text-primary);
+        }
+        
+        .table-light {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+        
+        .bg-purple {
+            background-color: #8B5CF6 !important;
+        }
+        
+        .text-accent-green {
+            color: var(--accent-green);
+        }
+        
+        .border-accent-green {
+            border-color: var(--accent-green) !important;
+        }
+        
+        .glow-green {
+            box-shadow: 0 0 20px rgba(28, 77, 141, 0.3);
+        }
+        
+        body.dark-mode .glow-green {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+
+        /* ========== MEDIA QUERIES ========== */
         @media (max-width: 768px) {
             .budget-display {
                 font-size: 1.8rem;
@@ -910,116 +1376,21 @@
                 font-size: 2rem;
             }
         }
-        
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0.3);
-                opacity: 0;
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 8px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
-            border-radius: 8px;
-            border: 2px solid #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #7BB5E3 0%, #5A9FD9 100%);
-        }
-        
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(156, 207, 255, 0.2);
-            border-top-color: var(--color-secondary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 40px auto;
-        }
-        
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .badge {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-weight: 600;
-            font-size: 0.8rem;
-            transition: all 0.3s ease;
-        }
-        
-        .badge:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .bg-purple {
-            background-color: var(--color-purple) !important;
-        }
-        
-        .text-purple {
-            color: var(--color-purple) !important;
-        }
-        
-        .accordion-button:not(.collapsed) {
-            background: linear-gradient(135deg, rgba(156, 207, 255, 0.2) 0%, rgba(156, 207, 255, 0.1) 100%);
-            color: var(--color-dark);
-        }
-        
-        .accordion-button:focus {
-            box-shadow: 0 0 0 0.25rem rgba(156, 207, 255, 0.25);
-            border-color: var(--color-secondary);
-        }
     </style>
 </head>
-<body>
+<body class="dark-mode">
+    <!-- Theme toggle script awal untuk menghindari flash -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('cashio_theme') || 'dark-mode';
+            document.body.className = savedTheme;
+        })();
+    </script>
+
     <!-- Login Screen -->
     <div id="loginScreen" class="login-container">
         <div class="text-center mb-4">
-            <i class="fas fa-chart-pie fa-3x" style="background: linear-gradient(135deg, var(--color-secondary), var(--color-success)); -webkit-background-clip: text; background-clip: text; color: transparent;"></i>
+            <i class="fas fa-chart-pie fa-3x" style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); -webkit-background-clip: text; background-clip: text; color: transparent;"></i>
             <h2 class="mt-3">Cashio</h2>
             <p class="text-muted">Aplikasi Manajemen Keuangan Pribadi</p>
         </div>
@@ -1045,7 +1416,7 @@
             </div>
             <button class="btn btn-primary w-100 mb-3" id="loginBtn">Login</button>
             <p class="text-center">
-                Belum punya akun? <a href="#" id="showRegister">Daftar disini</a>
+                Belum punya akun? <a href="#" id="showRegister" style="color: var(--accent-green);">Daftar disini</a>
             </p>
         </div>
         
@@ -1068,7 +1439,7 @@
             </div>
             <button class="btn btn-primary w-100 mb-3" id="registerBtn">Daftar</button>
             <p class="text-center">
-                Sudah punya akun? <a href="#" id="showLogin">Login disini</a>
+                Sudah punya akun? <a href="#" id="showLogin" style="color: var(--accent-green);">Login disini</a>
             </p>
         </div>
         
@@ -1082,8 +1453,8 @@
 
     <!-- Main App (Hidden by default) -->
     <div id="mainApp" style="display: none;">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
+        <!-- Navbar dengan theme toggle -->
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <span class="fw-bold">Cashio</span>
@@ -1106,6 +1477,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#simulation"><i class="fas fa-calculator"></i> Simulasi</a>
                         </li>
+                        <!-- THEME TOGGLE BUTTON - Dipindahkan ke sebelah Simulasi -->
+                        <li class="nav-item d-flex align-items-center">
+                            <button class="theme-toggle" id="themeToggleBtn">
+                                <i class="fas fa-sun" id="themeIcon"></i>
+                                <span id="themeText">Light</span>
+                            </button>
+                        </li>
                         <li class="nav-item">
                             <button class="btn btn-sm btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#userGuideModal">
                                 <i class="fas fa-question-circle"></i> Panduan
@@ -1127,6 +1505,36 @@
         </nav>
 
         <div class="container mt-4">
+            <!-- Premium Insight Box -->
+            <div class="premium-insight-box" id="premiumInsightBox">
+                <div class="premium-insight-title">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Financial Health Dashboard</span>
+                    <span class="status-indicator status-success ms-3" id="healthStatus">
+                        <i class="fas fa-circle"></i> Sehat
+                    </span>
+                </div>
+                <div class="premium-insight-content" id="premiumInsightContent">
+                    <!-- Akan diisi oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Status Indicator Group -->
+            <div class="status-indicator-group" id="statusIndicatorGroup">
+                <span class="status-indicator status-success" id="indicatorIncome">
+                    <i class="fas fa-arrow-up"></i> Pemasukan: Rp 0
+                </span>
+                <span class="status-indicator status-danger" id="indicatorExpense">
+                    <i class="fas fa-arrow-down"></i> Pengeluaran: Rp 0
+                </span>
+                <span class="status-indicator status-info" id="indicatorSavings">
+                    <i class="fas fa-piggy-bank"></i> Tabungan: Rp 0
+                </span>
+                <span class="status-indicator status-purple" id="indicatorRatio">
+                    <i class="fas fa-percent"></i> Rasio: 0%
+                </span>
+            </div>
+
             <!-- Bagian Beranda -->
             <div id="home">
                 <div class="row">
@@ -1198,7 +1606,7 @@
                         </div>
                         
                         <!-- Tabungan -->
-                        <div class="card mt-3 savings-card">
+                        <div class="card mt-3">
                             <div class="card-header">
                                 <i class="fas fa-piggy-bank"></i> Tabungan
                             </div>
@@ -1267,7 +1675,7 @@
                                     <h3 class="text-danger" id="totalExpenseDisplay">Rp 0</h3>
                                     
                                     <p class="text-muted mb-1 mt-3">Saldo Tersedia</p>
-                                    <h2 class="remaining-budget text-success" id="remainingBudgetDisplay">Rp 0</h2>
+                                    <h2 class="remaining-budget" id="remainingBudgetDisplay">Rp 0</h2>
                                     
                                     <div class="mt-3">
                                         <div class="d-flex justify-content-between">
@@ -1362,7 +1770,7 @@
                     <h3 class="mb-0">Cashflow Visualizer</h3>
                 </div>
                 
-                <div class="card cashflow-card">
+                <div class="card">
                     <div class="card-header">
                         <i class="fas fa-filter"></i> Filter Data
                     </div>
@@ -1494,7 +1902,7 @@
                 </div>
                 
                 <!-- Wishlist Input -->
-                <div class="card wishlist-card">
+                <div class="card">
                     <div class="card-header">
                         <i class="fas fa-plus-circle"></i> Tambah Wishlist Baru
                     </div>
@@ -1551,7 +1959,7 @@
                 </div>
                 
                 <!-- Perhitungan Otomatis Semua Wishlist -->
-                <div class="card mt-3 wishlist-calculation-card">
+                <div class="card mt-3">
                     <div class="card-header">
                         <i class="fas fa-calculator"></i> Perhitungan Otomatis Semua Wishlist
                     </div>
@@ -1569,7 +1977,7 @@
                         </div>
                         
                         <!-- Progress Total Wishlist -->
-                        <div class="card bg-light mb-3" id="totalWishlistProgressCard" style="display: none;">
+                        <div class="card mb-3" id="totalWishlistProgressCard" style="display: none; background: rgba(28, 77, 141, 0.05);">
                             <div class="card-body">
                                 <h6>Progress Total Wishlist</h6>
                                 <div class="progress mb-2" style="height: 20px;">
@@ -1624,7 +2032,7 @@
                 </div>
                 
                 <!-- Simulasi Pemulihan Tabungan -->
-                <div class="card simulation-card">
+                <div class="card">
                     <div class="card-header">
                         <i class="fas fa-sync-alt"></i> Simulasi Pemulihan Tabungan
                     </div>
@@ -1671,25 +2079,25 @@
                         
                         <div class="row text-center mb-3">
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Waktu Pemulihan</h6>
                                     <h4 id="recoveryTime">0 bulan</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Tabungan/Bulan</h6>
                                     <h4 id="monthlySavingAmount">Rp 0</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Tabungan Awal</h6>
                                     <h4 id="initialSavings">Rp 0</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Target</h6>
                                     <h4 id="targetSavings">Rp 0</h4>
                                 </div>
@@ -1806,25 +2214,25 @@
                         
                         <div class="row text-center mb-3">
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Harga Barang</h6>
                                     <h4 id="purchaseTotalPrice">Rp 0</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Waktu Tunggu</h6>
                                     <h4 id="purchaseWaitTime">0 bulan</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Total Bayar</h6>
                                     <h4 id="purchaseTotalPayment">Rp 0</h4>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="card bg-light p-3">
+                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
                                     <h6>Cicilan/Bulan</h6>
                                     <h4 id="purchaseMonthlyPayment">Rp 0</h4>
                                 </div>
@@ -1846,7 +2254,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="card h-100">
+                                <div class="card h-100" style="background: rgba(28, 77, 141, 0.05);">
                                     <div class="card-body">
                                         <h6><i class="fas fa-percentage text-success"></i> Aturan 50/30/20</h6>
                                         <small class="text-muted">Alokasi pendapatan: 50% kebutuhan, 30% keinginan, 20% tabungan & investasi.</small>
@@ -1854,7 +2262,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card h-100">
+                                <div class="card h-100" style="background: rgba(28, 77, 141, 0.05);">
                                     <div class="card-body">
                                         <h6><i class="fas fa-piggy-bank text-success"></i> Tabungan Prioritas</h6>
                                         <small class="text-muted">Sisihkan minimal 10-20% dari pendapatan untuk tabungan sebelum belanja kebutuhan lain.</small>
@@ -1862,7 +2270,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="card h-100">
+                                <div class="card h-100" style="background: rgba(28, 77, 141, 0.05);">
                                     <div class="card-body">
                                         <h6><i class="fas fa-balance-scale text-info"></i> Cash vs Kredit</h6>
                                         <small class="text-muted">Jika bunga kredit > 15% per tahun, lebih baik menabung untuk beli cash.</small>
@@ -1878,7 +2286,7 @@
         <!-- Footer -->
         <div class="footer">
             <div class="container">
-                <span>Cashio &copy; 2025 - Aplikasi Manajemen Keuangan Pribadi | <a href="#" data-bs-toggle="modal" data-bs-target="#userGuideModal" class="text-white">Panduan</a> | v2.0.0</span>
+                <span>Cashio &copy; 2025 - Aplikasi Manajemen Keuangan Pribadi | <a href="#" data-bs-toggle="modal" data-bs-target="#userGuideModal">Panduan</a> | v2.0.0</span>
             </div>
         </div>
     </div>
@@ -2800,6 +3208,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+        // ========== SELURUH SCRIPT ASLI (4000+ BARIS) ==========
         // Data aplikasi
         let expenses = [];
         let incomes = [];
@@ -2942,6 +3351,16 @@
         const wishlistSection = document.getElementById('wishlist');
         const simulationSection = document.getElementById('simulation');
         
+        // Premium Insight elements
+        const premiumInsightBox = document.getElementById('premiumInsightBox');
+        const premiumInsightContent = document.getElementById('premiumInsightContent');
+        const healthStatus = document.getElementById('healthStatus');
+        const indicatorIncome = document.getElementById('indicatorIncome');
+        const indicatorExpense = document.getElementById('indicatorExpense');
+        const indicatorSavings = document.getElementById('indicatorSavings');
+        const indicatorRatio = document.getElementById('indicatorRatio');
+        const statusIndicatorGroup = document.getElementById('statusIndicatorGroup');
+        
         // Peringatan pengeluaran di atas 70%
         const expenseWarning70 = document.getElementById('expenseWarning70');
         const expenseWarningMessage = document.getElementById('expenseWarningMessage');
@@ -2951,7 +3370,7 @@
         const itemsPerPage = 10;
         
         // Inisialisasi tanggal default
-        expenseDateInput.valueAsDate = new Date();
+        if (expenseDateInput) expenseDateInput.valueAsDate = new Date();
         if (wishlistDeadline) {
             const defaultDate = new Date();
             defaultDate.setMonth(defaultDate.getMonth() + 6);
@@ -3007,7 +3426,6 @@
             });
         });
         
-        // Event listeners untuk history pengeluaran
         if (historySearch) historySearch.addEventListener('input', updateExpenseHistory);
         if (historyCategoryFilter) historyCategoryFilter.addEventListener('change', updateExpenseHistory);
         if (historySort) historySort.addEventListener('change', updateExpenseHistory);
@@ -3020,8 +3438,6 @@
                 isLoggedIn = true;
                 showMainApp(user);
             }
-            
-            // Welcome message
             if (!localStorage.getItem('cashio_welcome_shown')) {
                 setTimeout(() => {
                     showNotification('👋 Selamat datang di Cashio! Kelola keuangan lebih mudah.', 'info');
@@ -3035,11 +3451,8 @@
             if (registerForm) registerForm.style.display = form === 'register' ? 'block' : 'none';
         }
         
-        // Navigation
         function navigateTo(section) {
-            [homeSection, cashflowSection, wishlistSection, simulationSection]
-                .forEach(s => { if (s) s.style.display = 'none'; });
-            
+            [homeSection, cashflowSection, wishlistSection, simulationSection].forEach(s => { if (s) s.style.display = 'none'; });
             if (section === 'home' && homeSection) {
                 homeSection.style.display = 'block';
                 updateSummaryDisplay();
@@ -3055,15 +3468,8 @@
             }
         }
         
-        // Google Login
         function handleGoogleLogin() {
-            const googleUser = {
-                id: Date.now(),
-                name: 'Pengguna Google',
-                email: 'user@gmail.com',
-                isGoogleUser: true
-            };
-            
+            const googleUser = { id: Date.now(), name: 'Pengguna Google', email: 'user@gmail.com', isGoogleUser: true };
             isLoggedIn = true;
             user = { ...googleUser, loggedIn: true };
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -3071,70 +3477,34 @@
             showNotification('✅ Login dengan Google berhasil!', 'success');
         }
         
-        // Login
         function login() {
             const email = loginEmail.value.trim();
             const password = loginPassword.value.trim();
-            
-            if (!email || !password) {
-                showNotification('Email dan password harus diisi!', 'error');
-                return;
-            }
-            
+            if (!email || !password) { showNotification('Email dan password harus diisi!', 'error'); return; }
             const users = JSON.parse(localStorage.getItem('cashioUsers') || '[]');
             const foundUser = users.find(u => u.email === email && u.password === password);
-            
             if (foundUser) {
                 isLoggedIn = true;
                 user = { ...foundUser, loggedIn: true };
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 showMainApp(user);
                 showNotification('✅ Login berhasil!', 'success');
-            } else {
-                showNotification('Email atau password salah!', 'error');
-            }
+            } else { showNotification('Email atau password salah!', 'error'); }
         }
         
-        // Register
         function register() {
             const name = registerName.value.trim();
             const email = registerEmail.value.trim();
             const password = registerPassword.value.trim();
             const confirmPassword = registerConfirmPassword.value.trim();
-            
-            if (!name || !email || !password || !confirmPassword) {
-                showNotification('Semua field harus diisi!', 'error');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showNotification('Password minimal 6 karakter!', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showNotification('Password dan konfirmasi password tidak cocok!', 'error');
-                return;
-            }
-            
+            if (!name || !email || !password || !confirmPassword) { showNotification('Semua field harus diisi!', 'error'); return; }
+            if (password.length < 6) { showNotification('Password minimal 6 karakter!', 'error'); return; }
+            if (password !== confirmPassword) { showNotification('Password dan konfirmasi password tidak cocok!', 'error'); return; }
             const users = JSON.parse(localStorage.getItem('cashioUsers') || '[]');
-            
-            if (users.some(u => u.email === email)) {
-                showNotification('Email sudah terdaftar!', 'error');
-                return;
-            }
-            
-            const newUser = {
-                id: Date.now(),
-                name,
-                email,
-                password,
-                createdAt: new Date().toISOString()
-            };
-            
+            if (users.some(u => u.email === email)) { showNotification('Email sudah terdaftar!', 'error'); return; }
+            const newUser = { id: Date.now(), name, email, password, createdAt: new Date().toISOString() };
             users.push(newUser);
             localStorage.setItem('cashioUsers', JSON.stringify(users));
-            
             isLoggedIn = true;
             user = { ...newUser, loggedIn: true };
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -3142,31 +3512,23 @@
             showNotification('✅ Registrasi berhasil!', 'success');
         }
         
-        // Skip Login
         function skipLogin() {
             isLoggedIn = false;
-            user = {
-                name: 'Pengguna',
-                email: 'guest@cashio.com',
-                isGuest: true
-            };
+            user = { name: 'Pengguna', email: 'guest@cashio.com', isGuest: true };
             showMainApp(user);
             showNotification('👤 Mode tamu - data hanya di perangkat ini', 'info');
         }
         
-        // Logout
         function logout() {
             if (confirm('Apakah Anda yakin ingin logout?')) {
                 localStorage.removeItem('currentUser');
-                isLoggedIn = false;
-                user = null;
+                isLoggedIn = false; user = null;
                 loginScreen.style.display = 'block';
                 mainApp.style.display = 'none';
                 showNotification('👋 Logout berhasil!', 'info');
             }
         }
         
-        // Show Main App
         function showMainApp(userData) {
             user = userData;
             if (userNameDisplay) userNameDisplay.textContent = `(${user.name})`;
@@ -3174,39 +3536,42 @@
             mainApp.style.display = 'block';
             loadUserData();
             updateSummaryDisplay();
+            updatePremiumInsight();
             navigateTo('home');
+            
+            // Update theme toggle icon
+            const currentTheme = document.body.className;
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (themeIcon && themeText) {
+                if (currentTheme === 'light-mode') {
+                    themeIcon.className = 'fas fa-moon';
+                    themeText.textContent = 'Dark';
+                } else {
+                    themeIcon.className = 'fas fa-sun';
+                    themeText.textContent = 'Light';
+                }
+            }
         }
         
-        // Save Data
         function saveData() {
-            const userData = {
-                expenses,
-                incomes,
-                savings,
-                wishlist,
-                savingsHistory,
-                lastUpdated: new Date().toISOString()
-            };
-            
+            const userData = { expenses, incomes, savings, wishlist, savingsHistory, lastUpdated: new Date().toISOString() };
             if (isLoggedIn && user && user.email) {
                 localStorage.setItem(`cashio_${user.email}`, JSON.stringify(userData));
             } else {
                 localStorage.setItem('cashio_guest', JSON.stringify(userData));
             }
-            
             showSavingIndicator();
+            updatePremiumInsight();
         }
         
-        // Load User Data
         function loadUserData() {
             let savedData = null;
-            
             if (isLoggedIn && user && user.email) {
                 savedData = localStorage.getItem(`cashio_${user.email}`);
             } else {
                 savedData = localStorage.getItem('cashio_guest');
             }
-            
             if (savedData) {
                 try {
                     const data = JSON.parse(savedData);
@@ -3215,10 +3580,84 @@
                     savings = data.savings || 0;
                     wishlist = data.wishlist || [];
                     savingsHistory = data.savingsHistory || [];
-                } catch (error) {
-                    console.error('Error loading data:', error);
-                }
+                } catch (error) { console.error('Error loading data:', error); }
             }
+        }
+        
+        // Update Premium Insight - TANPA DANA DARURAT
+        function updatePremiumInsight() {
+            if (!premiumInsightContent || !healthStatus || !indicatorIncome || !indicatorExpense || !indicatorSavings || !indicatorRatio) return;
+            
+            const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
+            const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
+            const availableBalance = totalIncome - totalExpense;
+            const expenseRatioValue = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
+            
+            indicatorIncome.innerHTML = `<i class="fas fa-arrow-up"></i> Pemasukan: ${formatCurrency(totalIncome)}`;
+            indicatorExpense.innerHTML = `<i class="fas fa-arrow-down"></i> Pengeluaran: ${formatCurrency(totalExpense)}`;
+            indicatorSavings.innerHTML = `<i class="fas fa-piggy-bank"></i> Tabungan: ${formatCurrency(savings)}`;
+            indicatorRatio.innerHTML = `<i class="fas fa-percent"></i> Rasio: ${Math.round(expenseRatioValue)}%`;
+            
+            if (expenseRatioValue <= 50 && availableBalance > 0) {
+                healthStatus.className = 'status-indicator status-success ms-3';
+                healthStatus.innerHTML = '<i class="fas fa-circle"></i> Sehat';
+            } else if (expenseRatioValue <= 70 && availableBalance > 0) {
+                healthStatus.className = 'status-indicator status-info ms-3';
+                healthStatus.innerHTML = '<i class="fas fa-circle"></i> Stabil';
+            } else if (expenseRatioValue <= 90 && availableBalance > 0) {
+                healthStatus.className = 'status-indicator status-warning ms-3';
+                healthStatus.innerHTML = '<i class="fas fa-circle"></i> Hati-hati';
+            } else {
+                healthStatus.className = 'status-indicator status-danger ms-3';
+                healthStatus.innerHTML = '<i class="fas fa-circle"></i> Kritis';
+            }
+            
+            let insightHTML = '';
+            
+            // Insight 1: Potensi Tabungan Bulanan
+            const projectedMonthlySaving = Math.max(0, availableBalance * 0.2);
+            insightHTML += `
+                <div class="insight-item">
+                    <span class="label">💰 Potensi Tabungan Bulanan</span>
+                    <span class="value">${formatCurrency(projectedMonthlySaving)} <small>/ bulan</small></span>
+                    <span class="trend-up"><i class="fas fa-arrow-up"></i> ${Math.round(projectedMonthlySaving/1000)}k</span>
+                </div>
+            `;
+            
+            // Insight 2: Limit Harian
+            const daysInMonth = 30;
+            const dailyLimit = Math.max(0, availableBalance / daysInMonth);
+            insightHTML += `
+                <div class="insight-item">
+                    <span class="label">📊 Limit Harian</span>
+                    <span class="value">${formatCurrency(dailyLimit)} <small>/ hari</small></span>
+                </div>
+            `;
+            
+            // Insight 3: Progress Wishlist
+            if (wishlist.length > 0) {
+                const totalWishlistPrice = wishlist.reduce((sum, item) => sum + item.price, 0);
+                const wishlistProgress = totalWishlistPrice > 0 ? (savings / totalWishlistPrice) * 100 : 0;
+                insightHTML += `
+                    <div class="insight-item">
+                        <span class="label">🎯 Progress Wishlist</span>
+                        <span class="value">${Math.round(wishlistProgress)}% <small>tercapai</small></span>
+                        <div class="progress mt-1" style="height: 4px;">
+                            <div class="progress-bar" style="width: ${wishlistProgress}%; background: linear-gradient(90deg, var(--accent-green), #4A70A9);"></div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                insightHTML += `
+                    <div class="insight-item">
+                        <span class="label">🎯 Wishlist</span>
+                        <span class="value">0 <small>item</small></span>
+                        <span class="trend-info"><i class="fas fa-plus-circle"></i> Tambah wishlist</span>
+                    </div>
+                `;
+            }
+            
+            premiumInsightContent.innerHTML = insightHTML;
         }
         
         // Reset Functions
@@ -3470,12 +3909,11 @@
             if (expenseRatio) expenseRatio.textContent = `${Math.round(expenseRatioValue)}%`;
             if (expenseRatioBar) expenseRatioBar.style.width = `${Math.min(100, expenseRatioValue)}%`;
             
-            // Update peringatan 70%
             updateExpenseWarning70(expenseRatioValue, totalIncome, totalExpense, availableBalance);
             updateBudgetWarning(totalIncome, totalExpense, availableBalance);
+            updatePremiumInsight();
         }
         
-        // Update Expense Warning 70%
         function updateExpenseWarning70(expenseRatioValue, totalIncome, totalExpense, availableBalance) {
             if (expenseWarning70 && expenseWarningMessage) {
                 if (expenseRatioValue > 70) {
@@ -3495,12 +3933,9 @@
             }
         }
         
-        // Update Budget Warning
         function updateBudgetWarning(totalIncome, totalExpense, availableBalance) {
             if (!budgetWarning || !warningMessage || !savingTips) return;
-            
             const expenseRatioValue = totalIncome > 0 ? (totalExpense / totalIncome) * 100 : 0;
-            
             if (expenseRatioValue > 90) {
                 warningMessage.textContent = 'Pengeluaran melebihi 90% dari pemasukan!';
                 savingTips.innerHTML = '<strong>Darurat!</strong> Segera kurangi pengeluaran non-esensial.';
@@ -3560,8 +3995,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'right' },
-                        title: { display: true, text: 'Pengeluaran per Kategori' }
+                        legend: { position: 'right', labels: { color: 'var(--text-secondary)' } },
+                        title: { display: true, text: 'Pengeluaran per Kategori', color: 'var(--text-primary)' }
                     }
                 };
                 
@@ -3574,7 +4009,7 @@
                     labels: ['Pemasukan', 'Pengeluaran'],
                     datasets: [{
                         data: [totalIncome, totalExpense],
-                        backgroundColor: ['#9CCFFF', '#E74C3C'],
+                        backgroundColor: ['var(--income-color)', 'var(--expense-color)'],
                         borderWidth: 1,
                         hoverOffset: 15
                     }]
@@ -3584,8 +4019,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'right' },
-                        title: { display: true, text: 'Pemasukan vs Pengeluaran' }
+                        legend: { position: 'right', labels: { color: 'var(--text-secondary)' } },
+                        title: { display: true, text: 'Pemasukan vs Pengeluaran', color: 'var(--text-primary)' }
                     }
                 };
                 
@@ -3605,7 +4040,6 @@
             });
         }
         
-        // Filter Data by Date Range
         function filterDataByDateRange(data, range) {
             const now = new Date();
             const currentMonth = now.getMonth();
@@ -3625,7 +4059,6 @@
             });
         }
         
-        // Update Category Details
         function updateCategoryDetails(categories) {
             if (!categoryDetails) return;
             
@@ -3652,7 +4085,6 @@
             categoryDetails.innerHTML = html;
         }
         
-        // Get Category Color
         function getCategoryColor(category) {
             const colors = {
                 'Makanan': '#FF6384',
@@ -3661,12 +4093,12 @@
                 'Belanja': '#4BC0C0',
                 'Pendidikan': '#9966FF',
                 'Kesehatan': '#FF9F40',
-                'Tabungan': '#2ECC71',
-                'Hutang': '#E74C3C',
-                'Investasi': '#9CCFFF',
-                'Lainnya': '#95A5A6'
+                'Tabungan': '#22C55E',
+                'Hutang': '#EF4444',
+                'Investasi': '#8B5CF6',
+                'Lainnya': '#6B7280'
             };
-            return colors[category] || '#95A5A6';
+            return colors[category] || '#6B7280';
         }
         
         // Update Expense History
@@ -3756,17 +4188,14 @@
             updatePagination(totalPages);
         }
         
-        // Update Pagination
         function updatePagination(totalPages) {
             if (!historyPagination) return;
-            
             if (totalPages <= 1) {
                 historyPagination.innerHTML = '';
                 return;
             }
             
             let paginationHtml = `<nav><ul class="pagination justify-content-center">`;
-            
             paginationHtml += `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
                 <a class="page-link" href="#" onclick="changePage(${currentPage - 1})"><i class="fas fa-chevron-left"></i></a>
             </li>`;
@@ -3784,12 +4213,10 @@
             paginationHtml += `<li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
                 <a class="page-link" href="#" onclick="changePage(${currentPage + 1})"><i class="fas fa-chevron-right"></i></a>
             </li>`;
-            
             paginationHtml += `</ul></nav>`;
             historyPagination.innerHTML = paginationHtml;
         }
         
-        // Change Page
         window.changePage = function(page) {
             currentPage = page;
             updateExpenseHistory();
@@ -3845,7 +4272,6 @@
             showNotification('🎯 Wishlist berhasil ditambahkan!', 'success');
         }
         
-        // Delete Wishlist
         window.deleteWishlist = function(id) {
             if (confirm('Hapus wishlist ini?')) {
                 wishlist = wishlist.filter(item => item.id !== id);
@@ -3855,10 +4281,8 @@
             }
         };
         
-        // Update Wishlist Display
         function updateWishlistDisplay() {
             if (!wishlistItems) return;
-            
             if (wishlist.length === 0) {
                 wishlistItems.innerHTML = '<p class="text-center text-muted">✨ Belum ada wishlist. Tambahkan wishlist pertama Anda!</p>';
                 return;
@@ -3919,7 +4343,6 @@
             wishlistItems.innerHTML = html;
         }
         
-        // Calculate All Wishlists
         function calculateAllWishlists() {
             const monthlySaving = parseInt(allWishlistMonthlySaving?.value || 0);
             
@@ -3999,7 +4422,6 @@
             
             if (allWishlistCalculationResults) allWishlistCalculationResults.innerHTML = html;
             
-            // Update total progress
             const totalProgress = Math.min(100, Math.round((savings / totalPrice) * 100));
             if (totalWishlistProgressBar) totalWishlistProgressBar.style.width = `${totalProgress}%`;
             if (totalWishlistProgressText) totalWishlistProgressText.textContent = `${totalProgress}%`;
@@ -4007,15 +4429,12 @@
             if (totalWishlistPriceDisplay) totalWishlistPriceDisplay.textContent = formatCurrency(totalPrice);
             if (totalWishlistProgressCard) totalWishlistProgressCard.style.display = 'block';
             
-            // Generate insights
             generateWishlistInsights(sortedWishlist, monthlySaving, totalPrice, affordableNow);
             if (wishlistInsightCard) wishlistInsightCard.style.display = 'block';
         }
         
-        // Generate Wishlist Insights
         function generateWishlistInsights(wishlistItems, monthlySaving, totalPrice, affordableNow) {
             if (!wishlistInsights) return;
-            
             let insightsHTML = '';
             
             if (affordableNow > 0) {
@@ -4066,7 +4485,6 @@
             breakdownHTML += '</ul>';
             
             insightsHTML += `<div class="insight-card">${breakdownHTML}</div>`;
-            
             wishlistInsights.innerHTML = insightsHTML;
         }
         
@@ -4098,7 +4516,6 @@
             if (recoveryResultCard) recoveryResultCard.style.display = 'block';
         }
         
-        // Generate Recovery Timeline
         function generateRecoveryTimeline(loss, targetAmount, monthlyCapacity, monthsNeeded) {
             if (!recoveryTimelineContent) return;
             
@@ -4202,7 +4619,6 @@
             if (purchaseResultCard) purchaseResultCard.style.display = 'block';
         }
         
-        // Generate Purchase Recommendation
         function generatePurchaseRecommendation(itemPrice, monthlySaving, purchaseMethod, cashResult) {
             if (!purchaseSafetyRecommendation) return;
             
@@ -4238,7 +4654,6 @@
                     recommendationHTML += `<p><i class="fas fa-question-circle text-warning"></i> <strong>Pertimbangkan kredit</strong> - menabung terlalu lama (${cashResult.months} bulan)</p>`;
                 }
             } else {
-                // Rekomendasi untuk metode kredit
                 const term = parseInt(creditTermInput?.value || 12);
                 const interest = parseFloat(interestRateInput?.value || 12);
                 const downPay = parseFloat(downPaymentInput?.value || 0);
@@ -4258,7 +4673,6 @@
                 const interestCost = totalPayment - itemPrice;
                 const interestPercentage = ((interestCost / itemPrice) * 100).toFixed(1);
                 
-                // Cek kemampuan bayar berdasarkan tabungan bulanan
                 if (purchaseMonthlySaving?.value) {
                     const monthlySavingValue = parseFloat(purchaseMonthlySaving.value);
                     if (monthlyPayment <= monthlySavingValue * 0.3) {
@@ -4270,7 +4684,6 @@
                     }
                 }
                 
-                // Rekomendasi berdasarkan bunga
                 if (interest <= 5) {
                     recommendationHTML += `<p><i class="fas fa-star text-success"></i> <strong>Bunga sangat rendah</strong> (${interest}%) - kredit sangat disarankan!</p>`;
                 } else if (interest <= 12) {
@@ -4281,7 +4694,6 @@
                     recommendationHTML += `<p><i class="fas fa-times-circle text-danger"></i> <strong>Bunga sangat tinggi</strong> (${interest}%) - lebih baik menabung untuk cash!</p>`;
                 }
                 
-                // Rekomendasi berdasarkan tenor
                 if (term <= 12) {
                     recommendationHTML += `<p><i class="fas fa-clock text-success"></i> <strong>Tenor pendek</strong> (${term} bulan) - cepat lunas, total bunga lebih kecil</p>`;
                 } else if (term <= 24) {
@@ -4290,7 +4702,6 @@
                     recommendationHTML += `<p><i class="fas fa-clock text-warning"></i> <strong>Tenor panjang</strong> (${term} bulan) - total bunga besar, pertimbangkan pelunasan dipercepat</p>`;
                 }
                 
-                // Rekomendasi berdasarkan DP
                 const dpPercentage = ((downPay / itemPrice) * 100).toFixed(1);
                 if (dpPercentage >= 30) {
                     recommendationHTML += `<p><i class="fas fa-thumbs-up text-success"></i> <strong>DP ideal</strong> (${dpPercentage}%) - mengurangi cicilan dan total bunga</p>`;
@@ -4300,12 +4711,10 @@
                     recommendationHTML += `<p><i class="fas fa-exclamation-triangle text-warning"></i> <strong>DP minim</strong> (${dpPercentage}%) - cicilan lebih besar, pertimbangkan tambah DP</p>`;
                 }
                 
-                // Ringkasan biaya bunga
                 if (interestCost > 0) {
                     recommendationHTML += `<p><i class="fas fa-calculator text-primary"></i> <strong>Total biaya bunga:</strong> ${formatCurrency(interestCost)} (${interestPercentage}% dari harga barang)</p>`;
                 }
                 
-                // Perbandingan dengan cash
                 if (cashResult.months > 0) {
                     if (cashResult.months <= 6) {
                         recommendationHTML += `<p><i class="fas fa-balance-scale text-info"></i> <strong>Alternatif:</strong> Cash hanya butuh ${cashResult.months} bulan, bandingkan dengan total bunga kredit</p>`;
@@ -4342,6 +4751,12 @@
             notification.style.zIndex = '9999';
             notification.style.minWidth = '300px';
             notification.style.maxWidth = '400px';
+            notification.style.background = type === 'success' ? 'rgba(28, 77, 141, 0.2)' : 
+                                    type === 'error' ? 'rgba(239, 68, 68, 0.2)' : 
+                                    'rgba(59, 130, 246, 0.2)';
+            notification.style.border = '1px solid var(--border-color)';
+            notification.style.color = 'var(--text-primary)';
+            notification.style.backdropFilter = 'blur(10px)';
             notification.innerHTML = `
                 <div class="d-flex align-items-center">
                     <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-triangle' : 'info-circle'} me-2"></i>
@@ -4364,15 +4779,50 @@
             `;
             indicator.style.cssText = `
                 position: fixed; bottom: 100px; right: 20px;
-                background: linear-gradient(135deg, var(--color-secondary) 0%, #7BB5E3 100%);
+                background: var(--bg-secondary);
                 color: white; padding: 10px 15px; border-radius: 10px;
-                z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border: 1px solid var(--border-color);
             `;
             document.body.appendChild(indicator);
             setTimeout(() => indicator.remove(), 1500);
         }
         
-        console.log('🎉 Cashio v2.0.0 siap digunakan!');
+        // ========== THEME TOGGLE ==========
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+
+        function setTheme(theme) {
+            document.body.className = theme;
+            localStorage.setItem('cashio_theme', theme);
+            if (theme === 'light-mode') {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            } else {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            }
+            if (typeof updateCashflowChart === 'function') updateCashflowChart();
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const newTheme = document.body.className === 'dark-mode' ? 'light-mode' : 'dark-mode';
+                setTheme(newTheme);
+            });
+            
+            const initialTheme = document.body.className;
+            if (initialTheme === 'light-mode') {
+                themeIcon.className = 'fas fa-moon';
+                themeText.textContent = 'Dark';
+            } else {
+                themeIcon.className = 'fas fa-sun';
+                themeText.textContent = 'Light';
+            }
+        }
+
+        console.log('🎉 Cashio dengan tema Light/Dark terbaru dan toggle di sebelah Simulasi siap digunakan!');
     </script>
 </body>
 </html>
