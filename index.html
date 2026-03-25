@@ -37,41 +37,6 @@
             --dark-glass: rgba(0,0,0,0.02);
             --glow-color: rgba(28, 77, 141, 0.3);
             --icon-color: #000000;         /* warna ikon light mode */
-            
-            /* Dark mode colors - akan ditimpa saat body.dark-mode */
-            --dark-bg-primary: #0B1120;
-            --dark-bg-secondary: #111827;
-            --dark-bg-card: #111827;
-            --dark-border: rgba(255,255,255,0.08);
-            --dark-text-primary: #FFFFFF;   /* putih murni untuk dark mode */
-            --dark-text-secondary: #FFFFFF;  /* putih untuk sekunder */
-            --dark-accent-green: #22C55E;
-            --dark-accent-blue: #3B82F6;
-            --dark-accent-purple: #8B5CF6;
-            --dark-icon-color: #FFFFFF;      /* ikon putih di dark mode */
-        }
-
-        /* Dark Mode */
-        body.dark-mode {
-            --bg-primary: var(--dark-bg-primary);
-            --bg-secondary: var(--dark-bg-secondary);
-            --bg-card: var(--dark-bg-card);
-            --navbar-bg: rgba(17, 24, 39, 0.95);
-            --border-color: var(--dark-border);
-            --accent-green: var(--dark-accent-green);
-            --accent-purple: var(--dark-accent-purple);
-            --accent-blue: var(--dark-accent-blue);
-            
-            --text-primary: var(--dark-text-primary);
-            --text-secondary: var(--dark-text-secondary);
-            --text-muted: #E0E0E0;          /* lebih terang untuk keterbacaan */
-            
-            --income-color: var(--dark-accent-green);
-            --expense-color: #EF4444;
-            
-            --dark-glass: rgba(255,255,255,0.02);
-            --glow-color: rgba(34, 197, 94, 0.3);
-            --icon-color: var(--dark-icon-color);
         }
 
         /* ========== BASE STYLES ========== */
@@ -86,27 +51,6 @@
             padding-bottom: 80px;
             position: relative;
             overflow-x: hidden;
-        }
-        
-        /* Dark mode background effect */
-        body.dark-mode::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: -1;
-        }
-        
-        /* Light mode background subtle */
-        body.light-mode::before {
-            display: none;
         }
         
         /* Ikon menyesuaikan warna tema */
@@ -126,12 +70,6 @@
             padding: 1rem 0;
             position: relative;
             overflow: hidden;
-        }
-        
-        body.dark-mode .navbar {
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
         }
         
         .navbar-brand {
@@ -229,10 +167,6 @@
             border-color: var(--accent-green);
         }
         
-        body.dark-mode .card:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--accent-green);
-        }
-        
         .card::after {
             content: '';
             position: absolute;
@@ -263,15 +197,6 @@
         
         .card-header i {
             color: #000000 !important;
-        }
-        
-        body.dark-mode .card-header {
-            background: rgba(34, 197, 94, 0.2) !important;
-            color: var(--dark-text-primary) !important;
-        }
-        
-        body.dark-mode .card-header i {
-            color: var(--dark-text-primary) !important;
         }
         
         .card-header::before {
@@ -317,10 +242,6 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(28, 77, 141, 0.2), transparent);
             transition: left 0.6s ease;
-        }
-        
-        body.dark-mode .btn::before {
-            background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.2), transparent);
         }
         
         .btn:hover::before {
@@ -453,11 +374,6 @@
             color: var(--text-primary);
         }
         
-        body.dark-mode .form-control:focus, 
-        body.dark-mode .form-select:focus {
-            box-shadow: 0 0 0 0.2rem rgba(34, 197, 94, 0.25);
-        }
-        
         .input-group-text {
             background: var(--bg-secondary);
             color: var(--text-secondary);
@@ -484,10 +400,6 @@
             border: 1px solid var(--border-color);
         }
         
-        body.dark-mode .budget-display {
-            background: rgba(34, 197, 94, 0.1);
-        }
-        
         .remaining-budget {
             font-size: 2.2rem;
             font-weight: 900;
@@ -499,11 +411,6 @@
             background: linear-gradient(135deg, rgba(28, 77, 141, 0.1) 0%, rgba(28, 77, 141, 0.05) 100%);
             border-radius: 15px;
             border: 1px solid var(--accent-green);
-        }
-        
-        body.dark-mode .remaining-budget {
-            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
         }
 
         /* ========== PROGRESS BARS ========== */
@@ -531,13 +438,6 @@
             animation: progressShine 2s infinite;
         }
         
-        body.dark-mode .progress::after {
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(34, 197, 94, 0.2) 50%, 
-                transparent 100%);
-        }
-        
         @keyframes progressShine {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
@@ -549,10 +449,6 @@
             transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
-        }
-        
-        body.dark-mode .progress-bar {
-            background: linear-gradient(90deg, var(--accent-green), #1A8F4E);
         }
         
         .progress-bar::before {
@@ -609,22 +505,6 @@
             color: #FFFFFF !important;
         }
         
-        body.dark-mode .footer {
-            background: var(--dark-bg-card);
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-        
-        body.dark-mode .footer i, 
-        body.dark-mode .footer span, 
-        body.dark-mode .footer a {
-            color: var(--text-secondary) !important;
-        }
-        
-        body.dark-mode .footer a {
-            color: var(--accent-green) !important;
-        }
-        
         .footer a:hover {
             text-decoration: underline;
         }
@@ -676,19 +556,11 @@
             filter: brightness(1);
         }
         
-        body.dark-mode .google-login-btn img {
-            filter: brightness(10);
-        }
-        
         .google-login-btn:hover {
             background: rgba(28, 77, 141, 0.1);
             border-color: var(--accent-green);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        body.dark-mode .google-login-btn:hover {
-            background: rgba(34, 197, 94, 0.1);
         }
         
         .google-login-btn img {
@@ -732,25 +604,10 @@
             animation: pulse 2s infinite;
         }
         
-        body.dark-mode .purchase-option.active {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.2);
-        }
-        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(28, 77, 141, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(28, 77, 141, 0); }
             100% { box-shadow: 0 0 0 0 rgba(28, 77, 141, 0); }
-        }
-        
-        body.dark-mode .purchase-option.active {
-            animation: pulse-dark 2s infinite;
-        }
-        
-        @keyframes pulse-dark {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
         /* ========== CHART CONTAINER ========== */
@@ -828,10 +685,6 @@
             border-color: var(--accent-purple);
         }
         
-        body.dark-mode .wishlist-item:hover {
-            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2), 0 0 0 1px var(--accent-purple);
-        }
-        
         .priority-high {
             border-left: 5px solid #EF4444;
         }
@@ -851,11 +704,6 @@
             box-shadow: 0 0 30px rgba(28, 77, 141, 0.2);
         }
         
-        body.dark-mode .affordable-now {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
-            box-shadow: 0 0 30px rgba(34, 197, 94, 0.2);
-        }
-        
         .affordable-now::after {
             content: '✅ Dapat Dibeli!';
             position: absolute;
@@ -868,11 +716,6 @@
             font-size: 0.75rem;
             font-weight: 600;
             box-shadow: 0 0 15px rgba(28, 77, 141, 0.3);
-        }
-        
-        body.dark-mode .affordable-now::after {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #1A8F4E 100%);
-            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
         }
         
         .wishlist-progress-container {
@@ -888,10 +731,6 @@
             color: var(--text-primary);
         }
         
-        body.dark-mode .wishlist-progress-container {
-            background: rgba(34, 197, 94, 0.05);
-        }
-        
         .daily-saving {
             font-size: 0.85rem;
             color: var(--text-secondary);
@@ -901,13 +740,15 @@
 
         /* ========== PREMIUM INSIGHT BOX ========== */
         .premium-insight-box {
-            background: rgba(28, 77, 141, 0.05);
-            border: 1px solid var(--border-color);
+            background: rgba(28, 77, 141, 0.15) !important;  /* Biru lebih jelas */
+            /* atau */
+            background: solid (135deg, rgba(28, 77, 141, 0.2)) !important;
+            border: 1px solid var(--accent-green);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 20px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -917,21 +758,8 @@
             color: var(--text-primary);
         }
         
-        body.dark-mode .premium-insight-box {
-            background: rgba(34, 197, 94, 0.05);
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
         .premium-insight-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
-            animation: glowPulse 3s infinite;
+           display: none;
         }
         
         @keyframes glowPulse {
@@ -960,23 +788,21 @@
             gap: 15px;
         }
         
-        .insight-item {
-            background: rgba(255, 255, 255, 0.02);
+        .premium-insight-box .insight-item {
+            background: rgba(255, 255, 255, 0.7);
             border-radius: 12px;
             padding: 12px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(28, 77, 141, 0.15);
             transition: all 0.3s ease;
         }
         
-        .insight-item:hover {
+        .premium-insight-box .insight-item:hover {
+            background: rgba(255, 255, 255, 0.9);
             transform: translateY(-3px);
             border-color: var(--accent-green);
-            box-shadow: 0 5px 15px rgba(28, 77, 141, 0.2);
+            box-shadow: 0 8px 20px rgba(28, 77, 141, 0.15);
         }
-        
-        body.dark-mode .insight-item:hover {
-            box-shadow: 0 5px 15px rgba(34, 197, 94, 0.2);
-        }
+
         
         .insight-item .label {
             font-size: 0.8rem;
@@ -1035,12 +861,6 @@
         }
         
         .status-success i {
-            color: var(--accent-green);
-        }
-        
-        body.dark-mode .status-success {
-            background: rgba(34, 197, 94, 0.15);
-            border-color: rgba(34, 197, 94, 0.3);
             color: var(--accent-green);
         }
         
@@ -1127,10 +947,6 @@
             padding: 12px;
         }
         
-        body.dark-mode .history-item:hover {
-            background: rgba(34, 197, 94, 0.05);
-        }
-        
         .history-category {
             font-size: 0.7rem;
             padding: 4px 10px;
@@ -1203,10 +1019,6 @@
             padding: 0.75rem 1rem;
         }
         
-        body.dark-mode .tips-card .card-header {
-            background: rgba(34, 197, 94, 0.1) !important;
-        }
-        
         .tips-card .card-body {
             padding: 0.75rem;
         }
@@ -1269,15 +1081,6 @@
             color: #000000 !important;
         }
         
-        body.dark-mode .modal-header {
-            background: rgba(34, 197, 94, 0.1) !important;
-            color: var(--dark-text-primary) !important;
-        }
-        
-        body.dark-mode .modal-header i {
-            color: var(--dark-text-primary) !important;
-        }
-        
         .modal-footer {
             border-top: 1px solid var(--border-color);
             padding: 15px 25px;
@@ -1316,10 +1119,6 @@
             background: rgba(28, 77, 141, 0.15);
         }
         
-        body.dark-mode .alert-success {
-            background: rgba(34, 197, 94, 0.15);
-        }
-        
         .alert-danger {
             background: rgba(239, 68, 68, 0.15);
         }
@@ -1334,17 +1133,9 @@
             color: var(--text-primary);
         }
         
-        body.dark-mode .accordion-button:not(.collapsed) {
-            background: rgba(34, 197, 94, 0.1);
-        }
-        
         .accordion-button:focus {
             box-shadow: 0 0 0 0.25rem rgba(28, 77, 141, 0.25);
             border-color: var(--accent-green);
-        }
-        
-        body.dark-mode .accordion-button:focus {
-            box-shadow: 0 0 0 0.25rem rgba(34, 197, 94, 0.25);
         }
         
         .accordion-button {
@@ -1371,10 +1162,6 @@
             background: rgba(28, 77, 141, 0.1);
             border-color: var(--accent-green);
             color: var(--accent-green);
-        }
-        
-        body.dark-mode .page-link:hover {
-            background: rgba(34, 197, 94, 0.1);
         }
         
         .page-item.active .page-link {
@@ -1421,11 +1208,6 @@
             color: var(--accent-green);
         }
         
-        body.dark-mode .badge-success {
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
-        
         .badge-warning {
             background: rgba(245, 158, 11, 0.2);
             border: 1px solid rgba(245, 158, 11, 0.3);
@@ -1465,19 +1247,11 @@
             border-radius: 8px;
             border: 2px solid var(--bg-secondary);
         }
-        
-        body.dark-mode ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #1A8F4E 100%);
-        }
-        
+       
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #4A70A9 0%, var(--accent-green) 100%);
         }
-        
-        body.dark-mode ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #1A8F4E 0%, var(--accent-green) 100%);
-        }
-
+       
         /* ========== UTILITY ========== */
         hr {
             border-color: var(--border-color);
@@ -1509,10 +1283,6 @@
             box-shadow: 0 0 20px rgba(28, 77, 141, 0.3);
         }
         
-        body.dark-mode .glow-green {
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
-
         /* ========== MEDIA QUERIES ========== */
         @media (max-width: 768px) {
             .budget-display {
@@ -1565,17 +1335,64 @@
                 font-size: 2rem;
             }
         }
+
+        /* ========== OPTIMASI HP ========== */
+        @media (max-width: 768px) {
+            .navbar-brand { font-size: 1.2rem; }
+            .navbar-brand small { font-size: 0.7rem; }
+            .card-header { padding: 0.7rem; font-size: 0.9rem; }
+            .card-body { padding: 1rem; }
+            .btn { padding: 0.5rem 0.8rem; font-size: 0.85rem; min-height: 44px; }
+            .form-control, .form-select { padding: 10px 12px; font-size: 16px; }
+            .row > [class*="col-"] { margin-bottom: 15px; }
+            .chart-container { height: 220px; }
+            .premium-insight-content { grid-template-columns: 1fr; gap: 10px; }
+            .stat-card { padding: 10px; }
+            .stat-card .icon { font-size: 1.5rem; }
+            .stat-card h4 { font-size: 1.2rem; }
+            .wishlist-item { padding: 12px; }
+            .affordable-now::after { font-size: 0.65rem; padding: 2px 6px; }
+            .history-actions { margin-top: 10px; justify-content: flex-end; }
+            .footer { font-size: 0.7rem; padding: 8px 0; }
+            .modal-dialog { margin: 0.5rem; }
+            .modal-header { padding: 12px; }
+            .modal-body { padding: 15px; }
+        }
+        
+        @media (max-width: 480px) {
+            .budget-display, .remaining-budget { font-size: 1.3rem; padding: 6px 12px; }
+            .section-title h3 { font-size: 1.1rem; }
+            .status-indicator { font-size: 0.65rem; padding: 3px 8px; }
+            .premium-insight-title { font-size: 0.9rem; }
+            .insight-item .value { font-size: 1rem; }
+        }
+
+/* Touch target dan scrolling */
+.btn, .nav-link, .purchase-option, .wishlist-item, .history-actions button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Perbaikan input di HP */
+input, select, textarea, button {
+    font-size: 16px !important;
+}
     </style>
 </head>
-<body class="light-mode"> <!-- TEMA UTAMA: LIGHT MODE -->
+<body> <!-- TEMA UTAMA: LIGHT MODE -->
     <!-- Theme toggle script awal untuk menghindari flash -->
     <script>
-        (function() {
-            // Cek tema tersimpan, default light-mode
-            const savedTheme = localStorage.getItem('cashio_theme') || 'light-mode';
-            document.body.className = savedTheme;
-        })();
-    </script>
+    (function() {
+        localStorage.setItem('cashio_theme', 'light-mode');
+    })();
+</script>
 
     <!-- Login Screen (tidak berubah) -->
     <div id="loginScreen" class="login-container">
@@ -1668,12 +1485,6 @@
                             <a class="nav-link" href="#simulation"><i class="fas fa-calculator"></i> Simulasi</a>
                         </li>
                         <!-- THEME TOGGLE BUTTON -->
-                        <li class="nav-item d-flex align-items-center">
-                            <button class="theme-toggle" id="themeToggleBtn">
-                                <i class="fas fa-moon" id="themeIcon"></i>
-                                <span id="themeText">Dark</span>
-                            </button>
-                        </li>
                         <li class="nav-item">
                             <button class="btn btn-sm btn-outline-light ms-2" data-bs-toggle="modal" data-bs-target="#userGuideModal">
                                 <i class="fas fa-question-circle"></i> Panduan
@@ -1732,7 +1543,7 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span><i class="fas fa-plus-circle"></i> Catat Transaksi</span>
                                 <button class="btn btn-sm btn-outline-light" id="resetMonthlyBtn" data-bs-toggle="modal" data-bs-target="#resetBudgetModal">
-                                    <i class="fas fa-redo"></i> Reset Bulan Ini
+                                    <i class="fas fa-redo"></i> Reset Bulan Ini 
                                 </button>
                             </div>
                             <div class="card-body">
@@ -4965,41 +4776,6 @@
             document.body.appendChild(indicator);
             setTimeout(() => indicator.remove(), 1500);
         }
-        
-        // ========== THEME TOGGLE ==========
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        const themeIcon = document.getElementById('themeIcon');
-        const themeText = document.getElementById('themeText');
-
-        function setTheme(theme) {
-            document.body.className = theme;
-            localStorage.setItem('cashio_theme', theme);
-            if (theme === 'light-mode') {
-                themeIcon.className = 'fas fa-moon';
-                themeText.textContent = 'Dark';
-            } else {
-                themeIcon.className = 'fas fa-sun';
-                themeText.textContent = 'Light';
-            }
-            if (typeof updateCashflowChart === 'function') updateCashflowChart();
-        }
-
-        if (themeToggleBtn) {
-            themeToggleBtn.addEventListener('click', () => {
-                const newTheme = document.body.className === 'dark-mode' ? 'light-mode' : 'dark-mode';
-                setTheme(newTheme);
-            });
-            
-            const initialTheme = document.body.className;
-            if (initialTheme === 'light-mode') {
-                themeIcon.className = 'fas fa-moon';
-                themeText.textContent = 'Dark';
-            } else {
-                themeIcon.className = 'fas fa-sun';
-                themeText.textContent = 'Light';
-            }
-        }
-
         console.log('🎉 Cashio dengan tema Light Mode sebagai utama siap digunakan! (Total baris: ~5100)');
     </script>
 </body>
