@@ -2031,88 +2031,56 @@
                     <h3 class="mb-0">Simulasi Keuangan</h3>
                 </div>
                 
-                <!-- Simulasi Pemulihan Tabungan -->
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fas fa-sync-alt"></i> Simulasi Pemulihan Tabungan
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted">Hitung berapa lama waktu yang dibutuhkan untuk memulihkan tabungan setelah pengeluaran besar.</p>
-                        
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="savingsLoss" class="form-label">Pengurangan Tabungan (Rp)</label>
-                                    <input type="number" class="form-control" id="savingsLoss" placeholder="Contoh: 2000000" min="0">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="monthlySavingCapacity" class="form-label">Kapasitas Menabung per Bulan (Rp)</label>
-                                    <input type="number" class="form-control" id="monthlySavingCapacity" placeholder="Contoh: 500000" min="0">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="mb-3">
-                                    <label for="savingsRecoveryTarget" class="form-label">Target Pemulihan (%)</label>
-                                    <div class="input-group">
-                                        <input type="number" class="form-control" id="savingsRecoveryTarget" value="100" min="0" max="100">
-                                        <span class="input-group-text">%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="btn btn-success" id="calculateRecoveryBtn">
-                            <i class="fas fa-calculator"></i> Hitung Simulasi Pemulihan
-                        </button>
-                    </div>
+                <!-- Simulasi Target Tabungan -->
+<div class="card">
+    <div class="card-header">
+        <i class="fas fa-bullseye"></i> Simulasi Target Tabungan
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Hitung berapa banyak yang perlu ditabung per bulan untuk mencapai target tabungan.</p>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="targetAmountInput" class="form-label">Target Tabungan (Rp)</label>
+                    <input type="number" class="form-control" id="targetAmountInput" placeholder="Contoh: 10000000" min="0" value="10000000">
+                    <small class="text-muted">Nominal yang ingin dicapai</small>
                 </div>
-                
-                <!-- Hasil Simulasi Pemulihan -->
-                <div class="card mt-3" id="recoveryResultCard" style="display: none;">
-                    <div class="card-header">
-                        <i class="fas fa-chart-line"></i> Hasil Simulasi Pemulihan Tabungan
-                    </div>
-                    <div class="card-body">
-                        <h5>Timeline Pemulihan Tabungan</h5>
-                        
-                        <div class="row text-center mb-3">
-                            <div class="col-md-3">
-                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
-                                    <h6>Waktu Pemulihan</h6>
-                                    <h4 id="recoveryTime">0 bulan</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
-                                    <h6>Tabungan/Bulan</h6>
-                                    <h4 id="monthlySavingAmount">Rp 0</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
-                                    <h6>Tabungan Awal</h6>
-                                    <h4 id="initialSavings">Rp 0</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="card p-3" style="background: rgba(28, 77, 141, 0.05); border: 1px solid var(--border-color);">
-                                    <h6>Target</h6>
-                                    <h4 id="targetSavings">Rp 0</h4>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Timeline Pemulihan -->
-                        <div id="recoveryTimeline" class="mb-3">
-                            <h6>Progres Pemulihan Bulanan</h6>
-                            <div class="timeline mt-2" id="recoveryTimelineContent">
-                                <!-- Timeline akan diisi oleh JavaScript -->
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="incomeInput" class="form-label">Pendapatan per Bulan (Rp)</label>
+                    <input type="number" class="form-control" id="incomeInput" placeholder="Contoh: 5000000" min="0" value="5000000">
+                    <small class="text-muted">Pendapatan bersih Anda per bulan</small>
                 </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label for="durationInput" class="form-label">Durasi Waktu (bulan)</label>
+                    <input type="number" class="form-control" id="durationInput" placeholder="Contoh: 12" min="1" value="12">
+                    <small class="text-muted">Berapa bulan ingin mencapainya</small>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-success" id="calculateTargetBtn">
+            <i class="fas fa-calculator"></i> Hitung Simulasi Target
+        </button>
+    </div>
+</div>
+<!-- Hasil Simulasi Target Tabungan -->
+<div class="card mt-3" id="recoveryResultCard" style="display: none;">
+    <div class="card-header">
+        <i class="fas fa-chart-line"></i> Hasil Simulasi Target Tabungan
+    </div>
+    <div class="card-body" id="recoveryTimelineContent">
+        <!-- Hasil simulasi akan ditampilkan di sini -->
+        <div class="text-center text-muted py-5">
+            <i class="fas fa-calculator fa-3x mb-3"></i>
+            <p>Masukkan target, durasi, dan pendapatan<br>lalu klik "Hitung Simulasi Target"</p>
+        </div>
+    </div>
+</div>
                 
                 <!-- Simulasi Pembelian Barang (Cash vs Kredit) -->
                 <div class="card mt-3">
@@ -2286,7 +2254,7 @@
         <!-- Footer -->
         <div class="footer">
             <div class="container">
-                <span>Cashio &copy; 2025 - Aplikasi Manajemen Keuangan Pribadi | <a href="#" data-bs-toggle="modal" data-bs-target="#userGuideModal">Panduan</a> | v2.0.0</span>
+                <span>Cashio & copy; 2025 - Aplikasi Manajemen Keuangan Pribadi | <a href="#" data-bs-toggle="modal" data-bs-target="#userGuideModal">Panduan</a> | v2.0.0</span>
             </div>
         </div>
     </div>
@@ -2304,67 +2272,67 @@
                 </div>
                 <div class="modal-body">
                     <!-- Daftar Isi Interaktif -->
-                    <div class="row mb-4">
-                        <div class="col-md-12">
-                            <div class="card bg-light border-0 shadow-sm">
-                                <div class="card-body">
-                                    <h6 class="fw-bold"><i class="fas fa-list-ul me-2 text-primary"></i> Daftar Isi Cepat</h6>
-                                    <div class="row">
-                                        <div class="col-md-3 col-6">
-                                            <a href="#guide-section1" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse1').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 1. Memulai
-                                            </a>
-                                            <a href="#guide-section2" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse2').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 2. Beranda
-                                            </a>
-                                            <a href="#guide-section3" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse3').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 3. Tabungan
-                                            </a>
-                                            <a href="#guide-section4" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse4').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 4. Cashflow
-                                            </a>
-                                        </div>
-                                        <div class="col-md-3 col-6">
-                                            <a href="#guide-section5" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse5').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 5. History
-                                            </a>
-                                            <a href="#guide-section6" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 6. Wishlist
-                                            </a>
-                                            <a href="#guide-section7" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse7').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 7. Kalkulator Wishlist
-                                            </a>
-                                            <a href="#guide-section8" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse8').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 8. Simulasi
-                                            </a>
-                                        </div>
-                                        <div class="col-md-3 col-6">
-                                            <a href="#guide-section9" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse9').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 9. Reset Data
-                                            </a>
-                                            <a href="#guide-section10" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse10').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 10. Tips
-                                            </a>
-                                            <a href="#guide-section11" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse11').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 11. FAQ
-                                            </a>
-                                            <a href="#guide-section12" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse12').classList.add('show')">
-                                                <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 12. Shortcut
-                                            </a>
-                                        </div>
-                                        <div class="col-md-3 col-6">
-                                            <div class="bg-primary bg-opacity-10 p-2 rounded">
-                                                <span class="badge bg-danger mb-1">HOT</span>
-                                                <a href="#guide-section6" class="d-block text-decoration-none text-dark fw-bold" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
-                                                    🔥 Fitur Perhitungan Otomatis
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card bg-light border-0 shadow-sm">
+            <div class="card-body">
+                <h6 class="fw-bold"><i class="fas fa-list-ul me-2 text-primary"></i> Daftar Isi Cepat</h6>
+                <div class="row">
+                    <div class="col-md-3 col-6">
+                        <a href="#guide-section1" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse1').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 1. Memulai
+                        </a>
+                        <a href="#guide-section2" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse2').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 2. Beranda
+                        </a>
+                        <a href="#guide-section3" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse3').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 3. Tabungan
+                        </a>
+                        <a href="#guide-section4" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse4').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 4. Cashflow
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="#guide-section5" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse5').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 5. History
+                        </a>
+                        <a href="#guide-section6" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 6. Wishlist
+                        </a>
+                        <a href="#guide-section7" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse7').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 7. Kalkulator Wishlist
+                        </a>
+                        <a href="#guide-section8" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse8').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 8. Target Tabungan
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <a href="#guide-section9" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse9').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 9. Reset Data
+                        </a>
+                        <a href="#guide-section10" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse10').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 10. Tips
+                        </a>
+                        <a href="#guide-section11" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse11').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 11. FAQ
+                        </a>
+                        <a href="#guide-section12" class="d-block text-decoration-none mb-2 text-dark" onclick="document.querySelector('#guide-collapse12').classList.add('show')">
+                            <i class="fas fa-play me-1 text-success" style="font-size: 10px;"></i> 12. Shortcut
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="bg-primary bg-opacity-10 p-2 rounded">
+                            <span class="badge bg-danger mb-1">HOT</span>
+                            <a href="#guide-section6" class="d-block text-decoration-none text-dark fw-bold" onclick="document.querySelector('#guide-collapse6').classList.add('show')">
+                                🔥 Fitur Perhitungan Otomatis
+                            </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                     
                     <!-- Konten Panduan dengan Accordion -->
                     <div class="accordion" id="userGuideAccordion">
@@ -2815,49 +2783,56 @@
                         </div>
                         
                         <!-- SECTION 8: SIMULASI KEUANGAN -->
-                        <div class="accordion-item" id="guide-section8">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse8">
-                                    <span class="badge bg-primary me-2">8</span> 🔮 Simulasi Keuangan (Cash vs Kredit)
-                                </button>
-                            </h2>
-                            <div id="guide-collapse8" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
-                                <div class="accordion-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <h6 class="text-warning"><i class="fas fa-sync-alt me-2"></i>Simulasi Pemulihan Tabungan</h6>
-                                            <p><strong>Kegunaan:</strong> Menghitung waktu pemulihan setelah pengeluaran besar</p>
-                                            <div class="bg-light p-3 rounded">
-                                                <p class="mb-1"><strong>Cara:</strong></p>
-                                                <ol class="mb-0">
-                                                    <li>Masukkan jumlah tabungan yang berkurang (contoh: beli motor Rp 20jt)</li>
-                                                    <li>Masukkan kapasitas menabung per bulan (Rp 1jt)</li>
-                                                    <li>Target pemulihan (default 100%)</li>
-                                                    <li>Klik "Hitung Simulasi Pemulihan"</li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h6 class="text-success"><i class="fas fa-balance-scale me-2"></i>Simulasi Cash vs Kredit</h6>
-                                            <p><strong>Kegunaan:</strong> Membandingkan total pembayaran cash vs kredit</p>
-                                            <div class="bg-light p-3 rounded">
-                                                <p class="mb-1"><strong>Cara:</strong></p>
-                                                <ol class="mb-0">
-                                                    <li>Nama barang & harga</li>
-                                                    <li>Pilih metode Cash atau Kredit</li>
-                                                    <li>Jika kredit: isi tenor, bunga, DP</li>
-                                                    <li>Tabungan per bulan untuk opsi cash</li>
-                                                </ol>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="alert alert-info mt-3">
-                                        <i class="fas fa-calculator me-2"></i>
-                                        <strong>Rumus Kredit:</strong> Cicilan = (Harga - DP) × (bunga/12) × (1+bunga/12)^tenor / ((1+bunga/12)^tenor - 1)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<div class="accordion-item" id="guide-section8">
+    <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#guide-collapse8">
+            <span class="badge bg-primary me-2">8</span> 🎯 Simulasi Target Tabungan + Cash vs Kredit
+        </button>
+    </h2>
+    <div id="guide-collapse8" class="accordion-collapse collapse" data-bs-parent="#userGuideAccordion">
+        <div class="accordion-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="text-success"><i class="fas fa-bullseye me-2"></i>Simulasi Target Tabungan</h6>
+                    <p><strong>Kegunaan:</strong> Menghitung berapa yang perlu ditabung per bulan untuk mencapai target.</p>
+                    <div class="bg-light p-3 rounded">
+                        <p class="mb-1"><strong>Cara:</strong></p>
+                        <ol class="mb-0">
+                            <li>Masukkan <strong>Target Tabungan</strong> (contoh: Rp 10.000.000)</li>
+                            <li>Masukkan <strong>Durasi Waktu</strong> (contoh: 12 bulan)</li>
+                            <li>Masukkan <strong>Pendapatan per Bulan</strong> (contoh: Rp 5.000.000)</li>
+                            <li>Klik <strong>"Hitung Simulasi Target"</strong></li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-warning"><i class="fas fa-balance-scale me-2"></i>Simulasi Cash vs Kredit</h6>
+                    <p><strong>Kegunaan:</strong> Membandingkan total pembayaran cash vs kredit</p>
+                    <div class="bg-light p-3 rounded">
+                        <p class="mb-1"><strong>Cara:</strong></p>
+                        <ol class="mb-0">
+                            <li>Nama barang & harga</li>
+                            <li>Pilih metode Cash atau Kredit</li>
+                            <li>Jika kredit: isi tenor, bunga, DP</li>
+                            <li>Tabungan per bulan untuk opsi cash</li>
+                            <li>Klik <strong>"Hitung Simulasi Pembelian"</strong></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-lightbulb me-2"></i>
+                <strong>Tips:</strong> Jika tabungan per bulan melebihi 50% dari pendapatan, perpanjang durasi agar lebih realistis.
+            </div>
+            
+            <div class="alert alert-secondary mt-2">
+                <i class="fas fa-calculator me-2"></i>
+                <strong>Rumus Kredit:</strong> Cicilan = (Harga - DP) × (bunga/12) × (1+bunga/12)^tenor / ((1+bunga/12)^tenor - 1)
+            </div>
+        </div>
+    </div>
+</div>
                         
                         <!-- SECTION 9: MANAJEMEN DATA & RESET -->
                         <div class="accordion-item" id="guide-section9">
@@ -3321,16 +3296,12 @@
         const purchaseMonthlyPayment = document.getElementById('purchaseMonthlyPayment');
         const purchaseSafetyRecommendation = document.getElementById('purchaseSafetyRecommendation');
         
-        // Savings Recovery Simulation
-        const savingsLossInput = document.getElementById('savingsLoss');
-        const monthlySavingCapacityInput = document.getElementById('monthlySavingCapacity');
-        const savingsRecoveryTargetInput = document.getElementById('savingsRecoveryTarget');
-        const calculateRecoveryBtn = document.getElementById('calculateRecoveryBtn');
+        // Simulasi Target Tabungan - DOM Elements
+        const targetAmountInput = document.getElementById('targetAmountInput');
+        const durationInput = document.getElementById('durationInput');
+        const incomeInput = document.getElementById('incomeInput');
+        const calculateTargetBtn = document.getElementById('calculateTargetBtn');
         const recoveryResultCard = document.getElementById('recoveryResultCard');
-        const recoveryTime = document.getElementById('recoveryTime');
-        const monthlySavingAmount = document.getElementById('monthlySavingAmount');
-        const initialSavings = document.getElementById('initialSavings');
-        const targetSavings = document.getElementById('targetSavings');
         const recoveryTimelineContent = document.getElementById('recoveryTimelineContent');
         
         // Navigation elements
@@ -3403,7 +3374,7 @@
         }
         
         if (calculatePurchaseBtn) calculatePurchaseBtn.addEventListener('click', calculatePurchase);
-        if (calculateRecoveryBtn) calculateRecoveryBtn.addEventListener('click', calculateRecovery);
+        if (calculateTargetBtn) calculateTargetBtn.addEventListener('click', calculateTargetSavings);
         
         navbarLinks.forEach(link => {
             link.addEventListener('click', function(e) {
@@ -4477,77 +4448,173 @@
             wishlistInsights.innerHTML = insightsHTML;
         }
         
-        // Calculate Recovery
-        function calculateRecovery() {
-            const loss = parseInt(savingsLossInput?.value || 0);
-            const monthlyCapacity = parseInt(monthlySavingCapacityInput?.value || 0);
-            const recoveryTarget = parseInt(savingsRecoveryTargetInput?.value || 100);
-            
-            if (isNaN(loss) || loss <= 0) {
-                showNotification('Masukkan jumlah pengurangan tabungan!', 'error');
-                return;
-            }
-            
-            if (isNaN(monthlyCapacity) || monthlyCapacity <= 0) {
-                showNotification('Masukkan kapasitas menabung per bulan!', 'error');
-                return;
-            }
-            
-            const targetAmount = loss * (recoveryTarget / 100);
-            const monthsNeeded = Math.ceil(targetAmount / monthlyCapacity);
-            
-            if (recoveryTime) recoveryTime.textContent = `${monthsNeeded} bulan`;
-            if (monthlySavingAmount) monthlySavingAmount.textContent = formatCurrency(monthlyCapacity);
-            if (initialSavings) initialSavings.textContent = formatCurrency(savings);
-            if (targetSavings) targetSavings.textContent = formatCurrency(targetAmount);
-            
-            generateRecoveryTimeline(loss, targetAmount, monthlyCapacity, monthsNeeded);
-            if (recoveryResultCard) recoveryResultCard.style.display = 'block';
-        }
+        // ============================================
+// SIMULASI TARGET TABUNGAN
+// ============================================
+
+function calculateTargetSavings() {
+    // Ambil nilai dari input
+    const target = document.getElementById('targetAmountInput');
+    const durasi = document.getElementById('durationInput');
+    const pendapatan = document.getElementById('incomeInput');
+    
+    const targetValue = parseInt(target?.value || 0);
+    const durasiValue = parseInt(durasi?.value || 0);
+    const pendapatanValue = parseInt(pendapatan?.value || 0);
+    
+    // Validasi
+    if (isNaN(targetValue) || targetValue <= 0) {
+        showNotification('Masukkan target tabungan yang valid!', 'error');
+        return;
+    }
+    
+    if (isNaN(durasiValue) || durasiValue <= 0) {
+        showNotification('Masukkan durasi waktu yang valid!', 'error');
+        return;
+    }
+    
+    if (isNaN(pendapatanValue) || pendapatanValue <= 0) {
+        showNotification('Masukkan pendapatan per bulan yang valid!', 'error');
+        return;
+    }
+    
+    // Hitung tabungan per bulan yang diperlukan
+    const tabunganPerBulan = Math.ceil(targetValue / durasiValue);
+    
+    // Hitung sisa uang untuk pengeluaran harian
+    const sisaUang = pendapatanValue - tabunganPerBulan;
+    const jatahHarian = Math.floor(sisaUang / 30);
+    
+    // Hitung persentase
+    const persentase = (tabunganPerBulan / pendapatanValue) * 100;
+    
+    // Tentukan status
+    let status = '';
+    let warnaStatus = '';
+    let pesanStatus = '';
+    
+    if (tabunganPerBulan <= pendapatanValue * 0.3) {
+        status = '✅ AMAN';
+        warnaStatus = 'success';
+        pesanStatus = `Menabung ${Math.round(persentase)}% dari pendapatan. Sangat terjangkau!`;
+    } else if (tabunganPerBulan <= pendapatanValue * 0.5) {
+        status = '⚠️ CUKUP';
+        warnaStatus = 'warning';
+        pesanStatus = `Menabung ${Math.round(persentase)}% dari pendapatan. Masih realistis.`;
+    } else if (tabunganPerBulan <= pendapatanValue * 0.7) {
+        status = '🔴 KETAT';
+        warnaStatus = 'danger';
+        pesanStatus = `Menabung ${Math.round(persentase)}% dari pendapatan. Cukup berat.`;
+    } else if (tabunganPerBulan <= pendapatanValue) {
+        status = '⚠️ SANGAT KETAT';
+        warnaStatus = 'danger';
+        pesanStatus = `Menabung ${Math.round(persentase)}% dari pendapatan. Perpanjang durasi!`;
+    } else {
+        status = '❌ TIDAK MUNGKIN';
+        warnaStatus = 'danger';
+        pesanStatus = `Tabungan Rp ${formatAngka(tabunganPerBulan)}/bulan melebihi pendapatan Anda.`;
+    }
+    
+    // Buat HTML hasil
+    const hasilHTML = `
+        <div class="row mb-4">
+            <div class="col-md-4 text-center">
+                <div class="p-3 rounded" style="background: rgba(28, 77, 141, 0.1);">
+                    <small class="text-muted">🎯 Target Tabungan</small>
+                    <h4 class="mb-0">${formatCurrency(targetValue)}</h4>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-3 rounded" style="background: rgba(28, 77, 141, 0.1);">
+                    <small class="text-muted">⏱️ Durasi</small>
+                    <h4 class="mb-0">${durasiValue} bulan</h4>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-3 rounded" style="background: rgba(28, 77, 141, 0.1);">
+                    <small class="text-muted">💰 Pendapatan / Bulan</small>
+                    <h4 class="mb-0">${formatCurrency(pendapatanValue)}</h4>
+                </div>
+            </div>
+        </div>
         
-        function generateRecoveryTimeline(loss, targetAmount, monthlyCapacity, monthsNeeded) {
-            if (!recoveryTimelineContent) return;
-            
-            let timelineHTML = '';
-            let currentAmount = 0;
-            const today = new Date();
-            
-            for (let month = 1; month <= Math.min(monthsNeeded, 12); month++) {
-                const monthDate = new Date(today);
-                monthDate.setMonth(today.getMonth() + month);
-                
-                currentAmount += monthlyCapacity;
-                const percentComplete = Math.min(100, Math.round((currentAmount / targetAmount) * 100));
-                
-                let timelineClass = 'timeline-item';
-                if (month === 1) timelineClass += ' current';
-                if (currentAmount >= targetAmount) timelineClass += ' completed';
-                
-                timelineHTML += `
-                    <div class="${timelineClass}">
-                        <h6>Bulan ${month} - ${formatDate(monthDate.toISOString())}</h6>
-                        <p class="mb-1">Tabungan Dipulihkan: <strong>${formatCurrency(currentAmount)}</strong></p>
-                        <div class="progress mt-2">
-                            <div class="progress-bar ${currentAmount >= targetAmount ? 'bg-success' : 'bg-warning'}" 
-                                 style="width: ${percentComplete}%">${percentComplete}%</div>
-                        </div>
-                    </div>
-                `;
-                
-                if (currentAmount >= targetAmount) break;
-            }
-            
-            if (monthsNeeded > 12) {
-                timelineHTML += `
-                    <div class="timeline-item completed">
-                        <h6>Bulan ${monthsNeeded} - Target Tercapai</h6>
-                        <p class="mb-1">Tabungan Dipulihkan: <strong>${formatCurrency(targetAmount)}</strong></p>
-                    </div>
-                `;
-            }
-            
-            recoveryTimelineContent.innerHTML = timelineHTML;
-        }
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="p-3 rounded text-center" style="background: rgba(28, 77, 141, 0.05);">
+                    <small class="text-muted">📌 Tabungan yang Diperlukan / Bulan</small>
+                    <h3 class="mb-0 text-primary">${formatCurrency(tabunganPerBulan)}</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="p-3 rounded text-center" style="background: rgba(28, 77, 141, 0.05);">
+                    <small class="text-muted">🍽️ Jatah Pengeluaran Harian</small>
+                    <h3 class="mb-0 text-info">${formatCurrency(jatahHarian)} / hari</h3>
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert alert-${warnaStatus}">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-${warnaStatus === 'success' ? 'check-circle' : 'exclamation-triangle'} fa-2x me-3"></i>
+                <div>
+                    <h5 class="mb-1">${status}</h5>
+                    <p class="mb-0">${pesanStatus}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-3">
+            <div class="progress" style="height: 12px;">
+                <div class="progress-bar bg-${tabunganPerBulan <= pendapatanValue ? 'success' : 'danger'}" 
+                     style="width: ${Math.min(100, persentase)}%"></div>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+                <small>0%</small>
+                <small>Tabungan: ${Math.round(persentase)}% dari pendapatan</small>
+                <small>100%</small>
+            </div>
+        </div>
+        
+        ${tabunganPerBulan > pendapatanValue ? `
+            <div class="alert alert-info mt-3">
+                <i class="fas fa-lightbulb me-2"></i>
+                <strong>Saran:</strong> Perpanjang durasi menjadi <strong>${Math.ceil(targetValue / (pendapatanValue * 0.5))} bulan</strong> agar lebih realistis.
+            </div>
+        ` : tabunganPerBulan > pendapatanValue * 0.5 ? `
+            <div class="alert alert-warning mt-3">
+                <i class="fas fa-chart-simple me-2"></i>
+                <strong>Tips:</strong> Kurangi pengeluaran seperti makan di luar dan langganan streaming untuk mencapai target.
+            </div>
+        ` : `
+            <div class="alert alert-success mt-3">
+                <i class="fas fa-thumbs-up me-2"></i>
+                <strong>Semangat!</strong> Target ini realistis! Tetap konsisten menabung ${formatCurrency(tabunganPerBulan)} setiap bulan.
+            </div>
+        `}
+    `;
+    
+    // Tampilkan hasil
+    const recoveryResultCard = document.getElementById('recoveryResultCard');
+    const recoveryTimelineContent = document.getElementById('recoveryTimelineContent');
+    
+    if (recoveryResultCard) recoveryResultCard.style.display = 'block';
+    if (recoveryTimelineContent) recoveryTimelineContent.innerHTML = hasilHTML;
+    
+    // Update ringkasan di card hasil
+    const recoveryTime = document.getElementById('recoveryTime');
+    const monthlySavingAmount = document.getElementById('monthlySavingAmount');
+    const initialSavings = document.getElementById('initialSavings');
+    const targetSavings = document.getElementById('targetSavings');
+    
+    if (recoveryTime) recoveryTime.textContent = `${durasiValue} bulan`;
+    if (monthlySavingAmount) monthlySavingAmount.textContent = formatCurrency(tabunganPerBulan);
+    if (initialSavings) initialSavings.textContent = formatCurrency(savings);
+    if (targetSavings) targetSavings.textContent = formatCurrency(targetValue);
+}
+
+function formatAngka(amount) {
+    return new Intl.NumberFormat('id-ID').format(Math.round(amount));
+}
         
         // Calculate Purchase
         function calculatePurchase() {
